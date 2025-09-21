@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import Category from './Category';
-import AddHeader from '../../../Components/AddComponents/AddHeader/AddHeader';
+import AddHeader from '../../Components/AddComponents/AddHeader/AddHeader';
+import Categories from './Category/Category';
+import './style.css'
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
@@ -15,17 +16,15 @@ export default function Advertisements() {
         if (step > 1) setStep(step - 1);
     };
     return (
-        <div>
+        <div className='Advertisements'>
             {/* header */}
             <AddHeader currentStep={step} />
 
             {/* الخطوة الأولى */}
             {step === 1 && (
-                <Category
+                <Categories
                     selected={selectedCategory}
                     onSelect={setSelectedCategory}
-                    onNext={nextStep}
-                    onPrev={prevStep}
                 />
             )}
 
@@ -33,10 +32,20 @@ export default function Advertisements() {
             {step === 2 && (
                 <div>
                     <h2>أدخل المعلومات</h2>
-                    <button onClick={prevStep}>السابق</button>
-                    <button onClick={nextStep}>التالي</button>
                 </div>
             )}
+
+            <div className="buttons">
+                <button className="btn prev" onClick={prevStep}>السابق</button>
+                <button
+                    className="btn next"
+                    onClick={nextStep}
+                    disabled={!selectedCategory} // ممنوع تكمل لو لسه ما اخترتش
+                >
+                    <span>التالي</span>
+                    <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />
+                </button>
+            </div>
         </div>
     )
 }
