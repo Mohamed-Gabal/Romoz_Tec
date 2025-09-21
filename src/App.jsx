@@ -25,6 +25,8 @@ import Login from "./Pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
+import Category from "./Pages/Advertisements/Category/Category";
+import Advertisements from "./Pages/Advertisements/Category/Advertisements";
 
 const App = () => {
   return (
@@ -52,6 +54,9 @@ const App = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/forgotPassword" element={<ForgotPassword />} />
       <Route path="/resetPassword" element={<ResetPassword />} />
+
+      {/* صفحات أضف إعلانك  */}
+      <Route path="/category" element={<Advertisements/>}/>
     </Routes>
   );
 };
