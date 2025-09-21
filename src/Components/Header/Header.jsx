@@ -50,7 +50,7 @@ const Header = () => {
           <NavLink to="/login" className="btn-delete">
             <span>تسجيل الدخول</span>
           </NavLink>
-          <NavLink to="/addDetails" className="btn-add">
+          <NavLink to="/category" className="btn-add">
             <GoPlus /> <span>اضف عرضك</span>
           </NavLink>
         </div>

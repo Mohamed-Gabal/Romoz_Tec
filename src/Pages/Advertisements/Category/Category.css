@@ -1,0 +1,135 @@
+.category_main {
+    padding: 10px;
+    background-color: var(--landing-color);
+}
+
+.categories-container {
+    max-width: 875px;
+    margin: auto;
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+    background: var(--color);
+    border-radius: 12px;
+    border: 1px solid #DBDBDB;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.category-card {
+    border: 1px solid #d9e4e6;
+    border-radius: 10px;
+    padding: 20px 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-card:hover {
+    border-color: #4cafac;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.icon {
+    font-size: 30px;
+    color: #4cafac;
+    margin-bottom: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ECF0F1;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn.next {
+    background: var(--main-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    opacity: .5;
+}
+
+.btn.next .arrowNext {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 2px;
+}
+
+.btn.prev {
+    background: #e0f2f1;
+    color: #4cafac;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.active_category {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.active_category p {
+    color: white;
+}
+
+
+/* للأجهزة الكبيرة (desktop) */
+@media (min-width: 1025px) {
+
+}
+
+/* للأجهزة المتوسطة (tablet) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+}
+
+/* للأجهزة الصغيرة (mobile) */
+@media (max-width: 540px) {
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 15px;
+    }
+}
