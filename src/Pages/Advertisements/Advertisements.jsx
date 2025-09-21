@@ -15,6 +15,25 @@ export default function Advertisements() {
     const prevStep = () => {
         if (step > 1) setStep(step - 1);
     };
+
+    const [formData, setFormData] = useState({
+        category: "",
+        information: {
+            adTitle: "",
+            adDescription: "",
+            adPrice: "",
+        },
+        images: [],
+        location: {
+            detailedAddress: "",
+            area: "",
+            city: "",
+        },
+        seller: {
+            name: "",
+            phone: ""
+        }
+    });
     return (
         <div className='Advertisements'>
             {/* header */}
