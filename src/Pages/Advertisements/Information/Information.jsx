@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./Information.css";
+import CarForm from '../../../Components/AddComponents/CarForm/CarForm';
 
 export default function Information() {
     const [toggles, setToggles] = useState(true);
@@ -51,17 +52,7 @@ export default function Information() {
                 </div>
             </div>
 
-            <div className="category_information">
-                <header className='information_header'>
-                    <div className="circle">
-                        2
-                    </div>
-                    <div className="text">
-                        <h1>البيانات الأساسيه للسياره</h1>
-                        <p>الفئه و الميديا والبيانات الاساسيه</p>
-                    </div>
-                </header>
-            </div>
+            <CarForm/>
         </div>
     )
 }
