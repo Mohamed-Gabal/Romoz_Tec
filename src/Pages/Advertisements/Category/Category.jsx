@@ -2,7 +2,7 @@ import React from 'react'
 import "./Category.css";
 
 const categories = [
-    { id: 1, key: "vehicles", name: "السيارات والمركبات", icon: "./advertisements/car.svg" },
+    { id: 1, key: "vehicles", name: "السيارات", icon: "./advertisements/car.svg" },
     { id: 2, key: "realestate", name: "العقارات", icon: "./advertisements/buildings.svg" },
     { id: 3, key: "electronics", name: "الإلكترونيات", icon: "./advertisements/electronics.svg" },
     { id: 4, key: "jobs", name: "الوظائف", icon: "./advertisements/jobs.svg" },
