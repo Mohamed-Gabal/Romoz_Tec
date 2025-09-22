@@ -3,6 +3,7 @@ import AddHeader from '../../Components/AddComponents/AddHeader/AddHeader';
 import Categories from './Category/Category';
 import './style.css'
 import Information from './Information/Information';
+import UploadImages from './UploadImages/UploadImages';
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
@@ -51,6 +52,11 @@ export default function Advertisements() {
             {/* مثال: الخطوة الثانية */}
             {step === 2 && (
                 <Information/>
+            )}
+
+            {/* رفع الصور */}
+            {step === 3 && (
+                <UploadImages/>
             )}
 
             <div className="buttons">
