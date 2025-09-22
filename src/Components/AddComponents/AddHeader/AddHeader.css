@@ -14,9 +14,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
     position: relative;
     max-width: 875px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .line{
@@ -35,7 +36,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    z-index: 10;
+    z-index: inherit;
 }
 
 .big_circle{
@@ -46,6 +47,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 10;
 }
 
 .border_circle{
@@ -55,10 +58,17 @@
     height: 20px;
 }
 
+.active_Header{
+    position: relative;
+    z-index: 10;
+}
 .active_Header .big_circle{
     background-color: var(--main-color);
+    position: relative;
+    z-index: 10;
 }
-.active_Header .border_circle{
+
+.active_Header .big_circle .border_circle{
     border-color: var(--main-color);
     width: 30px;
     height: 30px;
@@ -66,6 +76,23 @@
     justify-content: center;
     align-items: center;
 }
+.active_Header .big_circle .border_circle .CheckCircle{
+    position: relative;
+    z-index: 10;
+}
 .Check_none{
     display: none;
+}
+.current_step .big_circle{
+    position: relative;
+    z-index: 10;
+}
+
+.lineProgress {
+    background-color: var(--main-color);
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    width: 1000px;
+    height: 2px;
 }
