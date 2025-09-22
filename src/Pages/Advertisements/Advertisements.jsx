@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AddHeader from '../../Components/AddComponents/AddHeader/AddHeader';
 import Categories from './Category/Category';
 import './style.css'
+import Information from './Information/Information';
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
@@ -49,9 +50,7 @@ export default function Advertisements() {
 
             {/* مثال: الخطوة الثانية */}
             {step === 2 && (
-                <div>
-                    <h2>أدخل المعلومات</h2>
-                </div>
+                <Information/>
             )}
 
             <div className="buttons">
