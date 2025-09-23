@@ -81,7 +81,7 @@ export default function Advertisements() {
 
             {/* رفع الصور */}
             {step === 3 && (
-                <UploadImages />
+                <UploadImages formik={formik} />
             )}
 
             {/* رفع الموقع */}
