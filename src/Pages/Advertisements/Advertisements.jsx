@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AddHeader from '../../Components/AddComponents/AddHeader/AddHeader';
-import Categories from './Category/Category';
+import Category from './Category/Category';
 import './style.css'
 import Information from './Information/Information';
 import UploadImages from './UploadImages/UploadImages';
@@ -13,7 +13,6 @@ import { useFormik } from 'formik';
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
     const [step, setStep] = useState(1);
-    const [selectedCategory, setSelectedCategory] = useState("");
 
     const formik = useFormik({
         initialValues: {
@@ -36,8 +35,8 @@ export default function Advertisements() {
         },
         validationSchema: validationSchemas[step],
         onSubmit: (values) => {
-            console.log("🚀 البيانات النهائية:", values);
-            alert("تم إرسال الإعلان بنجاح ✅");
+            console.log("البيانات النهائية:", values);
+            alert("تم إرسال الإعلان بنجاح");
         },
         validateOnChange: false,
         validateOnBlur: true,
@@ -50,6 +49,7 @@ export default function Advertisements() {
         } catch (err) {
             err.inner.forEach((e) => {
                 formik.setFieldError(e.path, e.message);
+                formik.setFieldTouched(e.path, true, false); // 👈 مهم عشان يظهر الخطأ
             });
         }
     };
@@ -65,10 +65,7 @@ export default function Advertisements() {
 
             {/* الخطوة الأولى */}
             {step === 1 && (
-                <Categories
-                    selected={selectedCategory}
-                    onSelect={setSelectedCategory}
-                />
+                <Category formik={formik} />
             )}
 
             {/* مثال: الخطوة الثانية */}
@@ -101,7 +98,7 @@ export default function Advertisements() {
                 <button
                     className="btn next"
                     onClick={nextStep}
-                    disabled={!selectedCategory} // ممنوع تكمل لو لسه ما اخترتش
+                    // disabled={!formik.values.category} // ممنوع تكمل لو لسه ما اخترتش
                 >
                     <span>التالي</span>
                     <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />

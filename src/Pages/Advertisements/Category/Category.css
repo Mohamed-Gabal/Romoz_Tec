@@ -110,6 +110,16 @@
     color: white;
 }
 
+.error{
+    color: red;
+    margin-top: 15px;
+    transition: all ease-in-out .8s;
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 
 /* للأجهزة الكبيرة (desktop) */
 @media (min-width: 1025px) {
