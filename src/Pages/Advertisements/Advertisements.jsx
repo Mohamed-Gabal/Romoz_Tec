@@ -101,10 +101,11 @@ export default function Advertisements() {
             )}
 
             <div className="buttons">
-                <button className="btn prev" onClick={prevStep}>السابق</button>
+                <button className="btn prev" style={{opacity: step === 1 ? 0 : 1 }} onClick={prevStep}>السابق</button>
                 <button
                     className="btn next"
                     onClick={nextStep}
+                    style={{opacity: step < 6 ? 1 : 0 }}
                 >
                     <span>التالي</span>
                     <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />
