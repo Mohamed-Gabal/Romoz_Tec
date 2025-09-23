@@ -67,12 +67,12 @@ export default function Advertisements() {
                 <Location/>
             )}
 
-            {/* رفع الموقع */}
+            {/* بيانات البائع */}
             {step === 5 && (
                 <SellerData/>
             )}
 
-            {/* رفع الموقع */}
+            {/* التاكيد */}
             {step === 6 && (
                 <ConfirmAd/>
             )}
