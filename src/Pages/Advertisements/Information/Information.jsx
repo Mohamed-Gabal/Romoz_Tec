@@ -3,7 +3,7 @@ import "./Information.css";
 import CarForm from '../../../Components/AddComponents/CarForm/CarForm';
 
 export default function Information({ formik }) {
-    const { values, setFieldValue, errors, handleBlur } = formik;
+    const { values, setFieldValue, errors, handleBlur, touched } = formik;
 
     return (
         <div className="information_container">
@@ -20,7 +20,7 @@ export default function Information({ formik }) {
 
                 <div className="input_container">
                     <label htmlFor="adTitle">عنوان الإعلان*
-                        {errors.information?.adTitle && (
+                        {errors.information?.adTitle && touched.information?.adTitle && (
                             <div className="info_error">{errors.information.adTitle}</div>
                         )}
                     </label>
@@ -38,7 +38,7 @@ export default function Information({ formik }) {
 
                 <div className="textarea_container">
                     <label htmlFor="adDescription"> الوصف*
-                        {errors.information?.adDescription && (
+                        {errors.information?.adDescription && touched.information?.adDescription && (
                             <div className="info_error">{errors.information.adDescription}</div>
                         )}
                     </label>
@@ -68,12 +68,12 @@ export default function Information({ formik }) {
                             className='adPrice_input input'
                             placeholder='أدخل سعرك هنا' />
                         <span>ر.س</span>
-                        {errors.information?.adPrice && (
+                        {errors.information?.adPrice && touched.information?.adPrice && (
                             <div className="info_error">{errors.information.adPrice}</div>
                         )}
                     </div>
 
-                    {values?.information?.adPrice &&
+                    {values?.information?.adPrice && !errors.information?.adPrice && (
                         <div className="list-item">
                             <p>التفاوض علي السعر</p>
                             <label className="switch">
@@ -85,7 +85,7 @@ export default function Information({ formik }) {
                                 />
                                 <span className="slider"></span>
                             </label>
-                        </div>
+                        </div>)
                     }
                 </div>
             </div>

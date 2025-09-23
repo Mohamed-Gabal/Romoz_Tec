@@ -24,19 +24,21 @@
     color: white;
     display: flex;
     align-items: center;
-    opacity: .5;
+    gap: 5px;
 }
 
-.btn.next .arrowNext {
+.btn.next .arrowNext, .btn.prev .arrowPrev {
     width: 20px;
     height: 20px;
     margin-top: 5px;
-    margin-right: 2px;
 }
 
 .btn.prev {
     background: #e0f2f1;
     color: #4cafac;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .btn:hover {
