@@ -16,7 +16,8 @@ const categories = [
     { id: 12, key: "pets", name: "الحيوانات", icon: "./advertisements/animals.svg" },
 ];
 
-export default function Category({ selected, onSelect}) {
+export default function Category({ formik  }) {
+    const { values, setFieldValue, errors, touched } = formik;
     return (
         <div className='category_main'>
             <div className="categories-container">
@@ -27,17 +28,25 @@ export default function Category({ selected, onSelect}) {
                     {categories.map((cat) => (
                         <div
                             key={cat.id}
-                            onClick={() => onSelect(cat.key)}
+                            onClick={() => {
+                                setFieldValue("category", cat.name);
+                                formik.setFieldError("category", "");
+                            }}
                             role="button"
                             tabIndex={0}
-                            onKeyDown={(e) => e.key === "Enter" && onSelect(cat.key)}
-                            className={`category-card ${selected === cat.key ? "active_category" : ""}`}
+                            onKeyDown={(e) => e.name === "Enter" && setFieldValue("category", cat.name)}
+                            className={`category-card ${values.category === cat.name ? "active_category" : ""}`}
                         >
                             <div className="icon"><img src={cat.icon} alt={cat.name} /></div>
                             <p>{cat.name}</p>
                         </div>
                     ))}
                 </div>
+
+                {/* رسالة خطأ لو المستخدم ما اختارش حاجة */}
+                {errors.category && (
+                    <div className="error">{errors.category}</div>
+                )}
             </div>
         </div>
     )

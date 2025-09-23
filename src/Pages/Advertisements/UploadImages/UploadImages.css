@@ -33,6 +33,7 @@
     cursor: pointer;
     transition: border-color 0.3s;
     background: #fff;
+    position: relative;
 }
 
 .upload-box:hover {
@@ -74,14 +75,49 @@
 .preview-image {
     margin: 0px 10px;
     border: 1px solid var(--border-color);
-    width: 100px;
-    height: 80px;
+    width: 250px;
+    height: 200px;
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
 }
 
 .preview-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background-color: #AAFFEE80;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_error{
+    position: absolute;
+    top: -40px;
+    left: 0px;
+    color: red;
+    font-size: var(--font-size-sm);
+}
+
+/* للأجهزة الصغيرة (mobile) */
+@media (max-width: 540px) {
+    .preview-image {
+        margin: auto;
+        min-width: 220px;
+        /* width: max-content; */
+        height: 200px;
+    }
 }
