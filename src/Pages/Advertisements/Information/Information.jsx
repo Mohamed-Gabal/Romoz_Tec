@@ -55,8 +55,8 @@ export default function Information({ formik }) {
                     />
                 </div>
 
-                <div className="">
-                    <div className="inputPrice_container">
+                <div className="inputPrice_container">
+                    <div className="inputPrice">
                         <label htmlFor="adPrice"><span>السعر (ريال سعودي)</span> <span className='main_text'> (اختياري)</span></label>
                         <input
                             type="text"
@@ -74,7 +74,7 @@ export default function Information({ formik }) {
                     </div>
 
                     {values?.information?.adPrice && !errors.information?.adPrice && (
-                        <div className="list-item">
+                        <div className="switch-item">
                             <p>التفاوض علي السعر</p>
                             <label className="switch">
                                 <input
