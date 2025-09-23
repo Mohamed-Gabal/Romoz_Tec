@@ -105,7 +105,6 @@ export default function Advertisements() {
                 <button
                     className="btn next"
                     onClick={nextStep}
-                // disabled={!formik.values.category} // ممنوع تكمل لو لسه ما اخترتش
                 >
                     <span>التالي</span>
                     <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />

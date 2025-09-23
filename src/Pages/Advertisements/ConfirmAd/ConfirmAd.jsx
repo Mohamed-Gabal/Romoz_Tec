@@ -2,7 +2,7 @@ import React from 'react';
 import "./ConfirmAd.css"
 
 export default function ConfirmAd({ formik }) {
-    const {values} = formik;
+    const {values, handleSubmit} = formik;
     return (
         <div className="confirmAd_container">
             <header className='confirmAd_header'>
@@ -40,7 +40,7 @@ export default function ConfirmAd({ formik }) {
             </div>
 
             <div className="btn_confirmAd">
-                <button type='button' className='btn'>
+                <button type='submit' onClick={handleSubmit} className='btn'>
                     <span>انشر إعلانك الأن</span>
                     <img src="./advertisements/Plus.svg" alt="Plus" />
                 </button>
