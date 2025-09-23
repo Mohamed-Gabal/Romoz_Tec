@@ -17,10 +17,10 @@ export default function AddHeader({ currentStep }) {
         {steps.map((label, index) => (
           <div
             key={index}
-            className={`category ${currentStep > index + 1 ? "active_Header" : currentStep === index + 1 && "current_step"}`}
+            className={`category ${currentStep > index + 1 ? "active_Header" : currentStep === index + 1 ? "current_step" : ""}`}
           >
+            <div className="lineProgress" style={{ display: currentStep != index + 1 ? "none" : "" }} />
             <div className="big_circle">
-              <div className="lineProgress" style={{ display: currentStep != index + 1 && "none"}}/>
               <div className="border_circle">
                 <img
                   src="./advertisements/CheckCircle.svg"
