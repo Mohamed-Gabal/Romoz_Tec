@@ -34,6 +34,7 @@ export const validationSchemas = {
             phone: Yup.string()
                 .matches(/^05\d{8}$/, "رقم الجوال غير صحيح (05xxxxxxxx)")
                 .required("رقم الجوال مطلوب"),
+            webMessage: Yup.boolean(),
         }),
     }),
 };

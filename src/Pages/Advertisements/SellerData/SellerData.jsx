@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import "./SellerData.css"
 
-export default function SellerData() {
+export default function SellerData({ formik }) {
+    const { values, setFieldValue, errors, handleBlur, touched } = formik;
     const [toggles, setToggles] = useState(true);
     const handleToggle = () => {
         setToggles(!toggles);
@@ -14,13 +15,37 @@ export default function SellerData() {
             </header>
 
             <div className="input_container">
-                <label htmlFor="sellerName">الاسم*</label>
-                <input type="text" name="sellerName" id="sellerName" className='sellerName_input input' placeholder='أدخل اسمك' />
+                <label htmlFor="sellerName">الاسم*
+                    {errors.seller?.name && touched.seller?.name && (
+                        <div className="info_error">{errors.seller?.name}</div>
+                    )}
+                </label>
+                <input
+                    type="text"
+                    name="seller.name"
+                    value={values.seller.name}
+                    onChange={(e) => setFieldValue("seller.name", e.target.value)}
+                    onBlur={handleBlur}
+                    id="sellerName"
+                    className='sellerName_input input'
+                    placeholder='أدخل اسمك' />
             </div>
 
             <div className="input_container">
-                <label htmlFor="sellerPhone">رقم الجوال*</label>
-                <input type="text" name="sellerPhone" id="sellerPhone" className='sellerPhone_input input' placeholder='05xxxxxxxxxx' />
+                <label htmlFor="sellerPhone">رقم الجوال*
+                    {errors.seller?.phone && touched.seller?.phone && (
+                        <div className="info_error">{errors.seller?.phone}</div>
+                    )}
+                </label>
+                <input
+                    type="text"
+                    name="seller.phone"
+                    value={values.seller.phone}
+                    onChange={(e) => setFieldValue("seller.phone", e.target.value)}
+                    onBlur={handleBlur}
+                    id="sellerPhone"
+                    className='sellerPhone_input input'
+                    placeholder='05xxxxxxxxxx' />
             </div>
 
             <div className="webMessage_item">
@@ -31,10 +56,10 @@ export default function SellerData() {
                 <label className="switch">
                     <input
                         type="checkbox"
-                        name='webMessage'
+                        name="seller.webMessage"
                         id='webMessage'
-                        checked={toggles}
-                        onChange={() => handleToggle()}
+                        checked={values.seller.webMessage}
+                        onChange={(e) => { setFieldValue("seller.webMessage", e.target.checked) }}
                     />
                     <span className="slider"></span>
                 </label>

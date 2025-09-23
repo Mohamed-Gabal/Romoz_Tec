@@ -32,6 +32,7 @@ export default function Advertisements() {
             seller: {
                 name: "",
                 phone: "",
+                webMessage: true,
             },
         },
         validationSchema: validationSchemas[step],
@@ -91,7 +92,7 @@ export default function Advertisements() {
 
             {/* بيانات البائع */}
             {step === 5 && (
-                <SellerData />
+                <SellerData formik={formik} />
             )}
 
             {/* التاكيد */}
