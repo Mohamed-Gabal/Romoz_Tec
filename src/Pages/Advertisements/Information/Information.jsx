@@ -4,10 +4,6 @@ import CarForm from '../../../Components/AddComponents/CarForm/CarForm';
 
 export default function Information({ formik }) {
     const { values, setFieldValue, errors, handleBlur } = formik;
-    const [toggles, setToggles] = useState(true);
-    const handleToggle = () => {
-        setToggles(!toggles);
-    };
 
     return (
         <div className="information_container">
