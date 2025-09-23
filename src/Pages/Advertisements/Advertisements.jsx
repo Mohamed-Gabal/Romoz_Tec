@@ -86,7 +86,7 @@ export default function Advertisements() {
 
             {/* رفع الموقع */}
             {step === 4 && (
-                <Location />
+                <Location formik={formik} />
             )}
 
             {/* بيانات البائع */}
