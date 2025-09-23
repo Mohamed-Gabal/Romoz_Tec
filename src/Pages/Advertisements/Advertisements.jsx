@@ -7,6 +7,7 @@ import UploadImages from './UploadImages/UploadImages';
 import Location from './Location/Location';
 import SellerData from './SellerData/SellerData';
 import ConfirmAd from './ConfirmAd/ConfirmAd';
+import { validationSchemas } from "./validationSchemas";
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
