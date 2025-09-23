@@ -3,10 +3,7 @@ import "./SellerData.css"
 
 export default function SellerData({ formik }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
-    const [toggles, setToggles] = useState(true);
-    const handleToggle = () => {
-        setToggles(!toggles);
-    };
+    
     return (
         <div className="sellerData_container">
             <header className='sellerData_header'>
