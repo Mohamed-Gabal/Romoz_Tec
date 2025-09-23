@@ -4,6 +4,7 @@
 
 .buttons {
     max-width: 875px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     margin-top: 25px;
