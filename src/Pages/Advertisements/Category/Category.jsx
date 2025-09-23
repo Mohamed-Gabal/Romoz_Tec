@@ -2,7 +2,7 @@ import React from 'react'
 import "./Category.css";
 
 const categories = [
-    { id: 1, key: "vehicles", name: "السيارات والمركبات", icon: "./advertisements/car.svg" },
+    { id: 1, key: "vehicles", name: "السيارات", icon: "./advertisements/car.svg" },
     { id: 2, key: "realestate", name: "العقارات", icon: "./advertisements/buildings.svg" },
     { id: 3, key: "electronics", name: "الإلكترونيات", icon: "./advertisements/electronics.svg" },
     { id: 4, key: "jobs", name: "الوظائف", icon: "./advertisements/jobs.svg" },
@@ -16,7 +16,7 @@ const categories = [
     { id: 12, key: "pets", name: "الحيوانات", icon: "./advertisements/animals.svg" },
 ];
 
-export default function Category({ selected, onSelect, onNext, onPrev }) {
+export default function Category({ selected, onSelect}) {
     return (
         <div className='category_main'>
             <div className="categories-container">
@@ -37,18 +37,6 @@ export default function Category({ selected, onSelect, onNext, onPrev }) {
                             <p>{cat.name}</p>
                         </div>
                     ))}
-                </div>
-
-                <div className="buttons">
-                    <button className="btn prev" onClick={onPrev}>السابق</button>
-                    <button
-                        className="btn next"
-                        onClick={onNext}
-                        disabled={!selected} // ممنوع تكمل لو لسه ما اخترتش
-                    >
-                        <span>التالي</span>
-                        <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />
-                    </button>
                 </div>
             </div>
         </div>

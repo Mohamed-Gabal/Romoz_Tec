@@ -25,8 +25,7 @@ import Login from "./Pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
-import Category from "./Pages/Advertisements/Category/Category";
-import Advertisements from "./Pages/Advertisements/Category/Advertisements";
+import Advertisements from "./Pages/Advertisements/Advertisements";
 
 const App = () => {
   return (
