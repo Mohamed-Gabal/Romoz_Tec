@@ -8,38 +8,56 @@ import Location from './Location/Location';
 import SellerData from './SellerData/SellerData';
 import ConfirmAd from './ConfirmAd/ConfirmAd';
 import { validationSchemas } from "./validationSchemas";
+import { useFormik } from 'formik';
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
     const [step, setStep] = useState(1);
     const [selectedCategory, setSelectedCategory] = useState("");
 
-    const nextStep = () => {
-        if (step < 6) setStep(step + 1);
+    const formik = useFormik({
+        initialValues: {
+            category: "",
+            information: {
+                adTitle: "",
+                adDescription: "",
+                adPrice: "",
+            },
+            images: [],
+            location: {
+                detailedAddress: "",
+                city: "",
+                area: "",
+            },
+            seller: {
+                name: "",
+                phone: "",
+            },
+        },
+        validationSchema: validationSchemas[step],
+        onSubmit: (values) => {
+            console.log("🚀 البيانات النهائية:", values);
+            alert("تم إرسال الإعلان بنجاح ✅");
+        },
+        validateOnChange: false,
+        validateOnBlur: true,
+    });
+
+    const nextStep = async () => {
+        try {
+            await validationSchemas[step].validate(formik.values, { abortEarly: false });
+            if (step < 6) setStep(step + 1);
+        } catch (err) {
+            err.inner.forEach((e) => {
+                formik.setFieldError(e.path, e.message);
+            });
+        }
     };
 
     const prevStep = () => {
         if (step > 1) setStep(step - 1);
     };
 
-    const [formData, setFormData] = useState({
-        category: "",
-        information: {
-            adTitle: "",
-            adDescription: "",
-            adPrice: "",
-        },
-        images: [],
-        location: {
-            detailedAddress: "",
-            area: "",
-            city: "",
-        },
-        seller: {
-            name: "",
-            phone: ""
-        }
-    });
     return (
         <div className='Advertisements'>
             {/* header */}
@@ -55,27 +73,27 @@ export default function Advertisements() {
 
             {/* مثال: الخطوة الثانية */}
             {step === 2 && (
-                <Information/>
+                <Information />
             )}
 
             {/* رفع الصور */}
             {step === 3 && (
-                <UploadImages/>
+                <UploadImages />
             )}
-            
+
             {/* رفع الموقع */}
             {step === 4 && (
-                <Location/>
+                <Location />
             )}
 
             {/* بيانات البائع */}
             {step === 5 && (
-                <SellerData/>
+                <SellerData />
             )}
 
             {/* التاكيد */}
             {step === 6 && (
-                <ConfirmAd/>
+                <ConfirmAd />
             )}
 
             <div className="buttons">
