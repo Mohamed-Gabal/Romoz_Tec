@@ -97,7 +97,7 @@ export default function Advertisements() {
 
             {/* التاكيد */}
             {step === 6 && (
-                <ConfirmAd />
+                <ConfirmAd formik={formik} />
             )}
 
             <div className="buttons">
