@@ -21,6 +21,7 @@ export default function Advertisements() {
                 adTitle: "",
                 adDescription: "",
                 adPrice: "",
+                isNegotiable: true,
             },
             images: [],
             location: {
@@ -38,7 +39,7 @@ export default function Advertisements() {
             console.log("البيانات النهائية:", values);
             alert("تم إرسال الإعلان بنجاح");
         },
-        validateOnChange: false,
+        validateOnChange: true,
         validateOnBlur: true,
     });
 
@@ -47,12 +48,17 @@ export default function Advertisements() {
             await validationSchemas[step].validate(formik.values, { abortEarly: false });
             if (step < 6) setStep(step + 1);
         } catch (err) {
-            err.inner.forEach((e) => {
-                formik.setFieldError(e.path, e.message);
-                formik.setFieldTouched(e.path, true, false); // 👈 مهم عشان يظهر الخطأ
-            });
+            if (err.inner) {  // ← كده نتأكد إنه Yup error
+                err.inner.forEach((e) => {
+                    formik.setFieldError(e.path, e.message);
+                    formik.setFieldTouched(e.path, true, false);
+                });
+            } else {
+                console.error(err); // أي error تاني نطبعه بس
+            }
         }
     };
+
 
     const prevStep = () => {
         if (step > 1) setStep(step - 1);
@@ -68,9 +74,9 @@ export default function Advertisements() {
                 <Category formik={formik} />
             )}
 
-            {/* مثال: الخطوة الثانية */}
+            {/* المعلومات  */}
             {step === 2 && (
-                <Information />
+                <Information formik={formik} />
             )}
 
             {/* رفع الصور */}
@@ -98,7 +104,7 @@ export default function Advertisements() {
                 <button
                     className="btn next"
                     onClick={nextStep}
-                    // disabled={!formik.values.category} // ممنوع تكمل لو لسه ما اخترتش
+                // disabled={!formik.values.category} // ممنوع تكمل لو لسه ما اخترتش
                 >
                     <span>التالي</span>
                     <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />

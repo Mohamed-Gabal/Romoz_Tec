@@ -9,10 +9,8 @@ export const validationSchemas = {
         information: Yup.object({
             adTitle: Yup.string().required("عنوان الإعلان مطلوب"),
             adDescription: Yup.string().required("الوصف مطلوب"),
-            adPrice: Yup.number()
-                .typeError("السعر لازم يكون رقم")
-                .positive("السعر لازم يكون موجب")
-                .nullable(),
+            adPrice: Yup.string().notRequired().matches(/^(?:$|[1-9]\d*(\.\d+)?)$/, "السعر لازم يكون رقم"),
+            isNegotiable: Yup.boolean(),
         }),
     }),
 
@@ -29,7 +27,7 @@ export const validationSchemas = {
             area: Yup.string().required("المنطقة مطلوبة"),
         }),
     }),
-    
+
     5: Yup.object({
         seller: Yup.object({
             name: Yup.string().required("الاسم مطلوب"),
