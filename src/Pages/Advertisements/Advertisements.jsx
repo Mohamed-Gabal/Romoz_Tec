@@ -4,6 +4,7 @@ import Categories from './Category/Category';
 import './style.css'
 import Information from './Information/Information';
 import UploadImages from './UploadImages/UploadImages';
+import Location from './Location/Location';
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
@@ -57,6 +58,11 @@ export default function Advertisements() {
             {/* رفع الصور */}
             {step === 3 && (
                 <UploadImages/>
+            )}
+            
+            {/* رفع الموقع */}
+            {step === 4 && (
+                <Location/>
             )}
 
             <div className="buttons">
