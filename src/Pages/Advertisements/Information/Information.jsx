@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Information.css";
-import CarForm from '../../../Components/AddComponents/CarForm/CarForm';
+import CarForm from '../../../Components/AdvertisementsComponents/CarForm/CarForm';
 
 export default function Information({ formik }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
