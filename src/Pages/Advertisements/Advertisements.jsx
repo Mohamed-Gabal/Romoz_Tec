@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AddHeader from '../../Components/AddComponents/AddHeader/AddHeader';
+import AddHeader from '../../Components/AdvertisementsComponents/AddHeader/AddHeader';
 import Category from './Category/Category';
 import './style.css'
 import Information from './Information/Information';
@@ -22,6 +22,22 @@ export default function Advertisements() {
                 adDescription: "",
                 adPrice: "",
                 isNegotiable: true,
+
+                vehicle: {
+                    brand: "",
+                    model: "",
+                },
+
+                realestate: {
+                    realestateType: "",
+                    streetType: "",
+                    realestateInterface: "",
+                },
+
+                electronics: {
+                    deviceType: "",
+                    moreInfo: "",
+                }
             },
             images: [],
             location: {
@@ -37,7 +53,20 @@ export default function Advertisements() {
         },
         validationSchema: validationSchemas[step],
         onSubmit: (values) => {
-            console.log("البيانات النهائية:", values);
+            const cleanedValues = {
+                ...values,
+                information: {
+                    adTitle: values.information.adTitle,
+                    adDescription: values.information.adDescription,
+                    adPrice: values.information.adPrice,
+                    isNegotiable: values.information.isNegotiable,
+                    ...(values.category === "السيارات" ? { vehicle: values.information.vehicle } : {}),
+                    ...(values.category === "العقارات" ? { realestate: values.information.realestate } : {}),
+                    ...(values.category === "الإلكترونيات" ? { electronics: values.information.electronics } : {}),
+                },
+            };
+
+            console.log("البيانات النهائية:", cleanedValues);
             alert("تم إرسال الإعلان بنجاح");
         },
         validateOnChange: true,
@@ -46,19 +75,23 @@ export default function Advertisements() {
 
     const nextStep = async () => {
         try {
-            await validationSchemas[step].validate(formik.values, { abortEarly: false });
+            let schema = validationSchemas[step];
+            if (typeof schema === "function") {
+                schema = schema(formik.values.category);
+            }
+            await schema.validate(formik.values, { abortEarly: false });
+
             if (step < 6) setStep(step + 1);
         } catch (err) {
-            if (err.inner) {  // ← كده نتأكد إنه Yup error
+            if (err.inner) {
                 err.inner.forEach((e) => {
                     formik.setFieldError(e.path, e.message);
                     formik.setFieldTouched(e.path, true, false);
                 });
-            } else {
-                console.error(err); // أي error تاني نطبعه بس
             }
         }
     };
+
 
 
     const prevStep = () => {
@@ -77,7 +110,7 @@ export default function Advertisements() {
 
             {/* المعلومات  */}
             {step === 2 && (
-                <Information formik={formik} />
+                <Information formik={formik} prevStep={prevStep} />
             )}
 
             {/* رفع الصور */}
@@ -101,11 +134,14 @@ export default function Advertisements() {
             )}
 
             <div className="buttons">
-                <button className="btn prev" style={{opacity: step === 1 ? 0 : 1 }} onClick={prevStep}>السابق</button>
+                <button className="btn prev" style={{ opacity: step === 1 ? 0 : 1 }} onClick={prevStep}>
+                    <img src="./advertisements/ArrowRight.svg" alt="ArrowRight" className='arrowPrev' />
+                    <span>السابق</span>
+                </button>
                 <button
                     className="btn next"
                     onClick={nextStep}
-                    style={{opacity: step < 6 ? 1 : 0 }}
+                    style={{ opacity: step < 6 ? 1 : 0 }}
                 >
                     <span>التالي</span>
                     <img src="./advertisements/ArrowLeft.svg" alt="ArrowLeft" className='arrowNext' />
