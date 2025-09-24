@@ -41,7 +41,24 @@ export default function Advertisements() {
 
                 jobs: {
                     jobType: "",
-                }
+                },
+
+                furniture: {
+                    furnitureType:"",
+                },
+
+                services: {
+                    servicesType: "",
+                },
+
+                fashion: {
+                    fashionType: "",
+                    moreInfo: "",
+                },
+
+                food: {
+                    foodType: "",
+                },
             },
             images: [],
             location: {
@@ -68,6 +85,7 @@ export default function Advertisements() {
                     ...(values.category === "العقارات" ? { realestate: values.information.realestate } : {}),
                     ...(values.category === "الإلكترونيات" ? { electronics: values.information.electronics } : {}),
                     ...(values.category === "الوظائف" ? { jobs: values.information.jobs } : {}),
+                    ...(values.category === "الأثاث" ? { jobs: values.information.furniture } : {}),
                 },
             };
 

@@ -64,6 +64,51 @@ export const validationSchemas = {
             });
         }
 
+        if (category === "الأثاث") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    furniture: Yup.object({
+                        furnitureType: Yup.string().required("نوع الأثاث مطلوب"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "الخدمات") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    services: Yup.object({
+                        servicesType: Yup.string().required("نوع الخدمة مطلوب"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "الأزياء") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    fashion: Yup.object({
+                        fashionType: Yup.string().required("نوع الخدمة مطلوب"),
+                        moreInfo: Yup.string().required("المعلومات الاضافية مطلوبة"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "الأطعمة") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    food: Yup.object({
+                        foodType: Yup.string().required("نوع الأثاث مطلوب"),
+                    }),
+                }),
+            });
+        }
+
         return base;
     },
 

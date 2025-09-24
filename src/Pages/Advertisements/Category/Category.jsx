@@ -17,7 +17,7 @@ export const categories = [
 ];
 
 export default function Category({ formik  }) {
-    const { values, setFieldValue, errors, touched } = formik;
+    const { values, setFieldValue, errors } = formik;
     return (
         <div className='category_main'>
             <div className="categories-container">
@@ -43,7 +43,6 @@ export default function Category({ formik  }) {
                     ))}
                 </div>
 
-                {/* رسالة خطأ لو المستخدم ما اختارش حاجة */}
                 {errors.category && (
                     <div className="error">{errors.category}</div>
                 )}
