@@ -22,6 +22,12 @@ export default function Advertisements() {
                 adDescription: "",
                 adPrice: "",
                 isNegotiable: true,
+                
+                realestate: {
+                    realestateType: "",
+                    streetType: "",
+                    realestateInterface: "",
+                }
             },
             images: [],
             location: {

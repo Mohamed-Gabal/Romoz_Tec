@@ -3,6 +3,7 @@ import "./Information.css";
 import CarForm from '../../../Components/AdvertisementsComponents/CarForm/CarForm';
 import { categories } from '../Category/Category';
 import FormHeader from '../../../Components/AdvertisementsComponents/FormHeader/FormHeader';
+import RealestateForm from '../../../Components/AdvertisementsComponents/RealestateForm/RealestateForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
@@ -107,7 +108,8 @@ export default function Information({ formik, prevStep }) {
 
                 <div className="">
                     <FormHeader img={category.icon} title={category.title} desc={category.desc} prevStep={prevStep} />
-                    <CarForm />
+                    {category.key === "vehicles" && <CarForm/>}
+                    {category.key === "realestate" && <RealestateForm formik={formik} />}
                 </div>
             </div>
         </div>
