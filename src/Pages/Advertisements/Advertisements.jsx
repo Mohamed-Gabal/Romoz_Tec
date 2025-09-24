@@ -67,6 +67,7 @@ export default function Advertisements() {
                     ...(values.category === "السيارات" ? { vehicle: values.information.vehicle } : {}),
                     ...(values.category === "العقارات" ? { realestate: values.information.realestate } : {}),
                     ...(values.category === "الإلكترونيات" ? { electronics: values.information.electronics } : {}),
+                    ...(values.category === "الوظائف" ? { jobs: values.information.jobs } : {}),
                 },
             };
 
