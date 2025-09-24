@@ -1,19 +1,19 @@
 import React from 'react'
 import "./Category.css";
 
-const categories = [
-    { id: 1, key: "vehicles", name: "السيارات", icon: "./advertisements/car.svg" },
-    { id: 2, key: "realestate", name: "العقارات", icon: "./advertisements/buildings.svg" },
-    { id: 3, key: "electronics", name: "الإلكترونيات", icon: "./advertisements/electronics.svg" },
-    { id: 4, key: "jobs", name: "الوظائف", icon: "./advertisements/jobs.svg" },
-    { id: 5, key: "furniture", name: "الأثاث", icon: "./advertisements/furniture.svg" },
-    { id: 6, key: "services", name: "الخدمات", icon: "./advertisements/services.svg" },
-    { id: 7, key: "fashion", name: "الأزياء", icon: "./advertisements/fashion.svg" },
-    { id: 8, key: "food", name: "الأطعمة", icon: "./advertisements/food.svg" },
-    { id: 9, key: "anecdotes", name: "النوادر", icon: "./advertisements/anecdotes.svg" },
-    { id: 10, key: "gardens", name: "الحدائق", icon: "./advertisements/gardens.svg" },
-    { id: 11, key: "trips", name: "الرحلات", icon: "./advertisements/trips.svg" },
-    { id: 12, key: "pets", name: "الحيوانات", icon: "./advertisements/animals.svg" },
+export const categories = [
+    { id: 1, key: "vehicles", name: "السيارات", icon: "./advertisements/car.svg", title: "السيارات وقطع الغيار", desc: "سيارات ومركبات وقطع غيار السيارات للبيع " },
+    { id: 2, key: "realestate", name: "العقارات", icon: "./advertisements/buildings.svg", title: "العقارات", desc: "عقارات للبيع" },
+    { id: 3, key: "electronics", name: "الإلكترونيات", icon: "./advertisements/electronics.svg", title: "الإلكترونيات", desc: "أجهزة وهواتف ومنتجات إلكترونية" },
+    { id: 4, key: "jobs", name: "الوظائف", icon: "./advertisements/jobs.svg", title: "الوظائف", desc: "وظائف وفرص عمل" },
+    { id: 5, key: "furniture", name: "الأثاث", icon: "./advertisements/furniture.svg", title: "الأثاث", desc: "أثاث منزلي ومكتبي للبيع" },
+    { id: 6, key: "services", name: "الخدمات", icon: "./advertisements/services.svg", title: "الخدمات", desc: "خدمات متنوعة للأفراد والشركات" },
+    { id: 7, key: "fashion", name: "الأزياء", icon: "./advertisements/fashion.svg", title: "الأزياء", desc: "ملابس وأحذية وإكسسوارات" },
+    { id: 8, key: "food", name: "الأطعمة", icon: "./advertisements/food.svg", title: "الأطعمة", desc: "منتجات غذائية ومشروبات" },
+    { id: 9, key: "anecdotes", name: "النوادر", icon: "./advertisements/anecdotes.svg", title: "النوادر", desc: "قطع نادرة وهوايات" },
+    { id: 10, key: "gardens", name: "الحدائق", icon: "./advertisements/gardens.svg", title: "الحدائق", desc: "أدوات وزينة الحدائق" },
+    { id: 11, key: "trips", name: "الرحلات", icon: "./advertisements/trips.svg", title: "الرحلات", desc: "رحلات سياحية وسفر" },
+    { id: 12, key: "pets", name: "الحيوانات", icon: "./advertisements/animals.svg", title: "الحيوانات", desc: "حيوانات أليفة ومنتجاتها" },
 ];
 
 export default function Category({ formik  }) {

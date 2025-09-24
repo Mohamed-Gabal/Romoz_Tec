@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import "./Information.css";
 import CarForm from '../../../Components/AdvertisementsComponents/CarForm/CarForm';
+import { categories } from '../Category/Category';
+import FormHeader from '../../../Components/AdvertisementsComponents/FormHeader/FormHeader';
 
-export default function Information({ formik }) {
+export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
+    const category = categories.find(cat => cat.name === values.category);
+    if (!category) return null;
 
     return (
         <div className="information_container">
@@ -100,7 +104,11 @@ export default function Information({ formik }) {
                         <p>الفئه و الميديا والبيانات الاساسيه</p>
                     </div>
                 </header>
-                <CarForm />
+
+                <div className="">
+                    <FormHeader img={category.icon} title={category.title} desc={category.desc} prevStep={prevStep} />
+                    <CarForm />
+                </div>
             </div>
         </div>
     )

@@ -77,7 +77,7 @@ export default function Advertisements() {
 
             {/* المعلومات  */}
             {step === 2 && (
-                <Information formik={formik} />
+                <Information formik={formik} prevStep={prevStep} />
             )}
 
             {/* رفع الصور */}
