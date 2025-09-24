@@ -90,7 +90,18 @@ export default function Information({ formik }) {
                 </div>
             </div>
 
-            <CarForm />
+            <div className="basic_category_data">
+                <header className='category_header'>
+                    <div className="circle">
+                        2
+                    </div>
+                    <div className="text">
+                        <h1>البيانات الأساسيه للسياره</h1>
+                        <p>الفئه و الميديا والبيانات الاساسيه</p>
+                    </div>
+                </header>
+                <CarForm />
+            </div>
         </div>
     )
 }

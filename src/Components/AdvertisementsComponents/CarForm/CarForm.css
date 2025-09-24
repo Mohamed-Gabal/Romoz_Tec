@@ -1,45 +1,8 @@
-/* ------------------------------section_information------------------------------- */
-.information_header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-}
-
-.information_header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-}
-
-.information_header .circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--main-color);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.information_header .text h1 {
-    font-size: var(--font-size-lg);
-    text-align: start;
-}
-
-.information_header .text p {
-    font-size: var(--font-size-md);
-    text-align: start;
-}
-
 .section_header {
     display: flex;
     justify-content: space-between;
     align-items: end;
     color: var(--header-color);
-    margin-top: 20px;
     padding-bottom: 20px;
     border-bottom: 2px solid var(--border-color);
 }
