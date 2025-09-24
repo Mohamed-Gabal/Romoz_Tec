@@ -4,6 +4,7 @@ import CarForm from '../../../Components/AdvertisementsComponents/CarForm/CarFor
 import { categories } from '../Category/Category';
 import FormHeader from '../../../Components/AdvertisementsComponents/FormHeader/FormHeader';
 import RealestateForm from '../../../Components/AdvertisementsComponents/RealestateForm/RealestateForm';
+import ElectricForm from '../../../Components/AdvertisementsComponents/ElectricForm/ElectricForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
@@ -110,6 +111,7 @@ export default function Information({ formik, prevStep }) {
                     <FormHeader img={category.icon} title={category.title} desc={category.desc} prevStep={prevStep} />
                     {category.key === "vehicles" && <CarForm formik={formik} />}
                     {category.key === "realestate" && <RealestateForm formik={formik} />}
+                    {category.key === "electronics" && <ElectricForm formik={formik} />}
                 </div>
             </div>
         </div>

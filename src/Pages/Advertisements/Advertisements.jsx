@@ -32,6 +32,11 @@ export default function Advertisements() {
                     realestateType: "",
                     streetType: "",
                     realestateInterface: "",
+                },
+
+                electronics: {
+                    deviceType: "",
+                    moreInfo: "",
                 }
             },
             images: [],
@@ -57,6 +62,7 @@ export default function Advertisements() {
                     isNegotiable: values.information.isNegotiable,
                     ...(values.category === "السيارات" ? { vehicle: values.information.vehicle } : {}),
                     ...(values.category === "العقارات" ? { realestate: values.information.realestate } : {}),
+                    ...(values.category === "الإلكترونيات" ? { electronics: values.information.electronics } : {}),
                 },
             };
 

@@ -41,28 +41,20 @@ export const validationSchemas = {
             });
         }
 
+        if (category === "الإلكترونيات") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    electronics: Yup.object({
+                        deviceType: Yup.string().required("نوع الجهاز مطلوب"),
+                        moreInfo: Yup.string().required("المعلومات الاضافية مطلوبة"),
+                    }),
+                }),
+            });
+        }
+
         return base;
     },
-
-    // 2: Yup.object({
-    //     information: Yup.object({
-    //         adTitle: Yup.string().required("عنوان الإعلان مطلوب"),
-    //         adDescription: Yup.string().required("الوصف مطلوب"),
-    //         adPrice: Yup.string().notRequired().matches(/^(?:$|[1-9]\d*(\.\d+)?)$/, "السعر لازم يكون رقم"),
-    //         isNegotiable: Yup.boolean(),
-
-    //         vehicle: Yup.object({
-    //             brand: Yup.string().required("يجب ادخال الماركة"),
-    //             model: Yup.string().required("يجب ادخال الموديل"),
-    //         }),
-
-    //         realestate: Yup.object({
-    //             realestateType: Yup.string().required("نوع العقار مطلوب"),
-    //             streetType: Yup.string().required("يجب ادخال نوع الشارع"),
-    //             realestateInterface: Yup.string().required("يجب ادخال الواجهة")
-    //         })
-    //     }),
-    // }),
 
     3: Yup.object({
         images: Yup.array()
