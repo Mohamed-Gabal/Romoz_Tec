@@ -94,7 +94,7 @@ const CarCard = () => {
                   </span>
                 </div>
                 <div className="car-card-actions">
-                  <Link to={`/car/${ad.id}`} className="car-card-btn">
+                  <Link to={`/details/${ad.id}`} className="car-card-btn">
                     عرض التفاصيل
                   </Link>
                   <Link to="/favorites" className="car-card-vav">

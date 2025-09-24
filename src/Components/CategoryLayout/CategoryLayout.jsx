@@ -1,16 +1,11 @@
-// src/Components/CategoryLayout/CategoryLayout.jsx
-import React, { useState } from "react";
+
+import React from "react";
 import "./CategoryLayout.css";
 import { CiLocationOn, CiStopwatch } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const CategoryLayout = ({ title, description, brandButtons = [], filters = [], items = [] }) => {
-  const [openFilter, setOpenFilter] = useState(null);
-
-  const toggleFilter = (index) => {
-    setOpenFilter(openFilter === index ? null : index);
-  };
-
   return (
     <div className="category-layout">
       {/* العنوان والوصف */}
@@ -33,26 +28,21 @@ const CategoryLayout = ({ title, description, brandButtons = [], filters = [], i
           ))}
         </div>
       )}
-      {/* باقي الفلاتر */}
+      {/* الفلاتر */}
       <div className="category-filters">
         {filters.map((filter, index) => (
           <div key={index} className="filter-group">
-            <button className="filter-btn" onClick={() => toggleFilter(index)}>
-              {filter.label}
-            </button>
-            {openFilter === index && (
-              <div className="filter-options">
-                {filter.options.map((option, idx) => (
-                  <button key={idx} className="filter-option">
-                    {option}
-                  </button>
-                ))}
-              </div>
-            )}
+            <label className="filter-label">{filter.label}</label>
+            <select className="filter-btn">
+              {filter.options.map((option, idx) => (
+                <option key={idx} className="filter-option" value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
         ))}
       </div>
-
       {/* الكروت */}
       <div className="categorys-items">
         {items.map((item, index) => (
@@ -74,7 +64,7 @@ const CategoryLayout = ({ title, description, brandButtons = [], filters = [], i
                 <CiStopwatch /> {item.time}
               </span>
             </div>
-            <button className="details-btn">عرض التفاصيل</button>
+            <Link to={`/details/${item.id}`} className="details-btn">عرض التفاصيل</Link>
           </div>
         ))}
       </div>
@@ -82,3 +72,4 @@ const CategoryLayout = ({ title, description, brandButtons = [], filters = [], i
   );
 };
 export default CategoryLayout;
+

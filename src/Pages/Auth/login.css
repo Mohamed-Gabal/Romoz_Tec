@@ -111,11 +111,7 @@ button:hover {
     max-width: 100%;
     width: 100%;
   }
-  .login-image {
-    height: auto;
-    margin-bottom: 20px;
-  }
   .login-image img {
-    max-width: 60%;
+    display: none;
   }
 }

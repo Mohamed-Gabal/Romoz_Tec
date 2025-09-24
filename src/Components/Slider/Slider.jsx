@@ -18,7 +18,7 @@ const slides = [
     title: "أفضل العروض في مكانك",
     desc: "ابحث عن المنتجات أو الخدمات الأقرب إليك بسرعة فائقة",
     btn: "ابدأ الآن",
-    link: "/categories",
+    link: "/realEstate",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const slides = [
     title: "بيع واشتري بثقة",
     desc: "منصتنا تضمن لك تجربة سهلة وآمنة لإتمام صفقاتك",
     btn: "انشر إعلانك",
-    link: "/blog",
+    link: "/electronics",
   },
 ];
 

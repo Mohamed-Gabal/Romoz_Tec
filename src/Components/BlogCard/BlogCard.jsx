@@ -90,7 +90,7 @@ const BlogCard = () => {
                   </span>
                 </div>
                 <div className="ad-actions">
-                                  <Link to={`/car/${ad.id}`} className="ad-btn">
+                  <Link to={`/details/${ad.id}`} className="ad-btn">
                     عرض التفاصيل
                   </Link>
                   <Link to="/favorites" className="fav-btn">

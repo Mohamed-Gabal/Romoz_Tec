@@ -8,8 +8,11 @@ import { navLinks } from "../../Constants/NavLinks.js";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  
 
   const closeMenu = () => setMenuOpen(false);
+  
+
 
   return (
     <header className="header">
@@ -59,3 +62,6 @@ const Header = () => {
   );
 };
 export default Header;
+
+
+

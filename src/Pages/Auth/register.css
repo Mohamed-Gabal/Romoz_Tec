@@ -59,8 +59,7 @@
   font-size: 18px;
   color: #888;
 }
-.input-group input,
-.input-group select {
+.input-group input{
   width: 100%;
   padding: 12px 40px 12px 12px;
   border: 1px solid #ddd;
@@ -68,8 +67,7 @@
   font-size: 14px;
   outline: none;
 }
-.input-group input:focus,
-.input-group select:focus {
+.input-group input:focus{
   border-color: var(--main-color);
 }
 .regis_button {
@@ -96,4 +94,10 @@
 }
 .register-footer a:hover {
   text-decoration: underline;
+}
+
+@media(max-width: 768px) {
+  .register-image img {
+    display: none;
+  }
 }
