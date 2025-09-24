@@ -103,7 +103,7 @@ export const validationSchemas = {
                 information: Yup.object({
                     ...base.fields.information.fields,
                     food: Yup.object({
-                        foodType: Yup.string().required("نوع الأثاث مطلوب"),
+                        foodType: Yup.string().required("نوع الطعام مطلوب"),
                     }),
                 }),
             });

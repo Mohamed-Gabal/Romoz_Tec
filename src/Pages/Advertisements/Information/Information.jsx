@@ -9,6 +9,7 @@ import JobsForm from '../../../Components/AdvertisementsComponents/JobsForm/Jobs
 import FurnitureForm from '../../../Components/AdvertisementsComponents/FurnitureForm/FurnitureForm';
 import ServicesForm from '../../../Components/AdvertisementsComponents/ServicesForm/ServicesForm';
 import FashionForm from '../../../Components/AdvertisementsComponents/FashionForm/FashionForm';
+import FoodForm from '../../../Components/AdvertisementsComponents/FoodForm/FoodForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
@@ -120,6 +121,7 @@ export default function Information({ formik, prevStep }) {
                     {category.key === "furniture" && <FurnitureForm formik={formik} />}
                     {category.key === "services" && <ServicesForm formik={formik} />}
                     {category.key === "fashion" && <FashionForm formik={formik} />}
+                    {category.key === "food" && <FoodForm formik={formik} />}
                 </div>
             </div>
         </div>
