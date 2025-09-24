@@ -53,6 +53,17 @@ export const validationSchemas = {
             });
         }
 
+        if (category === "الوظائف") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    jobs: Yup.object({
+                        jobType: Yup.string().required("نوع الوظيفة مطلوب"),
+                    }),
+                }),
+            });
+        }
+
         return base;
     },
 

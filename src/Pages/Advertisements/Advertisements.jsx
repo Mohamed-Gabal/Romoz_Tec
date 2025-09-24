@@ -37,6 +37,10 @@ export default function Advertisements() {
                 electronics: {
                     deviceType: "",
                     moreInfo: "",
+                },
+
+                jobs: {
+                    jobType: "",
                 }
             },
             images: [],

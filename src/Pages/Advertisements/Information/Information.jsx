@@ -5,6 +5,7 @@ import { categories } from '../Category/Category';
 import FormHeader from '../../../Components/AdvertisementsComponents/FormHeader/FormHeader';
 import RealestateForm from '../../../Components/AdvertisementsComponents/RealestateForm/RealestateForm';
 import ElectricForm from '../../../Components/AdvertisementsComponents/ElectricForm/ElectricForm';
+import JobsForm from '../../../Components/AdvertisementsComponents/JobsForm/JobsForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
@@ -112,6 +113,7 @@ export default function Information({ formik, prevStep }) {
                     {category.key === "vehicles" && <CarForm formik={formik} />}
                     {category.key === "realestate" && <RealestateForm formik={formik} />}
                     {category.key === "electronics" && <ElectricForm formik={formik} />}
+                    {category.key === "jobs" && <JobsForm formik={formik} />}
                 </div>
             </div>
         </div>
