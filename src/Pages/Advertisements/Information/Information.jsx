@@ -108,7 +108,7 @@ export default function Information({ formik, prevStep }) {
 
                 <div className="">
                     <FormHeader img={category.icon} title={category.title} desc={category.desc} prevStep={prevStep} />
-                    {category.key === "vehicles" && <CarForm/>}
+                    {category.key === "vehicles" && <CarForm formik={formik} />}
                     {category.key === "realestate" && <RealestateForm formik={formik} />}
                 </div>
             </div>
