@@ -144,15 +144,63 @@ export default function Advertisements() {
                     formData.append("vehicle[brand]", formik.values.information.vehicle.brand);
                     formData.append("vehicle[model]", formik.values.information.vehicle.model);
                 }
+
+                if (formik.values.category === "realestate") {
+                    formData.append("realestate[realestateType]", formik.values.information.realestate.realestateType);
+                    formData.append("realestate[streetType]", formik.values.information.realestate.streetType);
+                    formData.append("realestate[realestateInterface]", formik.values.information.realestate.realestateInterface);
+                }
+
+                if (formik.values.category === "electronics") {
+                    formData.append("electronics[deviceType]", formik.values.information.electronics.deviceType);
+                    formData.append("electronics[moreInfo]", formik.values.information.electronics.moreInfo);
+                }
+
+                if (formik.values.category === "jobs") {
+                    formData.append("jobs[jobType]", formik.values.information.jobs.jobType);
+                }
+
+                if (formik.values.category === "furniture") {
+                    formData.append("furniture[furnitureType]", formik.values.information.furniture.furnitureType);
+                }
+
+                if (formik.values.category === "services") {
+                    formData.append("services[servicesType]", formik.values.information.services.servicesType);
+                }
+
+                if (formik.values.category === "fashion") {
+                    formData.append("fashion[fashionType]", formik.values.information.fashion.fashionType);
+                    formData.append("fashion[moreInfo]", formik.values.information.fashion.moreInfo);
+                }
+
+                if (formik.values.category === "food") {
+                    formData.append("food[foodType]", formik.values.information.food.foodType);
+                }
+
+                if (formik.values.category === "pets") {
+                    formData.append("pets[moreInfo]", formik.values.information.pets.moreInfo);
+                }
+
+                if (formik.values.category === "anecdotes") {
+                    formData.append("anecdotes[moreInfo]", formik.values.information.anecdotes.moreInfo);
+                }
+
+                if (formik.values.category === "gardens") {
+                    formData.append("gardens[moreInfo]", formik.values.information.gardens.moreInfo);
+                }
+
+                if (formik.values.category === "trips") {
+                    formData.append("trips[moreInfo]", formik.values.information.trips.moreInfo);
+                }
+
                 const response = await axios.post(
                     "https://api.mashy.sand.alrmoz.com/api/ads",
                     formData,
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );
                 console.log(response.data);
-
             } catch (error) {
-
+                console.error("Error submitting ad:", error.response?.data || error.message);
             }
 
             // console.log("البيانات النهائية:", cleanedValues);
