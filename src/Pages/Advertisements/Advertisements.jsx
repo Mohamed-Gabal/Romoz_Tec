@@ -115,30 +115,35 @@ export default function Advertisements() {
 
             try {
                 const formData = new FormData();
+                // الفئة
                 formData.append("category", formik.values.category);
-                formData.append("adTitle", formik.values.information.adTitle);
-                formData.append("adDescription", formik.values.information.adDescription);
-                formData.append("adPrice", formik.values.information.adPrice);
-                formData.append("isNegotiable", formik.values.information.isNegotiable ? "true" : "false");
 
-                // لو في images
-                formik.values.images.forEach((img, index) => {
-                    formData.append(`images[${index}]`, img);
+                // معلومات الإعلان
+                formData.append("information[title]", formik.values.information.adTitle);
+                formData.append("information[description]", formik.values.information.adDescription);
+                formData.append("information[price]", formik.values.information.adPrice);
+                formData.append("information[negotiable]", formik.values.information.isNegotiable ? "true" : "false");
+
+                // العنوان
+                formData.append("address[location]", formik.values.location.detailedAddress);
+                formData.append("address[city]", formik.values.location.city);
+                formData.append("address[area]", formik.values.location.area);
+
+                // البائع
+                formData.append("seller[name]", formik.values.seller.name);
+                formData.append("seller[phone]", formik.values.seller.phone);
+                formData.append("seller[webMessage]", formik.values.seller.webMessage ? "true" : "false");
+
+                // الصور
+                formik.values.images.forEach((file) => {
+                    formData.append("images[]", file);
                 });
+
+                // category إضافية بيانات حسب
                 if (formik.values.category === "vehicles") {
-                    formData.append("vehicleBrand", formik.values.information.vehicle.brand);
-                    formData.append("vehicleModel", formik.values.information.vehicle.model);
+                    formData.append("vehicle[brand]", formik.values.information.vehicle.brand);
+                    formData.append("vehicle[model]", formik.values.information.vehicle.model);
                 }
-
-                // بيانات الموقع
-                formData.append("city", formik.values.location.city);
-                formData.append("area", formik.values.location.area);
-                formData.append("detailedAddress", formik.values.location.detailedAddress);
-
-                // بيانات البائع
-                formData.append("sellerName", formik.values.seller.name);
-                formData.append("sellerPhone", formik.values.seller.phone);
-                formData.append("webMessage", formik.values.seller.webMessage ? "true" : "false");
                 const response = await axios.post(
                     "https://api.mashy.sand.alrmoz.com/api/ads",
                     formData,
