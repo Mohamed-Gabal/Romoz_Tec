@@ -13,7 +13,7 @@ import FoodForm from '../../../Components/AdvertisementsComponents/FoodForm/Food
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
-    const category = categories.find(cat => cat.name === values.category);
+    const category = categories.find(cat => cat.key === values.category);
     if (!category) return null;
 
     return (
@@ -38,7 +38,7 @@ export default function Information({ formik, prevStep }) {
                     <input
                         type="text"
                         name="information.adTitle"
-                        value={values.information.adTitle}
+                        value={values.information?.adTitle}
                         onChange={(e) => setFieldValue("information.adTitle", e.target.value)}
                         onBlur={handleBlur}
                         id="adTitle"
@@ -56,7 +56,7 @@ export default function Information({ formik, prevStep }) {
                     <textarea
                         type="text"
                         name="information.adDescription"
-                        value={values.information.adDescription}
+                        value={values.information?.adDescription}
                         onChange={(e) => setFieldValue("information.adDescription", e.target.value)}
                         onBlur={handleBlur}
                         id="adDescription"

@@ -1,8 +1,11 @@
 import React from 'react';
-import "./ConfirmAd.css"
+import "./ConfirmAd.css";
+import { categories } from '../Category/Category';
 
 export default function ConfirmAd({ formik }) {
     const {values, handleSubmit} = formik;
+    const category = categories.find((cat)=> values?.category === cat.key);
+    if (!category) return null;
     return (
         <div className="confirmAd_container">
             <header className='confirmAd_header'>
@@ -14,7 +17,7 @@ export default function ConfirmAd({ formik }) {
                 <ul className='info_list'>
                     <li>
                         <h4>القسم/الفئة:</h4>
-                        <p>{values?.category}</p>
+                        <p>{category?.name}</p>
                     </li>
                     <li>
                         <h4>عنوان الإعلان:</h4>
