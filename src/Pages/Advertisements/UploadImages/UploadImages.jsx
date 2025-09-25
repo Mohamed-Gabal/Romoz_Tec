@@ -7,17 +7,25 @@ export default function UploadImages({ formik }) {
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
-        const newImages = files.map((file) => URL.createObjectURL(file));
 
-        const updatedImages = [...images, ...newImages].slice(0, 10);
-        setImages(updatedImages); // local state تحديث الـ  
-        setFieldValue("images", updatedImages); //Formik state تحديث الـ  
+        // تحديث Formik state بالـ files
+        setFieldValue("images", [...values.images, ...files].slice(0, 10));
+
+        // إنشاء preview URLs للعرض المحلي
+        const previewUrls = [...images, ...files.map(file => URL.createObjectURL(file))].slice(0, 10);
+        setImages(previewUrls);
     };
 
     const handleRemoveImage = (index) => {
-        const updatedImages = images.filter((_, i) => i !== index);
+        // حذف من Formik
+        const updatedFiles = [...values.images];
+        updatedFiles.splice(index, 1);
+        setFieldValue("images", updatedFiles);
+
+        // حذف من preview
+        const updatedImages = [...images];
+        updatedImages.splice(index, 1);
         setImages(updatedImages);
-        setFieldValue("images", updatedImages);
     };
 
     return (
