@@ -59,6 +59,10 @@ export default function Advertisements() {
                 food: {
                     foodType: "",
                 },
+
+                pets: {
+                    petsType: "",
+                },
             },
             images: [],
             location: {
@@ -86,6 +90,10 @@ export default function Advertisements() {
                     ...(values.category === "الإلكترونيات" ? { electronics: values.information.electronics } : {}),
                     ...(values.category === "الوظائف" ? { jobs: values.information.jobs } : {}),
                     ...(values.category === "الأثاث" ? { jobs: values.information.furniture } : {}),
+                    ...(values.category === "الخدمات" ? { services: values.information.services } : {}),
+                    ...(values.category === "الأزياء" ? { fashion: values.information.fashion } : {}),
+                    ...(values.category === "الأطعمة" ? { food: values.information.food } : {}),
+                    ...(values.category === "الحيوانات" ? { pets: values.information.pets } : {}),
                 },
             };
 
