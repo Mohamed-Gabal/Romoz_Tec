@@ -1,31 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./UploadImages.css";
 
 export default function UploadImages({ formik }) {
     const { values, setFieldValue, errors } = formik;
-    const [images, setImages] = useState(values.images || []);
+    const [previewUrls, setPreviewUrls] = useState([]);
+
+    // تحديث الـ previews كل ما الصور في Formik تتغير
+    useEffect(() => {
+        if (values.images && values.images.length > 0) {
+            const urls = values.images.map(file => URL.createObjectURL(file));
+            setPreviewUrls(urls);
+
+            // تنظيف الـ Object URLs بعد الاستخدام
+            return () => urls.forEach(url => URL.revokeObjectURL(url));
+        } else {
+            setPreviewUrls([]);
+        }
+    }, [values.images]);
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
 
-        // تحديث Formik state بالـ files
+        // تحديث Formik بالملفات فقط
         setFieldValue("images", [...values.images, ...files].slice(0, 10));
-
-        // إنشاء preview URLs للعرض المحلي
-        const previewUrls = [...images, ...files.map(file => URL.createObjectURL(file))].slice(0, 10);
-        setImages(previewUrls);
     };
 
     const handleRemoveImage = (index) => {
-        // حذف من Formik
         const updatedFiles = [...values.images];
         updatedFiles.splice(index, 1);
         setFieldValue("images", updatedFiles);
-
-        // حذف من preview
-        const updatedImages = [...images];
-        updatedImages.splice(index, 1);
-        setImages(updatedImages);
     };
 
     return (
@@ -54,7 +57,7 @@ export default function UploadImages({ formik }) {
             </label>
 
             <div className="preview">
-                {images.map((src, index) => (
+                {previewUrls.map((src, index) => (
                     <div key={index} className="preview-image">
                         <img src={src} alt={`preview-${index}`} />
                         <button
