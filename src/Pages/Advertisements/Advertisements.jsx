@@ -61,7 +61,19 @@ export default function Advertisements() {
                 },
 
                 pets: {
-                    petsType: "",
+                    moreInfo: "",
+                },
+
+                anecdotes: {
+                    moreInfo: "",
+                },
+
+                gardens: {
+                    moreInfo: "",
+                },
+
+                trips: {
+                    moreInfo: "",
                 },
             },
             images: [],
@@ -93,6 +105,9 @@ export default function Advertisements() {
                     ...(values.category === "services" ? { services: values.information.services } : {}),
                     ...(values.category === "fashion" ? { fashion: values.information.fashion } : {}),
                     ...(values.category === "food" ? { food: values.information.food } : {}),
+                    ...(values.category === "anecdotes" ? { anecdotes: values.information.anecdotes } : {}),
+                    ...(values.category === "gardens" ? { gardens: values.information.gardens } : {}),
+                    ...(values.category === "trips" ? { trips: values.information.trips } : {}),
                     ...(values.category === "pets" ? { pets: values.information.pets } : {}),
                 },
             };

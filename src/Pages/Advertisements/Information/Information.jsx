@@ -10,6 +10,10 @@ import FurnitureForm from '../../../Components/AdvertisementsComponents/Furnitur
 import ServicesForm from '../../../Components/AdvertisementsComponents/ServicesForm/ServicesForm';
 import FashionForm from '../../../Components/AdvertisementsComponents/FashionForm/FashionForm';
 import FoodForm from '../../../Components/AdvertisementsComponents/FoodForm/FoodForm';
+import AnecdotesForm from '../../../Components/AdvertisementsComponents/AnecdotesForm/AnecdotesForm';
+import PetsForm from '../../../Components/AdvertisementsComponents/PetsForm/PetsForm';
+import GardensForm from '../../../Components/AdvertisementsComponents/GardensForm/GardensForm';
+import TripsForm from '../../../Components/AdvertisementsComponents/TripsForm/TripsForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
@@ -122,6 +126,10 @@ export default function Information({ formik, prevStep }) {
                     {category.key === "services" && <ServicesForm formik={formik} />}
                     {category.key === "fashion" && <FashionForm formik={formik} />}
                     {category.key === "food" && <FoodForm formik={formik} />}
+                    {category.key === "anecdotes" && <AnecdotesForm formik={formik} />}
+                    {category.key === "gardens" && <GardensForm formik={formik} />}
+                    {category.key === "trips" && <TripsForm formik={formik} />}
+                    {category.key === "pets" && <PetsForm formik={formik} />}
                 </div>
             </div>
         </div>

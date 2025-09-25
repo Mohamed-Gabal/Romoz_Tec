@@ -109,17 +109,6 @@ export const validationSchemas = {
             });
         }
 
-        if (category === "pets") {
-            return base.shape({
-                information: Yup.object({
-                    ...base.fields.information.fields,
-                    pets: Yup.object({
-                        petsType: Yup.string().required("نوع الطعام مطلوب"),
-                    }),
-                }),
-            });
-        }
-
         return base;
     },
 
