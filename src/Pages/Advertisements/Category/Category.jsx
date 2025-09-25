@@ -17,7 +17,7 @@ export const categories = [
 ];
 
 export default function Category({ formik  }) {
-    const { values, setFieldValue, errors, touched } = formik;
+    const { values, setFieldValue, errors } = formik;
     return (
         <div className='category_main'>
             <div className="categories-container">
@@ -29,13 +29,13 @@ export default function Category({ formik  }) {
                         <div
                             key={cat.id}
                             onClick={() => {
-                                setFieldValue("category", cat.name);
+                                setFieldValue("category", cat.key);
                                 formik.setFieldError("category", "");
                             }}
                             role="button"
                             tabIndex={0}
-                            onKeyDown={(e) => e.name === "Enter" && setFieldValue("category", cat.name)}
-                            className={`category-card ${values.category === cat.name ? "active_category" : ""}`}
+                            onKeyDown={(e) => e.key === "Enter" && setFieldValue("category", cat.key)}
+                            className={`category-card ${values.category === cat.key ? "active_category" : ""}`}
                         >
                             <div className="icon"><img src={cat.icon} alt={cat.name} /></div>
                             <p>{cat.name}</p>
@@ -43,7 +43,6 @@ export default function Category({ formik  }) {
                     ))}
                 </div>
 
-                {/* رسالة خطأ لو المستخدم ما اختارش حاجة */}
                 {errors.category && (
                     <div className="error">{errors.category}</div>
                 )}

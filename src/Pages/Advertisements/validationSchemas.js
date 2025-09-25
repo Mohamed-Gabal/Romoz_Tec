@@ -16,7 +16,7 @@ export const validationSchemas = {
             }),
         });
 
-        if (category === "السيارات") {
+        if (category === "vehicles") {
             return base.shape({
                 information: Yup.object({
                     ...base.fields.information.fields,
@@ -28,7 +28,7 @@ export const validationSchemas = {
             });
         }
 
-        if (category === "العقارات") {
+        if (category === "realestate") {
             return base.shape({
                 information: Yup.object({
                     ...base.fields.information.fields,
@@ -41,13 +41,69 @@ export const validationSchemas = {
             });
         }
 
-        if (category === "الإلكترونيات") {
+        if (category === "electronics") {
             return base.shape({
                 information: Yup.object({
                     ...base.fields.information.fields,
                     electronics: Yup.object({
                         deviceType: Yup.string().required("نوع الجهاز مطلوب"),
                         moreInfo: Yup.string().required("المعلومات الاضافية مطلوبة"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "jobs") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    jobs: Yup.object({
+                        jobType: Yup.string().required("نوع الوظيفة مطلوب"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "furniture") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    furniture: Yup.object({
+                        furnitureType: Yup.string().required("نوع الأثاث مطلوب"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "services") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    services: Yup.object({
+                        servicesType: Yup.string().required("نوع الخدمة مطلوب"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "fashion") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    fashion: Yup.object({
+                        fashionType: Yup.string().required("نوع الخدمة مطلوب"),
+                        moreInfo: Yup.string().required("المعلومات الاضافية مطلوبة"),
+                    }),
+                }),
+            });
+        }
+
+        if (category === "food") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    food: Yup.object({
+                        foodType: Yup.string().required("نوع الطعام مطلوب"),
                     }),
                 }),
             });
@@ -74,7 +130,8 @@ export const validationSchemas = {
         seller: Yup.object({
             name: Yup.string().required("الاسم مطلوب"),
             phone: Yup.string()
-                .matches(/^05\d{8}$/, "رقم الجوال غير صحيح (05xxxxxxxx)")
+            .matches(
+                /^(?:(?:\+966|966)5\d{8}|05\d{8})$/,"الصيغة الصحيحة : 05xxxxxxxxx او 9665xxxxxxxxx")
                 .required("رقم الجوال مطلوب"),
             webMessage: Yup.boolean(),
         }),

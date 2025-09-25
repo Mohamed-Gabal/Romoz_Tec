@@ -5,10 +5,19 @@ import { categories } from '../Category/Category';
 import FormHeader from '../../../Components/AdvertisementsComponents/FormHeader/FormHeader';
 import RealestateForm from '../../../Components/AdvertisementsComponents/RealestateForm/RealestateForm';
 import ElectricForm from '../../../Components/AdvertisementsComponents/ElectricForm/ElectricForm';
+import JobsForm from '../../../Components/AdvertisementsComponents/JobsForm/JobsForm';
+import FurnitureForm from '../../../Components/AdvertisementsComponents/FurnitureForm/FurnitureForm';
+import ServicesForm from '../../../Components/AdvertisementsComponents/ServicesForm/ServicesForm';
+import FashionForm from '../../../Components/AdvertisementsComponents/FashionForm/FashionForm';
+import FoodForm from '../../../Components/AdvertisementsComponents/FoodForm/FoodForm';
+import AnecdotesForm from '../../../Components/AdvertisementsComponents/AnecdotesForm/AnecdotesForm';
+import PetsForm from '../../../Components/AdvertisementsComponents/PetsForm/PetsForm';
+import GardensForm from '../../../Components/AdvertisementsComponents/GardensForm/GardensForm';
+import TripsForm from '../../../Components/AdvertisementsComponents/TripsForm/TripsForm';
 
 export default function Information({ formik, prevStep }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
-    const category = categories.find(cat => cat.name === values.category);
+    const category = categories.find(cat => cat.key === values.category);
     if (!category) return null;
 
     return (
@@ -33,7 +42,7 @@ export default function Information({ formik, prevStep }) {
                     <input
                         type="text"
                         name="information.adTitle"
-                        value={values.information.adTitle}
+                        value={values.information?.adTitle}
                         onChange={(e) => setFieldValue("information.adTitle", e.target.value)}
                         onBlur={handleBlur}
                         id="adTitle"
@@ -51,7 +60,7 @@ export default function Information({ formik, prevStep }) {
                     <textarea
                         type="text"
                         name="information.adDescription"
-                        value={values.information.adDescription}
+                        value={values.information?.adDescription}
                         onChange={(e) => setFieldValue("information.adDescription", e.target.value)}
                         onBlur={handleBlur}
                         id="adDescription"
@@ -112,6 +121,15 @@ export default function Information({ formik, prevStep }) {
                     {category.key === "vehicles" && <CarForm formik={formik} />}
                     {category.key === "realestate" && <RealestateForm formik={formik} />}
                     {category.key === "electronics" && <ElectricForm formik={formik} />}
+                    {category.key === "jobs" && <JobsForm formik={formik} />}
+                    {category.key === "furniture" && <FurnitureForm formik={formik} />}
+                    {category.key === "services" && <ServicesForm formik={formik} />}
+                    {category.key === "fashion" && <FashionForm formik={formik} />}
+                    {category.key === "food" && <FoodForm formik={formik} />}
+                    {category.key === "anecdotes" && <AnecdotesForm formik={formik} />}
+                    {category.key === "gardens" && <GardensForm formik={formik} />}
+                    {category.key === "trips" && <TripsForm formik={formik} />}
+                    {category.key === "pets" && <PetsForm formik={formik} />}
                 </div>
             </div>
         </div>
