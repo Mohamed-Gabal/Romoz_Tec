@@ -9,6 +9,7 @@ import SellerData from './SellerData/SellerData';
 import ConfirmAd from './ConfirmAd/ConfirmAd';
 import { validationSchemas } from "./validationSchemas";
 import { useFormik } from 'formik';
+import axios from "axios";
 
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
@@ -44,7 +45,7 @@ export default function Advertisements() {
                 },
 
                 furniture: {
-                    furnitureType:"",
+                    furnitureType: "",
                 },
 
                 services: {
@@ -89,7 +90,7 @@ export default function Advertisements() {
             },
         },
         validationSchema: validationSchemas[step],
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             const cleanedValues = {
                 ...values,
                 information: {
@@ -101,7 +102,7 @@ export default function Advertisements() {
                     ...(values.category === "realestate" ? { realestate: values.information.realestate } : {}),
                     ...(values.category === "electronics" ? { electronics: values.information.electronics } : {}),
                     ...(values.category === "jobs" ? { jobs: values.information.jobs } : {}),
-                    ...(values.category === "furniture" ? { jobs: values.information.furniture } : {}),
+                    ...(values.category === "furniture" ? { furniture: values.information.furniture } : {}),
                     ...(values.category === "services" ? { services: values.information.services } : {}),
                     ...(values.category === "fashion" ? { fashion: values.information.fashion } : {}),
                     ...(values.category === "food" ? { food: values.information.food } : {}),
@@ -112,7 +113,44 @@ export default function Advertisements() {
                 },
             };
 
-            console.log("البيانات النهائية:", cleanedValues);
+            try {
+                const formData = new FormData();
+                formData.append("category", formik.values.category);
+                formData.append("adTitle", formik.values.information.adTitle);
+                formData.append("adDescription", formik.values.information.adDescription);
+                formData.append("adPrice", formik.values.information.adPrice);
+                formData.append("isNegotiable", formik.values.information.isNegotiable ? "true" : "false");
+
+                // لو في images
+                formik.values.images.forEach((img, index) => {
+                    formData.append(`images[${index}]`, img);
+                });
+                if (formik.values.category === "vehicles") {
+                    formData.append("vehicleBrand", formik.values.information.vehicle.brand);
+                    formData.append("vehicleModel", formik.values.information.vehicle.model);
+                }
+
+                // بيانات الموقع
+                formData.append("city", formik.values.location.city);
+                formData.append("area", formik.values.location.area);
+                formData.append("detailedAddress", formik.values.location.detailedAddress);
+
+                // بيانات البائع
+                formData.append("sellerName", formik.values.seller.name);
+                formData.append("sellerPhone", formik.values.seller.phone);
+                formData.append("webMessage", formik.values.seller.webMessage ? "true" : "false");
+                const response = await axios.post(
+                    "https://api.mashy.sand.alrmoz.com/api/ads",
+                    formData,
+                    { headers: { "Content-Type": "multipart/form-data" } }
+                );
+                console.log(response.data);
+
+            } catch (error) {
+
+            }
+
+            // console.log("البيانات النهائية:", cleanedValues);
         },
         validateOnChange: true,
         validateOnBlur: true,
