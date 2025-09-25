@@ -113,7 +113,6 @@ export default function Advertisements() {
             };
 
             console.log("البيانات النهائية:", cleanedValues);
-            alert("تم إرسال الإعلان بنجاح");
         },
         validateOnChange: true,
         validateOnBlur: true,
