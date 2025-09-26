@@ -9,12 +9,21 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const registerPassword = () => {
-    setShowPassword(!showPassword);
-  }
+  const registerPassword = () => setShowPassword(!showPassword);
+
   const navigate = useNavigate();
 
-  // state عشان  اعرف القيم اللي المستخدم بيكتبها في الفورم
+  // الأخطاء
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    password_confirmation: "",
+    general: "",
+  });
+
+  // البيانات اللي المستخدم بيكتبها
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,40 +32,84 @@ const Register = () => {
     password_confirmation: "",
   });
 
-  // الدالة دي بتشتغل لما المستخدم يضغط submit
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // منع تحديث الصفحة الافتراضي
+  // التحقق من البيانات
+  const dataValidation = () => {
+    let formIsValid = true;
+    let newDataErrors = {
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+      password_confirmation: "",
+      general: "",
+    };
 
-    // شرط للتأكد إن كلمة المرور وتأكيدها متطابقين
+    if (!formData.name.trim()) {
+      newDataErrors.name = "الرجاء إدخال الاسم الكامل";
+      formIsValid = false;
+    }
+    if (!formData.email.trim()) {
+      newDataErrors.email = "الرجاء إدخال البريد الإلكتروني";
+      formIsValid = false;
+    }
+    if (!formData.phone.trim()) {
+      newDataErrors.phone = "الرجاء إدخال رقم الجوال";
+      formIsValid = false;
+    }
+    if (!formData.password.trim()) {
+      newDataErrors.password = "الرجاء إدخال كلمة المرور";
+      formIsValid = false;
+    }
+    if (!formData.password_confirmation.trim()) {
+      newDataErrors.password_confirmation = "الرجاء تأكيد كلمة المرور";
+      formIsValid = false;
+    }
+
+    setErrors(newDataErrors);
+    return formIsValid;
+  };
+
+  // إرسال الفورم
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // ✅ تحقق من صحة البيانات قبل الإرسال
+    if (!dataValidation()) return;
+
+    // ✅ تحقق من تطابق كلمة المرور
     if (formData.password !== formData.password_confirmation) {
-      alert("كلمات المرور غير متطابقة");
+      setErrors((prev) => ({
+        ...prev,
+        password_confirmation: "كلمات المرور غير متطابقة",
+      }));
       return;
     }
 
     try {
-      // إرسال البيانات للـ API
-      const response = await fetch("https://api.mashy.sand.alrmoz.com/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // تحويل البيانات من object لـ JSON
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://api.mashy.sand.alrmoz.com/api/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
-        // لو التسجيل نجح → تحويل المستخدم لصفحة تسجيل الدخول
         navigate("/login");
       } else {
-        // لو حصل خطأ من السيرفر → عرض الرسالة
-        alert(data.message || "حدث خطأ أثناء التسجيل");
+        setErrors((prev) => ({
+          ...prev,
+          general: data.message || "حدث خطأ أثناء التسجيل",
+        }));
       }
-    } catch (error) {
-      // لو حصل خطأ في الاتصال بالسيرفر أو أي مشكلة
-      console.error("Error:", error);
-      alert("حدث خطأ أثناء التسجيل");
+    } catch {
+      setErrors((prev) => ({
+        ...prev,
+        general: "خطأ في الاتصال ",
+      }));
     }
   };
 
@@ -67,7 +120,6 @@ const Register = () => {
           <img src="/images/login.png" alt="Register" />
         </div>
 
-        {/* محتوى الريجستر */}
         <div className="register-content">
           <h2>إنشاء حساب جديد</h2>
           <p>
@@ -75,7 +127,13 @@ const Register = () => {
             خدماتك في المكان المناسب، بسرعة وأمان.
           </p>
 
-          {/* ربطنا الفورم بالدالة handleSubmit */}
+          {/* ✅ خطأ عام */}
+          {errors.general && (
+            <p className="error-message" style={{ color: "red" }}>
+              {errors.general}
+            </p>
+          )}
+
           <form className="register-form" onSubmit={handleSubmit}>
             {/* الاسم الكامل */}
             <div className="input-group">
@@ -83,10 +141,14 @@ const Register = () => {
               <input
                 type="text"
                 placeholder="الاسم الكامل"
-                value={formData.name} // ربط القيمة بالـ state
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })} // تحديث الـ state
+                value={formData.name}
+                onChange={(e) => {
+                  setFormData({ ...formData, name: e.target.value });
+                  setErrors((prev) => ({ ...prev, name: "" }));
+                }}
               />
             </div>
+            {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
 
             {/* البريد الإلكتروني */}
             <div className="input-group">
@@ -95,9 +157,13 @@ const Register = () => {
                 type="email"
                 placeholder="بريدك الإلكتروني"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, email: e.target.value });
+                  setErrors((prev) => ({ ...prev, email: "" }));
+                }}
               />
             </div>
+            {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
 
             {/* رقم الجوال */}
             <div className="input-group">
@@ -106,9 +172,13 @@ const Register = () => {
                 type="number"
                 placeholder="رقم الجوال"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, phone: e.target.value });
+                  setErrors((prev) => ({ ...prev, phone: "" }));
+                }}
               />
             </div>
+            {errors.phone && <p style={{ color: "red" }}>{errors.phone}</p>}
 
             {/* كلمة المرور */}
             <div className="input-group">
@@ -117,9 +187,13 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="كلمة المرور"
                 value={formData.password}
-                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                onChange={(e) => {
+                  setFormData({ ...formData, password: e.target.value });
+                  setErrors((prev) => ({ ...prev, password: "" }));
+                }}
               />
             </div>
+            {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
 
             {/* تأكيد كلمة المرور */}
             <div className="input-group">
@@ -128,19 +202,24 @@ const Register = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="تأكيد كلمة المرور"
                 value={formData.password_confirmation}
-                onChange={(e) =>
-                  setFormData({ ...formData, password_confirmation: e.target.value })
-                }
+                onChange={(e) => {
+                  setFormData({
+                    ...formData,
+                    password_confirmation: e.target.value,
+                  });
+                  setErrors((prev) => ({ ...prev, password_confirmation: "" }));
+                }}
               />
             </div>
+            {errors.password_confirmation && (
+              <p style={{ color: "red" }}>{errors.password_confirmation}</p>
+            )}
 
-            {/* زر إنشاء الحساب */}
             <button type="submit" className="regis_button">
               إنشاء حساب
             </button>
           </form>
 
-          {/* رابط تسجيل الدخول */}
           <p className="register-footer">
             هل لديك حساب بالفعل؟ <Link to="/login">تسجيل دخول</Link>
           </p>
@@ -150,4 +229,5 @@ const Register = () => {
   );
 };
 export default Register;
+
 

@@ -19,11 +19,11 @@ import Gardens from './Pages/Gardens/Gardens';
 import Pets from './Pages/Pets/Pets';
 import RealEstate from './Pages/RealEstate/RealEstate';
 import Trips from './Pages/Trips/Trips';
-import Categories from "./pages/Categories/Categories";
-import Blog from "./pages/Blog/Blog";
-import AddDetails from "./pages/AddDetails/AddDetails";
+import AboutUs from "./Pages/AboutUs/AboutUs";
+import Blog from "./Pages/Blog/Blog";
+import ContactUs from "./Pages/ContactUs/ContactUs";
 import Login from "./Pages/Auth/Login";
-import Register from "./pages/Auth/Register";
+import Register from "./Pages/Auth/Register";
 import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
 import DetailsLayout from "./Pages/DetailsLayout/DetailsLayout";
@@ -45,9 +45,9 @@ const App = () => {
       <Route path="/pets" element={<MainLayout><Pets /></MainLayout>} />
       <Route path="/realEstate" element={<MainLayout><RealEstate /></MainLayout>} />
       <Route path="/trips" element={<MainLayout><Trips /></MainLayout>} />
-      <Route path="/categories" element={<MainLayout><Categories /></MainLayout>} />
+      <Route path="/aboutUs" element={<MainLayout><AboutUs /></MainLayout>} />
       <Route path="/blog" element={<MainLayout><Blog /></MainLayout>} />
-      <Route path="/addDetails" element={<MainLayout><AddDetails /></MainLayout>} />
+      <Route path="/contactUs" element={<MainLayout><ContactUs /></MainLayout>} />
       <Route path="/details/:id" element={<MainLayout><DetailsLayout /></MainLayout>} />
 
       {/* صفحات تسجيل الدخول والتسجيل بدون Layout */}
