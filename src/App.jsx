@@ -27,6 +27,7 @@ import Register from "./Pages/Auth/Register";
 import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
 import DetailsLayout from "./Pages/DetailsLayout/DetailsLayout";
+// import Advertisement from "./Pages/Advertisements/Advertisements";
 
 // pages about us
 import AboutUsLayout from "./Components/AboutUsLayout/AboutUsLayout";
@@ -65,6 +66,9 @@ const App = () => {
         <Route path="/aboutUs/work" element={<MainLayout><AboutUsWork /></MainLayout>} />
         <Route path="/aboutUs/choice" element={<MainLayout><AboutUsChoice /></MainLayout>} />
         <Route path="/aboutUs/start" element={<MainLayout><AboutUsStart /></MainLayout>} />
+
+       {/* صفحات أضف إعلانك  */}
+      {/* <Route path="/category" element={<Advertisement/>}/> */}
 
       {/* صفحات تسجيل الدخول والتسجيل بدون Layout */}
       <Route path="/login" element={<Login />} />
