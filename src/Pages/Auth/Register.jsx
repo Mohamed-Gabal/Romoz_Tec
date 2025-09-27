@@ -108,7 +108,7 @@ const Register = () => {
     } catch {
       setErrors((prev) => ({
         ...prev,
-        general: "خطأ في الاتصال ",
+        general: "خطأ في الاتصال   ",
       }));
     }
   };

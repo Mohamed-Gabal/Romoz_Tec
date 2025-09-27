@@ -28,6 +28,14 @@ import ForgotPassword from './Pages/Auth/ForgotPassword';
 import ResetPassword from './Pages/Auth/ResetPassword';
 import DetailsLayout from "./Pages/DetailsLayout/DetailsLayout";
 
+// pages about us
+import AboutUsLayout from "./Components/AboutUsLayout/AboutUsLayout";
+import AboutUsPlatform from "./Components/AboutUsPlatform/AboutUsPlatform";
+import AboutUsTeam from "./Components/AboutUsTeam/AboutUsTeam";
+import AboutUsWork from "./Components/AboutUsWork/AboutUsWork";
+import AboutUsChoice from "./Components/AboutUsChoice/AboutUsChoice";
+import AboutUsStart from "./Components/AboutUsStart/AboutUsStart";
+
 const App = () => {
   return (
     <Routes>
@@ -49,6 +57,14 @@ const App = () => {
       <Route path="/blog" element={<MainLayout><Blog /></MainLayout>} />
       <Route path="/contactUs" element={<MainLayout><ContactUs /></MainLayout>} />
       <Route path="/details/:id" element={<MainLayout><DetailsLayout /></MainLayout>} />
+       
+       {/*pages about us */}
+        <Route path="/aboutUs/layout" element={<MainLayout><AboutUsLayout /></MainLayout>} />
+        <Route path="/aboutUs/platform" element={<MainLayout><AboutUsPlatform /></MainLayout>} />
+        <Route path="/aboutUs/team" element={<MainLayout><AboutUsTeam /></MainLayout>} />
+        <Route path="/aboutUs/work" element={<MainLayout><AboutUsWork /></MainLayout>} />
+        <Route path="/aboutUs/choice" element={<MainLayout><AboutUsChoice /></MainLayout>} />
+        <Route path="/aboutUs/start" element={<MainLayout><AboutUsStart /></MainLayout>} />
 
       {/* صفحات تسجيل الدخول والتسجيل بدون Layout */}
       <Route path="/login" element={<Login />} />
