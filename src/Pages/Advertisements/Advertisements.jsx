@@ -14,6 +14,9 @@ import axios from "axios";
 export default function Advertisements() {
     // Step management: 1=category, 2=details, 3=review
     const [step, setStep] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -90,107 +93,87 @@ export default function Advertisements() {
             },
         },
         validationSchema: validationSchemas[step],
-        onSubmit: async (values) => {
-            const cleanedValues = {
-                ...values,
-                information: {
-                    adTitle: values.information.adTitle,
-                    adDescription: values.information.adDescription,
-                    adPrice: values.information.adPrice,
-                    isNegotiable: values.information.isNegotiable,
-                    ...(values.category === "vehicles" ? { vehicle: values.information.vehicle } : {}),
-                    ...(values.category === "realestate" ? { realestate: values.information.realestate } : {}),
-                    ...(values.category === "electronics" ? { electronics: values.information.electronics } : {}),
-                    ...(values.category === "jobs" ? { jobs: values.information.jobs } : {}),
-                    ...(values.category === "furniture" ? { furniture: values.information.furniture } : {}),
-                    ...(values.category === "services" ? { services: values.information.services } : {}),
-                    ...(values.category === "fashion" ? { fashion: values.information.fashion } : {}),
-                    ...(values.category === "food" ? { food: values.information.food } : {}),
-                    ...(values.category === "anecdotes" ? { anecdotes: values.information.anecdotes } : {}),
-                    ...(values.category === "gardens" ? { gardens: values.information.gardens } : {}),
-                    ...(values.category === "trips" ? { trips: values.information.trips } : {}),
-                    ...(values.category === "pets" ? { pets: values.information.pets } : {}),
-                },
-            };
-
+        onSubmit: async () => {
+            setIsLoading(true);
+            setErrorMessage("");
             try {
                 const formData = new FormData();
                 // الفئة
                 formData.append("category", formik.values.category);
 
                 // معلومات الإعلان
-                formData.append("information[title]", formik.values.information.adTitle);
-                formData.append("information[description]", formik.values.information.adDescription);
-                formData.append("information[price]", formik.values.information.adPrice);
-                formData.append("information[negotiable]", formik.values.information.isNegotiable ? "true" : "false");
+                formData.append("information[adTitle]", formik.values.information.adTitle);
+                formData.append("information[adDescription]", formik.values.information.adDescription);
+                formData.append("information[adPrice]", formik.values.information.adPrice);
+                formData.append("information[isNegotiable]", formik.values.information.isNegotiable ? 1 : 0);
 
                 // العنوان
-                formData.append("address[location]", formik.values.location.detailedAddress);
-                formData.append("address[city]", formik.values.location.city);
-                formData.append("address[area]", formik.values.location.area);
+                formData.append("location[detailedAddress]", formik.values.location.detailedAddress);
+                formData.append("location[city]", formik.values.location.city);
+                formData.append("location[area]", formik.values.location.area);
 
                 // البائع
                 formData.append("seller[name]", formik.values.seller.name);
                 formData.append("seller[phone]", formik.values.seller.phone);
-                formData.append("seller[webMessage]", formik.values.seller.webMessage ? "true" : "false");
+                formData.append("seller[webMessage]", formik.values.seller.webMessage ? 1 : 0);
 
                 // الصور
-                formik.values.images.forEach((file) => {
-                    formData.append("images[]", file);
+                formik.values.images.forEach((file, index) => {
+                    formData.append(`images[${index}]`, file);
                 });
 
                 // category إضافية بيانات حسب
                 if (formik.values.category === "vehicles") {
-                    formData.append("vehicle[brand]", formik.values.information.vehicle.brand);
-                    formData.append("vehicle[model]", formik.values.information.vehicle.model);
+                    formData.append("information[vehicle][brand]", formik.values.information.vehicle.brand);
+                    formData.append("information[vehicle][model]", formik.values.information.vehicle.model);
                 }
 
                 if (formik.values.category === "realestate") {
-                    formData.append("realestate[realestateType]", formik.values.information.realestate.realestateType);
-                    formData.append("realestate[streetType]", formik.values.information.realestate.streetType);
-                    formData.append("realestate[realestateInterface]", formik.values.information.realestate.realestateInterface);
+                    formData.append("information[realestate][realestateType]", formik.values.information.realestate.realestateType);
+                    formData.append("information[realestate][streetType]", formik.values.information.realestate.streetType);
+                    formData.append("information[realestate][realestateInterface]", formik.values.information.realestate.realestateInterface);
                 }
 
                 if (formik.values.category === "electronics") {
-                    formData.append("electronics[deviceType]", formik.values.information.electronics.deviceType);
-                    formData.append("electronics[moreInfo]", formik.values.information.electronics.moreInfo);
+                    formData.append("information[electronics][deviceType]", formik.values.information.electronics.deviceType);
+                    formData.append("information[electronics][moreInfo]", formik.values.information.electronics.moreInfo);
                 }
 
                 if (formik.values.category === "jobs") {
-                    formData.append("jobs[jobType]", formik.values.information.jobs.jobType);
+                    formData.append("information[jobs][jobType]", formik.values.information.jobs.jobType);
                 }
 
                 if (formik.values.category === "furniture") {
-                    formData.append("furniture[furnitureType]", formik.values.information.furniture.furnitureType);
+                    formData.append("information[furniture][furnitureType]", formik.values.information.furniture.furnitureType);
                 }
 
                 if (formik.values.category === "services") {
-                    formData.append("services[servicesType]", formik.values.information.services.servicesType);
+                    formData.append("information[service][serviceType]", formik.values.information.services.servicesType);
                 }
 
                 if (formik.values.category === "fashion") {
-                    formData.append("fashion[fashionType]", formik.values.information.fashion.fashionType);
-                    formData.append("fashion[moreInfo]", formik.values.information.fashion.moreInfo);
+                    formData.append("information[fashion][fashionType]", formik.values.information.fashion.fashionType);
+                    formData.append("information[fashion][moreInfo]", formik.values.information.fashion.moreInfo);
                 }
 
                 if (formik.values.category === "food") {
-                    formData.append("food[foodType]", formik.values.information.food.foodType);
+                    formData.append("information[food][foodType]", formik.values.information.food.foodType);
                 }
 
                 if (formik.values.category === "pets") {
-                    formData.append("pets[moreInfo]", formik.values.information.pets.moreInfo);
-                }
-
-                if (formik.values.category === "anecdotes") {
-                    formData.append("anecdotes[moreInfo]", formik.values.information.anecdotes.moreInfo);
+                    formData.append("information[pets][animalType]", formik.values.information.pets.moreInfo);
                 }
 
                 if (formik.values.category === "gardens") {
-                    formData.append("gardens[moreInfo]", formik.values.information.gardens.moreInfo);
+                    formData.append("information[gardens][gardenType]", formik.values.information.gardens.moreInfo);
                 }
 
                 if (formik.values.category === "trips") {
-                    formData.append("trips[moreInfo]", formik.values.information.trips.moreInfo);
+                    formData.append("information[trip][tripType]", formik.values.information.trips.moreInfo);
+                }
+
+                if (formik.values.category === "anecdotes") {
+                    formData.append("information[anecdotes][anecdoteType]", formik.values.information.anecdotes.moreInfo);
                 }
 
                 const response = await axios.post(
@@ -199,11 +182,18 @@ export default function Advertisements() {
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );
                 console.log(response.data);
+                setSuccessMessage(true);
+                if (response?.data?.success) {
+                    setStep(1);
+                    formik.resetForm();
+                }
             } catch (error) {
+                setErrorMessage(error.response?.message || error.message)
                 console.error("Error submitting ad:", error.response?.data || error.message);
-            }
+            } finally {
+                setIsLoading(false);
+            };
 
-            // console.log("البيانات النهائية:", cleanedValues);
         },
         validateOnChange: true,
         validateOnBlur: true,
@@ -266,7 +256,7 @@ export default function Advertisements() {
 
             {/* التاكيد */}
             {step === 6 && (
-                <ConfirmAd formik={formik} />
+                <ConfirmAd formik={formik} isLoading={isLoading} errorMessage={errorMessage} successMessage={successMessage} setSuccessMessage={setSuccessMessage} />
             )}
 
             <div className="buttons">

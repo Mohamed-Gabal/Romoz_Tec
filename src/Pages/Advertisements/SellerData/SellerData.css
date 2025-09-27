@@ -37,3 +37,7 @@
     text-align: start;
     color: var(--header-color);
 }
+
+.webMessage_item .switch .slider {
+    display: flex;
+}

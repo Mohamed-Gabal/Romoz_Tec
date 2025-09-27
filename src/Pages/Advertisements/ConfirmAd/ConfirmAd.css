@@ -27,7 +27,7 @@
     font-size: var(--font-size-sm);
 }
 
-.info_list{
+.info_list {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -59,7 +59,7 @@
 }
 
 /* ------------------------Modal----------------------- */
-.modal{
+.modal {
     position: absolute;
     inset: 0;
     background-color: var(--shadow-color);
@@ -69,7 +69,8 @@
     align-items: center;
     height: 100%;
 }
-.modal-dialog{
+
+.modal-dialog {
     max-width: 480px;
     margin: auto;
     margin-top: 20px;
@@ -81,6 +82,7 @@
     color: var(--header-color);
     margin-bottom: 20px;
 }
+
 .modal-content, .modal-header, .modal-body {
     display: flex;
     flex-direction: column;
@@ -89,7 +91,7 @@
     margin: auto;
 }
 
-.modal-header .img_avatar{
+.modal-header .img_avatar {
     background-color: #AAFFEE80;
     width: 60px;
     height: 60px;
@@ -110,7 +112,7 @@
     font-size: var(--font-size-sm);
 }
 
-.btn-secondary{
+.btn-secondary {
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -125,7 +127,7 @@
     margin-top: 3px;
 }
 
-.special-adver{ 
+.special-adver {
     background-color: #FFF1BB;
     border-radius: 15px;
     margin-top: 15px;
@@ -154,11 +156,11 @@
     width: 170px;
 }
 
-.btn-primary:hover{
+.btn-primary:hover {
     background-color: #F1C40F;
 }
 
-.modal-footer{
+.modal-footer {
     color: #A4A4A4;
     font-size: var(--font-size-sm);
     margin-top: 15px;
@@ -166,7 +168,31 @@
 
 /* للأجهزة الصغيرة (mobile) */
 @media (max-width: 540px) {
-    .modal-dialog{
+    .modal-dialog {
         max-width: 95%;
+    }
+}
+
+/* -------- loader ---------*/
+.loader {
+    --d: 50px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    color: #25b09b;
+    box-shadow:
+        calc(1*var(--d)) calc(0*var(--d)) 0 0,
+        calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+        calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+        calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+        calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+        calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+        calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+    animation: l27 1.5s infinite steps(8);
+}
+
+@keyframes l27 {
+    100% {
+        transform: rotate(1turn)
     }
 }

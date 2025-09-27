@@ -127,6 +127,7 @@
     border-radius: 9999px;
     position: relative;
     transition: background-color 0.3s;
+    display: flex;
 }
 
 .slider::before {

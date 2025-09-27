@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import "./ConfirmAd.css";
 import { categories } from '../Category/Category';
 
-export default function ConfirmAd({ formik }) {
+export default function ConfirmAd({ formik, errorMessage, isLoading, successMessage, setSuccessMessage }) {
     const { values, handleSubmit } = formik;
     const category = categories.find((cat) => values?.category === cat.key);
     if (!category) return null;
 
-    const [toggleModel, setToggleModel] = useState(false);
-    const handleModel = () => {
-        setToggleModel(!toggleModel);
-    }
     return (
         <div className="confirmAd_container">
             <header className='confirmAd_header'>
@@ -48,7 +44,7 @@ export default function ConfirmAd({ formik }) {
             </div>
 
             <div className="btn_confirmAd">
-                <button type='submit' onClick={() => { handleSubmit(); handleModel() }} className='btn'>
+                <button type='submit' onClick={handleSubmit} className='btn'>
                     <span>انشر إعلانك الأن</span>
                     <img src="./advertisements/Plus.svg" alt="Plus" />
                 </button>
@@ -56,7 +52,7 @@ export default function ConfirmAd({ formik }) {
             </div>
 
             {/* Modal */}
-            <div className="modal fade" style={{ display: toggleModel ? "none" : "flex" }}>
+            <div className="modal fade" style={{ display: successMessage ? "flex" : "none" }}>
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -68,7 +64,7 @@ export default function ConfirmAd({ formik }) {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                         </div>
                         <div className="modal-body">
-                            <button type="button" className="btn btn-secondary" onClick={handleModel}>
+                            <button type="button" className="btn btn-secondary" onClick={() => { setSuccessMessage(false) }}>
                                 <img src="./advertisements/eye.svg" alt="eye" />
                                 <span>شاهد إعلانك</span>
                             </button>
@@ -90,6 +86,10 @@ export default function ConfirmAd({ formik }) {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="modal fade" style={{ display: isLoading ? "flex" : "none" }}>
+                <div class="loader" />
             </div>
 
         </div>
