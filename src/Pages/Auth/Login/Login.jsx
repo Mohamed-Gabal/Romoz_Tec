@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
-import { IoCallOutline } from "react-icons/io5";
+import "./loginStyle.css";
 import { BiMessageRounded } from "react-icons/bi";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";

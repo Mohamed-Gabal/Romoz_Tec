@@ -56,3 +56,13 @@ button:hover {
   max-width: 1200px;
   margin: 0 auto;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 9999px;
+}

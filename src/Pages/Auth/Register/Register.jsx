@@ -1,5 +1,5 @@
 import React from "react";
-import "./register.css";
+import "./registerStyle.css";
 import { IoCallOutline } from "react-icons/io5";
 import { BiMessageRounded } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";

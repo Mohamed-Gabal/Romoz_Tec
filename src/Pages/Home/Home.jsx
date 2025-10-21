@@ -1,6 +1,5 @@
 import React from "react";
 import "./Home.css";
-import MainLayout from "../../Layouts/MainLayout";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Slider from '../../Components/Slider/Slider';
 import AddList from '../../Components/AddList/AddList';
