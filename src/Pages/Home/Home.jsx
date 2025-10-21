@@ -5,7 +5,6 @@ import Slider from '../../Components/Slider/Slider';
 import AddList from '../../Components/AddList/AddList';
 import CategoriesSection from "../../Components/CategoriesSection/CategoriesSection";
 import BlogCard from "../../Components/BlogCard/BlogCard";
-import CarCard from "../../Components/CarCard/CarCard";
 import SellSeaction from "../../Components/SellSeaction/SellSeaction";
 
 const Home = () => {
@@ -16,7 +15,6 @@ const Home = () => {
         <AddList />
         <CategoriesSection />
         <BlogCard />
-        <CarCard />
         <SellSeaction />
       </div>
   );

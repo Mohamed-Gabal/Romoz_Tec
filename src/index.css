@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Outfit:wght@100..900&display=swap");
+
+:root {
+    /* Colors */
+    --color: #fff;
+    --start-color: #444444;
+    --main-color: #1abc9c;
+    --hover-color: #16a085;
+    --header-color: #2c3e50;
+    --yellow-color: #f1c40f;
+    --shadow-color: #00000026;
+    --parg-color: #555;
+    --title-color: #222;
+    --landing-color: #f8f5f5;
+    --border-color: #DBDBDB;
+
+    /* Fonts */
+    --font-main: "Cairo", sans-serif;
+    --font-alt: "Outfit", sans-serif;
+    --font-size-sm: 14px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 28px;
+    /* Borders & Shadows */
+    --space-sm: 8px;
+    --space-md: 12px;
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --shadow-sm: 0 2px 5px var(--shadow-color);
+    --shadow-md: 0 4px 12px var(--shadow-color);
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    direction: rtl;
+    font-family: var(--font-main);
+    direction: rtl;
+}
+
+/* Body */
+body {
+    font-family: var(--font-main);
+    font-size: var(--font-size-md);
+    background-color: var(--landing-color);
+    color: var(--title-color);
+    line-height: 1.6;
+}
+
+/* Buttons */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    background-color: var(--main-color);
+    color: var(--color);
+    font-size: var(--font-size-md);
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e5e7eb;
+    border-radius: 9999px;
+}
