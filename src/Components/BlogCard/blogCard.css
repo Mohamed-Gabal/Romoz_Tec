@@ -1,12 +1,12 @@
-
-.latest-ads {
-  padding: 40px 20px;
+.car-card {
+  padding: 40px 0px;
   background: var(--light-bg);
   font-family: var(--main-font);
   direction: rtl;
 }
-.latest-ads .container {
-  max-width: 1200px;
+.car_card_container {
+  max-width: 1195px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 .section-title {
@@ -23,12 +23,12 @@
   text-align: center;
   line-height: 1.6;
 }
-.ads-grid {
+.car-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
 }
-.ad-card {
+.car-card-card {
   background-color: var(--color);
   border: 1px solid var(--main-color);
   border-radius: 12px;
@@ -37,173 +37,244 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
-.ad-card:hover {
-  transform: translateY(-6px);
+.car-card-card:hover {
+  transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
 }
-.ad-img {
+
+.car-card-card .card_img{ 
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 180px;
-  object-fit: cover;
+  position: relative;
+  overflow: hidden;
 }
-.ad-content {
+
+.car-card-main-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0px;
+}
+.car-card-content {
   padding: 15px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   justify-content: space-between;
 }
-.ad-user {
+.car-card-user {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
-.user-img {
+.car-card-user-img {
   width: 32px;
   height: 32px;
   border-radius: 50%;
   border: 1px solid var(--main-color);
   object-fit: cover;
 }
-.ad-user span {
-  font-size: 14px;
+.car-card-user span {
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-color);
 }
-.ad-title {
-  font-size: 18px;
-  font-weight: bold;
+.car-card-title {
+  font-size: 16px;
+  font-weight: 600;
   color: var(--text-color);
-  margin-bottom: 12px;
+  margin-bottom: 0;
+  line-height: 1.4;
+  height: 30px;
+  overflow: hidden;
 }
-.ad-meta {
+.car-card-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 15px;
-  font-size: 14px;
+  gap: 10px;
+  font-size: 13px;
   color: var(--gray-color);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
-.meta-item {
+.car-card-item {
   display: flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.meta-icon {
-  font-size: 20px;
+.car-card-icon {
+  font-size: 18px;
   color: var(--main-color);
-  cursor: pointer;
 }
-.ad-actions {
+.car-card-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--main-color);
+  margin-bottom: 10px;
+}
+.car-card-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-top: auto;
 }
-.fav-btn {
+.car-card-fav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: var(--color);
-  padding: 8px 12px;
+  justify-content: center;
+  color: var(--main-color);
+  background: transparent;
   border: 1px solid var(--primary-color);
   border-radius: 8px;
   text-decoration: none;
-  font-size: 16px;
-  transition: all 0.3s ease;
   width: 40px;
   height: 40px;
+  transition: all 0.3s ease;
 }
-.fav-btn:hover {
+.car-card-fav:hover {
   background-color: var(--primary-color);
   color: var(--color);
 }
-.fav-icon {
-  font-size: 25px;
-  color: var(--main-color);
+.car-card-ico {
+  font-size: 22px;
+  transition: 0.3s;
 }
-.ad-btn {
+.car-card-ico:hover {
+  color: var(--hover-color);
+}
+.car-card-btn {
+  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: var(--main-color);
   color: var(--color);
-  padding: 9px 16px;
+  padding: 8px 14px;
   border-radius: 6px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   transition: 0.3s ease;
-  flex: 1;
 }
-.ad-btn:hover {
+.car-card-btn:hover {
   background: var(--hover-color);
   color: var(--color);
 }
-/* ✅ Responsive Cards */
-@media (max-width: 768px) {
-  .latest-ads {
-    padding: 15px 10px;
+/* ======================== */
+/* Responsiveness *
+
+/* الشاشات المتوسطة */
+@media (max-width: 992px) {
+  .car-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
   }
-  .ads-grid {
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 12px;
+
+  .car-card-card .card_img{ 
+    height: 150px;
   }
-  .ad-card {
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-  }
-  .ad-img {
-    height: 100px;
-  }
-  .ad-content {
-    padding: 8px;
-  }
-  .ad-user {
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  .user-img {
-    width: 20px;
-    height: 20px;
-  }
-  .ad-user span {
-    font-size: 9px;
-  }
-  .ad-title {
-    font-size: 10px;
-    margin-bottom: 6px;
-    line-height: 1.4;
-  }
-  .ad-meta {
-    font-size: 11px;
-    gap: 6px;
-    margin-bottom: 8px;
-  }
-  .meta-icon {
+  .car-card-title {
     font-size: 14px;
+    height: 36px;
   }
-  .ad-actions {
-    gap: 6px;
-  }
-  .fav-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
-  .meta-item {
-    font-size: 9px;
-  }
-  .fav-icon {
-    font-size: 18px;
-  }
-  .ad-btn {
-    padding: 6px 8px;
+  .car-card-meta {
     font-size: 12px;
-    border-radius: 6px;
+  }
+  .car-card-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .car-card-ico {
+    font-size: 20px;
   }
 }
 
-
+/* الشاشات الصغيرة */
+@media (max-width: 768px) {
+  /* .section-title,
+  .section-subtitle {
+    display: none;
+  } */
+  .car-card {
+    margin-top: 30px;
+    padding: 15px 0px;
+  }
+  .car-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .car-card-card {
+    border-radius: 8px;
+  }
+  .car-card-card .card_img{ 
+    height: 100px;
+  }
+  .car-card-user-img {
+    width: 18px;
+    height: 18px;
+  }
+  .car-card-user span {
+    font-size: 9px;
+  }
+  .car-card-title {
+    font-size: 10px;
+    height: 20px;
+    margin-bottom: 0;
+  }
+  .car-card-meta {
+    font-size: 9px;
+    gap: 6px;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .car-card-icon {
+    font-size: 13px;
+  }
+  .car-card-price {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+  .car-card-btn {
+    font-size: 9px;
+    padding: 4px 6px;
+    border-radius: 5px;
+  }
+  .car-card-fav {
+    width: 28px;
+    height: 28px;
+  }
+  .car-card-ico {
+    font-size: 14px;
+  }
+}
+/* الشاشات الصغيرة جدًا */
+@media (max-width: 520px) {
+  .car-card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+  }
+  .car-card-main-img {
+    height: 100px;
+  }
+  .car-card-title {
+    font-size: 9px;
+  }
+  .car-card-btn {
+    font-size: 8px;
+  }
+  .car-card-fav {
+    width: 26px;
+    height: 26px;
+  }
+}
