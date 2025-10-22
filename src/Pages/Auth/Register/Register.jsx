@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./registerStyle.css";
 import { Link, useNavigate } from "react-router-dom";
-// import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -18,7 +18,7 @@ export default function Register() {
     setShowModdel(false);
     navigate("/settingsUser");
   };
-  // const [setCookie] = useCookies(["token"]);
+  const [setCookie] = useCookies(["token"]);
 
   // Yup for validation
   const validationSchema = Yup.object({
@@ -68,11 +68,11 @@ export default function Register() {
         if (response.ok && data.success) {
           setIsLoading(false)
           setShowModdel(true);
-          // setCookie("token", data, {
-          //   maxAge: 60 * 60 * 24 * 30,
-          //   sameSite: "lax",
-          //   secure: process.env.NODE_ENV === "production",
-          // });
+          setCookie("token", data, {
+            maxAge: 60 * 60 * 24 * 30,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+          });
         } else if (data.errors) {
           const hasEmailError = data.errors.email;
           const hasPhoneError = data.errors.phone;

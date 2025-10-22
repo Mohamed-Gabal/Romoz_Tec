@@ -3,6 +3,7 @@ import "./loginStyle.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,7 +11,7 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
-
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -39,6 +40,11 @@ export default function Login() {
         const data = await response.json();
         if (response.ok) {
           navigate("/");
+          setCookie("token", data, {
+            maxAge: 60 * 60 * 24 * 30,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+          });
         } else if (data.errors) {
           const hasEmailError = data.errors.email;
 
