@@ -69,7 +69,6 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar_container">
-        {/* اللوجو */}
         <div className="logo">
           <NavLink to="/" onClick={closeMenu}>
             <img src="/images/logo.svg" alt="logo" />
@@ -77,6 +76,10 @@ export default function Navbar() {
         </div>
         {/* قائمة الروابط الرئيسية */}
         <ul id="primary-navigation" ref={menuRef} className={`nav ${menuOpen ? "open" : ""}`} >
+          <li><NavLink to="/"><span>الرئيسية</span></NavLink></li>
+          <li><NavLink to="/contactUs"><span>اتصل بنا</span></NavLink></li>
+          <li><NavLink to="/aboutUs"><span>من نحن</span></NavLink></li>
+          <li><NavLink to="/blog"><span>المدونه</span></NavLink></li>
         </ul>
 
         <div className="navbar_buttons">

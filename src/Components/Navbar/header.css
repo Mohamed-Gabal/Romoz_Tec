@@ -46,13 +46,16 @@
   padding-bottom: 5px;
   transition: all 0.3s ease;
 }
+.nav a:hover {
+  color: var(--main-color);
+}
 
 .nav a::after {
   content: "";
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 0;
+  width: 0px;
   height: 2px;
   background-color: var(--main-color);
   transition: width 0.3s ease;
@@ -416,7 +419,7 @@
   }
 
   .nav.open {
-    width: 220px;
+    width: 180px;
     padding: 20px;
   }
 
