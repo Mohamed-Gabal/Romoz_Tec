@@ -192,8 +192,7 @@ button:hover {
   }
 
   .login-image {
-    height: auto;
-    margin-bottom: 20px;
+    display: none;
   }
 
   .login-image img {
