@@ -94,7 +94,7 @@
 
 .password_input .password_input_container input,
 .confirmPassword_input .password_input_container input {
-  padding-inline-start: 10px;
+  padding-inline-start: 35px;
 }
 
 .name_input .input_container input::placeholder,
@@ -129,7 +129,7 @@
   width: 24px;
   height: 24px;
   position: absolute;
-  left: 10px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;

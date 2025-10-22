@@ -102,7 +102,7 @@ export default function Register() {
       <div className="register-box">
         {/* image */}
         <div className="register-image">
-          <img src="/images/login.png" alt="Register" />
+          <img src="/images/login.webp" alt="Register" />
         </div>
 
         {/* المحتوى */}

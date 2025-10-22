@@ -67,7 +67,7 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       <div className="login-image">
-        <img src="/images/login.png" alt="login" />
+        <img src="/images/login.webp" alt="login" />
       </div>
       <div className="login-container">
         <h2>مرحبًا بك مجددًا</h2>
