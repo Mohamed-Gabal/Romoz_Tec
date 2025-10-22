@@ -5,12 +5,12 @@ import { CiSearch } from "react-icons/ci";
 import { useCookies } from "react-cookie";
 
 export default function Navbar() {
-  // بنستخدم useCookies عشان نقدر نقرأ ونمسح الكوكيز (زي التوكن)
   const [cookies, removeCookie] = useCookies(["token"]);
   const userID = cookies?.token?.data?.user?.id;
   const token = cookies?.token?.data?.token;
   // بنجيب بيانات المستخدم من التوكن اللي في الكوكيز
   const [userData, setUserData] = useState({});
+  console.log(userData);
   const [showToast, setShowToast] = useState(true);
 
   // حالة لإظهار أو إخفاء كارت البروفايل لما نضغط على الصورة
@@ -122,7 +122,6 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        {/* مربع البحث في الموبايل */}
         <div className="mobile-search">
           <CiSearch className="search_icon" onClick={handleFocus} />
           <input type="search" placeholder="ابحث هنا..." ref={inputRef} />
@@ -169,31 +168,14 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* زر فتح وغلق المينيو (الهامبرجر) */}
           <div
             ref={toggleRef}
             className="menu-toggle"
-            onClick={() => setMenuOpen((prev) => !prev)} // قلب الحالة
+            onClick={() => setMenuOpen((prev) => !prev)}
             aria-expanded={menuOpen}
             aria-controls="primary-navigation"
           >
-            {/* أيقونة الهامبرجر */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-text-align-justify"
-            >
-              <path d="M3 5h18" />
-              <path d="M3 12h18" />
-              <path d="M3 19h18" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-text-align-justify" ><path d="M3 5h18" /><path d="M3 12h18" /> <path d="M3 19h18" /></svg>
           </div>
         </div>
 
@@ -203,13 +185,6 @@ export default function Navbar() {
           ref={menuRef}
           className={`nav ${menuOpen ? "open" : ""}`}
         >
-          {navLinks.map((link, i) => (
-            <li key={i}>
-              <NavLink to={link.path} onClick={closeMenu} end={link.path === "/"}>
-                {link.label}
-              </NavLink>
-            </li>
-          ))}
         </ul>
 
         {/* أزرار الهيدر في الديسكتوب */}
@@ -223,10 +198,7 @@ export default function Navbar() {
                 className="btn_profile" ref={desktopProfileRef}
               >
                 <span>حسابي</span>
-                {/* سهم للأسفل */}
-                <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down" >
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down" ><path d="m6 9 6 6 6-6" /></svg>
               </Link>
 
               {/* كارت البروفايل */}
@@ -243,23 +215,8 @@ export default function Navbar() {
             </NavLink>
           )}
 
-          {/* زر إضافة إعلان جديد */}
           <NavLink to="/Advertisements" className="btn-add">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width={20}
-              height={20}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-plus"
-            >
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"className="lucide lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
             <span>اضف عرضك</span>
           </NavLink>
         </div>
@@ -286,11 +243,9 @@ export function ProfileCard({ toggleProfileCard, userData, removeCookie }) {
         </div>
       </div>
       <Link to="/accountUser" className="show_accountUser"><span>عرض الملف الشخصي</span></Link>
+
       <Link to="/settingsUser" className="settings">
-        <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings-icon lucide-settings">
-          <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-          <circle cx={12} cy={12} r={3} />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx={12} cy={12} r={3} /></svg>
         <span>إعدادات الحساب</span>
       </Link>
       <button
@@ -327,7 +282,7 @@ export function ToastWarning({ message = "الرجاء إضافة الموقع �
           <svg className="toast-close-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14" ><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" /></svg>
         </button>
 
-        <div className="progress-line"/>
+        <div className="progress-line" />
       </div>
     </div>
   );
