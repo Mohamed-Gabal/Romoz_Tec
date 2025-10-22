@@ -12,10 +12,15 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showModdel, setShowModdel] = useState(false);
-  const navigate = useNavigate();
-  // const [, setCookie] = useCookies(["token"]);
 
-  // Yup
+  const navigate = useNavigate();
+  const closeModel = () => {
+    setShowModdel(false);
+    navigate("/settingsUser");
+  };
+  // const [setCookie] = useCookies(["token"]);
+
+  // Yup for validation
   const validationSchema = Yup.object({
     name: Yup.string().trim().required("الرجاء إدخال الاسم الكامل"),
     email: Yup.string()
@@ -90,12 +95,6 @@ export default function Register() {
       }
     },
   });
-
-  // إغلاق الموديل بعد التسجيل
-  const closeModel = () => {
-    setShowModdel(false);
-    navigate("/settingsUser");
-  };
 
   return (
     <div className="register-container">
