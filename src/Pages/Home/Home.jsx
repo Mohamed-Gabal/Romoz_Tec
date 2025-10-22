@@ -3,7 +3,6 @@ import "./Home.css";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Slider from '../../Components/Slider/Slider';
 import AddList from '../../Components/AddList/AddList';
-import CategoriesSection from "../../Components/CategoriesSection/CategoriesSection";
 import BlogCard from "../../Components/BlogCard/BlogCard";
 import SellSeaction from "../../Components/SellSeaction/SellSeaction";
 
@@ -13,7 +12,6 @@ const Home = () => {
         <SearchBar />
         <Slider />
         <AddList />
-        <CategoriesSection />
         <BlogCard />
         <SellSeaction />
       </div>
