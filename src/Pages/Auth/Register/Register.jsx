@@ -52,8 +52,9 @@ export default function Register() {
       try {
         setIsLoading(true);
         setErrorMessage("");
+        // url from vite.config
         const response = await fetch(
-          "https://api.mashy.sand.alrmoz.com/api/register",
+          "/api/register",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
