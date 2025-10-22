@@ -43,7 +43,7 @@ export default function Slider() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 1000);
+    }, 2000);
     return () => clearInterval(timer);
   }, []);
   return (
