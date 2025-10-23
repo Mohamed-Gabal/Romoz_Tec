@@ -6,6 +6,7 @@ import Layout from "./Layout/Layout";
 // Pages
 import Home from "./Pages/Home/Home";
 import Advertisements from "./Pages/Advertisements/Advertisements";
+import SpecificCategory from "./Pages/SpecificCategory/SpecificCategory";
 //  Lazy Loading
 const ContactUs = lazy(() => import("./Pages/ContactUs/ContactUs"));
 const AboutUS = lazy(() => import("./Pages/AboutUs/AboutUS"));
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: "/aboutUs", element: <AboutUS /> },
       { path: "/blog", element: <Blog /> },
       { path: "/advertisements", element: <Advertisements /> },
+      { path: "/:category", element: <SpecificCategory /> },
     ],
   },
 
