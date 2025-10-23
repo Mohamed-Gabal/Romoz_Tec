@@ -150,7 +150,7 @@ export default function AboutUS() {
                 </div>
             </div>
 
-{/* ------------------ AboutUsChoice ------------------ */}
+            {/* ------------------ AboutUsChoice ------------------ */}
             <div className="auc_container">
                 <h2>
                     انضم إلى آلاف المستخدمين وابدأ بيع <br />
@@ -166,4 +166,4 @@ export default function AboutUS() {
             </div>
         </div>
     )
-}
+};
