@@ -24,9 +24,28 @@
     margin-bottom: 15px;
 }
 
-.region_option{
+.area_input, .city_input{
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+
+.area_input .input, .city_input .input {
+    width: 100%;
+    border-width: 2px;
+}
+
+.area_input img, .city_input img {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.region_option, .city_option{
     position: absolute;
     top: 100%;
+    z-index: 50;
     text-align: start;
     background-color: var(--color);
     display: flex;
@@ -43,11 +62,11 @@
     scrollbar-color: var(--main-color) #e5e7eb;
 }
 
-.region_option li {
+.region_option li, .city_option li {
     padding: 5px 10px;
     cursor: pointer;
 }
 
-.region_option li:hover{
+.region_option li:hover, .city_option li:hover {
     background-color: #e5e7eb;
 }

@@ -47,12 +47,17 @@
     color: #555;
 }
 
-.upload-icon {
+.upload_icon {
     font-size: 30px;
     margin-bottom: 10px;
     background-color: #AAFFEE80;
+    color: var(--main-color);
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .upload-content p {
@@ -88,7 +93,7 @@
     object-fit: cover;
 }
 
-.remove-btn {
+.remove_btn {
     position: absolute;
     top: 4px;
     left: 4px;
@@ -98,18 +103,44 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    padding: 0px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.image_error{
+.image_error {
     position: absolute;
     top: -40px;
     left: 0px;
     color: red;
     font-size: var(--font-size-sm);
+}
+
+
+/* ----------------loader------------------ */
+.UploadImages_loader {
+    --d: 22px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    color: var(--main-color);
+    box-shadow:
+        calc(1*var(--d)) calc(0*var(--d)) 0 0,
+        calc(0.707*var(--d)) calc(0.707*var(--d)) 0 1px,
+        calc(0*var(--d)) calc(1*var(--d)) 0 2px,
+        calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+        calc(-1*var(--d)) calc(0*var(--d)) 0 4px,
+        calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+        calc(0*var(--d)) calc(-1*var(--d)) 0 6px;
+    animation: l27 1s infinite steps(8);
+}
+
+@keyframes l27 {
+    100% {
+        transform: rotate(1turn)
+    }
 }
 
 /* للأجهزة الصغيرة (mobile) */
