@@ -184,7 +184,6 @@
   .contact_us_container_right,
   .contact_us_container_left {
     width: 100%;
-    padding: 20px;
   }
 }
 @media (max-width: 600px) {
@@ -202,10 +201,6 @@
   }
   .contact_us_container {
     gap: 15px;
-  }
-  .contact_us_container_right,
-  .contact_us_container_left {
-    padding: 12px;
   }
   .contact_us_input,
   .contact_us_textarea {
