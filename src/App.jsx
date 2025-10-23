@@ -6,12 +6,13 @@ import Layout from "./Layout/Layout";
 // Pages
 import Home from "./Pages/Home/Home";
 import Advertisements from "./Pages/Advertisements/Advertisements";
+//  Lazy Loading
+const ContactUs = lazy(() => import("./Pages/ContactUs/ContactUs"));
+const AboutUS = lazy(() => import("./Pages/AboutUs/AboutUS"));
+const Blog = lazy(() => import("./Pages/Blog/Blog"));
 
 // Auth pages
 import Login from "./Pages/Auth/Login/Login";
-//  Lazy Loading
-const AboutUS = lazy(() => import("./Pages/AboutUs/AboutUS"));
-const Blog = lazy(() => import("./Pages/Blog/Blog"));
 const Register = lazy(() => import("./Pages/Auth/Register/Register"));
 const ResetPassword = lazy(() => import("./Pages/Auth/ResetPassword/ResetPassword"));
 const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword/ForgotPassword"));
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
   {
     path: "", element: <Layout />, children: [
       { index: true, element: <Home /> },
+      { path: "/contactUs", element: <ContactUs /> },
       { path: "/aboutUs", element: <AboutUS /> },
       { path: "/blog", element: <Blog /> },
     ],
