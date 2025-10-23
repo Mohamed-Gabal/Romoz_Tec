@@ -8,6 +8,7 @@ import Home from "./Pages/Home/Home";
 import Advertisements from "./Pages/Advertisements/Advertisements";
 import SpecificCategory from "./Pages/SpecificCategory/SpecificCategory";
 //  Lazy Loading
+const DetailsLayout = lazy(() => import("./Pages/DetailsLayout/DetailsLayout"));
 const ContactUs = lazy(() => import("./Pages/ContactUs/ContactUs"));
 const AboutUS = lazy(() => import("./Pages/AboutUs/AboutUS"));
 const Blog = lazy(() => import("./Pages/Blog/Blog"));
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: "/blog", element: <Blog /> },
       { path: "/advertisements", element: <Advertisements /> },
       { path: "/:category", element: <SpecificCategory /> },
+      { path: "/:details/:id", element: <DetailsLayout /> },
     ],
   },
 

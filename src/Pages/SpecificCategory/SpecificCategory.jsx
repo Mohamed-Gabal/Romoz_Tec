@@ -5,8 +5,8 @@ import "./SpecificCategory.css"
 import { IoIosArrowBack } from 'react-icons/io';
 import { attributesMap, specificCategoriesData } from '../../data';
 import SaudiRegionsDropdown from '../../Components/AdvertisementsComponents/SaudiRegionsDropdown/SaudiRegionsDropdown';
-// import SkeletonCard from '../../Components/SkeletonCard/SkeletonCard';
-// import NotFound from '../../Components/NotFound/NotFound';
+import SkeletonCard from '../../Components/SkeletonCard/SkeletonCard';
+import NotFound from '../../Components/NotFound/NotFound';
 
 export default function SpecificCategory() {
     const { category } = useParams();
