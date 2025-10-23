@@ -12,11 +12,13 @@ import Login from "./Pages/Auth/Login/Login";
 import Register from "./Pages/Auth/Register/Register";
 import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
 import ForgotPassword from "./Pages/Auth/ForgotPassword/ForgotPassword";
+import AboutUS from "./Pages/AboutUs/AboutUS";
 
 const router = createBrowserRouter([
   {
     path: "", element: <Layout />, children: [
       { index: true, element: <Home /> },
+      { path: "/aboutUs", element: <AboutUS /> },
     ],
   },
 
