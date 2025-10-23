@@ -28,6 +28,7 @@ const AddList = () => {
       <h1 className="add-list-title">
         لماذا تختار <span>ماشي؟</span>
       </h1>
+      <p>منصتك المثالية للبيع والشراء بكل ثقة وأمان</p>
       <div className="add-list-container">
         {card.map((item) => (
           <div key={item.id} className="add-card">
