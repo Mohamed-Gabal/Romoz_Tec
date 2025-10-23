@@ -9,12 +9,12 @@ import Advertisements from "./Pages/Advertisements/Advertisements";
 
 // Auth pages
 import Login from "./Pages/Auth/Login/Login";
-import Register from "./Pages/Auth/Register/Register";
-import ResetPassword from "./Pages/Auth/ResetPassword/ResetPassword";
-import ForgotPassword from "./Pages/Auth/ForgotPassword/ForgotPassword";
 //  Lazy Loading
 const AboutUS = lazy(() => import("./Pages/AboutUs/AboutUS"));
 const Blog = lazy(() => import("./Pages/Blog/Blog"));
+const Register = lazy(() => import("./Pages/Auth/Register/Register"));
+const ResetPassword = lazy(() => import("./Pages/Auth/ResetPassword/ResetPassword"));
+const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword/ForgotPassword"));
 
 const router = createBrowserRouter([
   {
