@@ -55,6 +55,7 @@ const DetailsLayout = () => {
     };
 
     fetchDetails();
+    window.scrollTo(0, 0);
   }, [details, id]);
 
   useEffect(() => {
@@ -336,8 +337,8 @@ export function handleWhatsApp(seller, title) {
 
   let phone = seller.phone.trim().replace(/\s+/g, "").replace(/^\+/, "");
   phone = phone.startsWith("966") ? phone : phone.startsWith("0")
-  ? `966${phone.slice(1)}`
-  : `966${phone}`;
+    ? `966${phone.slice(1)}`
+    : `966${phone}`;
 
   if (!/^9665\d{8}$/.test(phone)) {
     return;
