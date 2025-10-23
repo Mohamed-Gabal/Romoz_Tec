@@ -16,7 +16,7 @@ import { timeSince } from "../SpecificCategory/SpecificCategory";
 import { CiFlag1 } from "react-icons/ci";
 import { attributeMapForDetails } from "../../data";
 import { useCookies } from "react-cookie";
-import { LoginForm } from "../Auth/Login";
+import { LoginForm } from "../Auth/Login/Login";
 
 const DetailsLayout = () => {
   const [cookies] = useCookies(["token"]);
@@ -159,7 +159,7 @@ const DetailsLayout = () => {
               <div className="deteils_location">
                 <div className="deteils_location_item">
                   <div className="location_item_icon">
-                    <img src="/advertisements/location.svg" alt="location" />
+                    <img src="/Icons/location.svg" alt="location" />
                   </div>
                   <div className="location_text">
                     <span>المنطقة</span>
@@ -169,7 +169,7 @@ const DetailsLayout = () => {
 
                 <div className="deteils_location_item">
                   <div className="location_item_icon">
-                    <img src="/advertisements/location.svg" alt="location" />
+                    <img src="/Icons/location.svg" alt="location" />
                   </div>
                   <div className="location_text">
                     <span>المدينة</span>
