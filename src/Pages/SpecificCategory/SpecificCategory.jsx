@@ -8,6 +8,7 @@ import SaudiRegionsDropdown from '../../Components/AdvertisementsComponents/Saud
 import SkeletonCard from '../../Components/SkeletonCard/SkeletonCard';
 import NotFound from '../../Components/NotFound/NotFound';
 import DatePicker from '../../Components/DatePicker/DatePicker';
+import AdCard from '../../Components/AdCard/AdCard';
 
 export default function SpecificCategory() {
     const { category } = useParams();
@@ -153,46 +154,7 @@ export default function SpecificCategory() {
                         </div>
                         <div className="categories_items">
                             {filteredCategoriesDataByTitle.map((cat) => (
-                                <div
-                                    key={cat.id_ads}
-                                    className={`category_card`}
-                                >
-                                    <div className="card_image">
-                                        <img
-                                            src={cat.images?.[0] ? `https://api.mashy.sand.alrmoz.com/storage/${cat.images[0]}` : "/placeholder.png"}
-                                            alt={cat?.information?.title}
-                                        />
-
-                                    </div>
-
-                                    <Link to={`/user/${cat?.seller?.name}/${cat?.user?.id_user}`} className="card_user">
-                                        {cat.user?.user_image ? (
-                                            <img src={cat.user.user_image} alt={cat.seller?.name} />
-                                        ) : (
-                                            <div className="avatar_placeholder">
-                                                {cat?.seller?.name?.split(" ").map(word => word[0]).join("").toUpperCase()}
-                                            </div>
-                                        )}
-                                        <span>{cat.seller?.name}</span>
-                                    </Link>
-
-                                    <div className="card_body">
-                                        <h3>{cat?.information?.title.substring(0, 18)}...</h3>
-                                        <div className="card_meta">
-                                            <div className="ciLocationOn">
-                                                <CiLocationOn style={{ color: "var(--main-color)", fontSize: "12px", fontWeight: "bold" }} />
-                                                <span>{cat?.user?.area || "غير محدد"}</span>
-                                            </div>
-                                            <div className="ciStopwatch">
-                                                <CiStopwatch style={{ color: "var(--main-color)", fontSize: "12px", fontWeight: "bold" }} />
-                                                <span>{timeSince(cat.created_at)}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <Link to={`/${category}/${cat.id_ads}`} className="details_link">
-                                        عرض التفاصيل
-                                    </Link>
-                                </div>
+                                <AdCard category={category} adID={cat.id_ads} img={cat.images[0]} title={cat?.information?.title} sellerName={cat.seller?.name} userID={cat?.user?.id_user} userImg={cat?.user?.profile_image} area={cat?.user?.area} created_at={cat?.created_at}/>
                             ))}
                         </div>
                     </section>

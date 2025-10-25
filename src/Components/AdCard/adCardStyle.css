@@ -1,0 +1,155 @@
+.ad_card {
+    background: #fff;
+    border: 1px solid var(--main-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.ad_card:hover {
+    transform: translateY(-4px);
+}
+
+.ad_card .card_image {
+    width: 100%;
+    height: 180px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.ad_card .card_image img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    inset: 0px;
+}
+
+.ad_card .card_user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+}
+
+.ad_card .card_user img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.card_body {
+    padding: 0px 10px;
+}
+
+.card_body h3 {
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.card_body .mapPin_timer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 12px 12px;
+    font-size: 14px;
+    color: #777;
+}
+
+.card_body .mapPin_timer .mapPin,
+.card_body .mapPin_timer .timer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card_body .mapPin_timer .mapPin .mapPin_icon,
+.card_body .mapPin_timer .timer .timer_icon {
+    display: flex;
+    width: 15px;
+    height: 15px;
+}
+
+.details_link {
+    display: block;
+    text-align: center;
+    background-color: var(--main-color);
+    color: white;
+    padding: 10px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.details_link:hover {
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .card_image {
+        height: 120px;
+    }
+
+    .card_user img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .card_body {
+        padding: 0px 5px;
+    }
+
+    .card_user span,
+    .mapPin_timer span {
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .details_link {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+
+    .card_body h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 540px) {
+    .ad_card .card_image {
+        height: 110px;
+    }
+
+    .card_user {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .card_body .mapPin_timer .mapPin,
+    .card_body .mapPin_timer .timer {
+        gap: 0px;
+    }
+
+    .card_body .mapPin_timer .mapPin .mapPin_icon,
+    .card_body .mapPin_timer .timer .timer_icon {
+        display: flex;
+        width: 15px;
+        height: 15px;
+        padding: 0px;
+    }
+}
