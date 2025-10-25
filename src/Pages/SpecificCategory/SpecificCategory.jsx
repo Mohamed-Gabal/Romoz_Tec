@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CiLocationOn, CiStopwatch } from 'react-icons/ci';
 import { Link, useParams } from 'react-router-dom';
-import "./SpecificCategory.css"
-import { IoIosArrowBack } from 'react-icons/io';
 import { attributesMap, specificCategoriesData } from '../../data';
 import SaudiRegionsDropdown from '../../Components/AdvertisementsComponents/SaudiRegionsDropdown/SaudiRegionsDropdown';
 import SkeletonCard from '../../Components/SkeletonCard/SkeletonCard';
 import NotFound from '../../Components/NotFound/NotFound';
 import DatePicker from '../../Components/DatePicker/DatePicker';
 import AdCard from '../../Components/AdCard/AdCard';
+import "./SpecificCategory.css"
 
 export default function SpecificCategory() {
     const { category } = useParams();
@@ -24,7 +22,7 @@ export default function SpecificCategory() {
         const itemDate = item.created_at.split(" ")[0];
         return itemDate === date;
     });
-    
+
     const [filteredAttributes, setFilteredAttributes] = useState(null);
     const [attributeValue, setAttributeValue] = useState("");
     const filteredCategoriesData = filteredCategoriesDataByDate.filter((item) => {
@@ -87,14 +85,14 @@ export default function SpecificCategory() {
             {isLoading && (
                 <div className='isLoading'>{Array.from({ length: 4 }, (_, i) => (<SkeletonCard key={i} />))}</div>
             )}
-            {errorMessage && <NotFound/>}
+            {errorMessage && <NotFound />}
             {!isLoading && !errorMessage && (
                 <>
                     <section className='top_section'>
                         <div className="top_section_container">
                             <div className="categoryData_links">
-                                <span className="main_link">الرئيسيه </span>
-                                <IoIosArrowBack className='arr_icon' />
+                                <Link to="/" className="main_link">الرئيسيه </Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6" /></svg>
                                 <span className="category_link">{specificCate?.title}</span>
                             </div>
 
@@ -154,7 +152,7 @@ export default function SpecificCategory() {
                         </div>
                         <div className="categories_items">
                             {filteredCategoriesDataByTitle.map((cat) => (
-                                <AdCard category={category} adID={cat.id_ads} img={cat.images[0]} title={cat?.information?.title} sellerName={cat.seller?.name} userID={cat?.user?.id_user} userImg={cat?.user?.profile_image} area={cat?.user?.area} created_at={cat?.created_at}/>
+                                <AdCard category={category} adID={cat.id_ads} img={cat.images[0]} title={cat?.information?.title} sellerName={cat.seller?.name} userID={cat?.user?.id_user} userImg={cat?.user?.profile_image} area={cat?.user?.area} created_at={cat?.created_at} />
                             ))}
                         </div>
                     </section>
