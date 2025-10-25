@@ -15,6 +15,7 @@ const Blog = lazy(() => import("./Pages/Blog/Blog"));
 
 // Auth pages
 import Login from "./Pages/Auth/Login/Login";
+import ShowAnyUser from "./Pages/ShowAnyUser/ShowAnyUser";
 const Register = lazy(() => import("./Pages/Auth/Register/Register"));
 const ResetPassword = lazy(() => import("./Pages/Auth/ResetPassword/ResetPassword"));
 const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword/ForgotPassword"));
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { path: "/advertisements", element: <Advertisements /> },
       { path: "/:category", element: <SpecificCategory /> },
       { path: "/:details/:id", element: <DetailsLayout /> },
+      { path: "/user/:name/:userID", element: <ShowAnyUser /> },
     ],
   },
 
