@@ -69,7 +69,14 @@ button:hover {
 }
 
 a {
+    font-weight: 500;
     text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--hover-color);
 }
 
 ::-webkit-scrollbar {

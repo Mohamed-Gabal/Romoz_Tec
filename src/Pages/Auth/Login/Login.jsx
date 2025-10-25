@@ -19,12 +19,9 @@ export default function Login() {
           المنشورة، وتدير منتجاتك أو خدماتك بسهولة.
         </p>
 
-        <LoginForm/>
-        <p className="login-footer">
+        <LoginForm />
+        <p className="login_footer">
           ليس لديك حساب بعد؟ <Link to="/register">إنشاء حساب</Link>
-        </p>
-        <p className="login-footer">
-          <Link to="/forgotPassword">نسيت كلمة المرور؟</Link>
         </p>
       </div>
     </div>
@@ -33,6 +30,7 @@ export default function Login() {
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -56,7 +54,7 @@ export function LoginForm() {
       try {
         // url from vite.config
         const response = await fetch(
-          "/api/login",
+          "https://api.mashy.sand.alrmoz.com/api/login",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -138,6 +136,26 @@ export function LoginForm() {
         </div>
       </div>
 
+      <div className="forgetPassword">
+        <div className="rememberMe">
+          <div className="rememberMe_section">
+            <label className="rememberMe_label">
+              <input
+                type="checkbox"
+                name="rememberMe"
+                id="rememberMe"
+                checked={remember}
+                onChange={(e) => setRemember(e.target.checked)}
+                className="rememberMe_checkbox"
+              />
+            </label>
+          </div>
+          <p>تذكرني</p>
+        </div>
+        <div role="button">
+          <Link to="/forgotPassword">نسيت كلمة المرور؟</Link>
+        </div>
+      </div>
       <button type="submit" className="login_button" disabled={isLoading}>
         {isLoading ? "جاري التحميل..." : "تسجيل دخول"}
       </button>
