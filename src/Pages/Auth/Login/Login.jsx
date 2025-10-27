@@ -75,7 +75,7 @@ export function LoginForm() {
           if (hasEmailError) {
             setErrorMessage("هذا البريد الإلكتروني غير مسجل ");
           } else {
-            setErrorMessage("حدث خطأ أثناء التحقق من البيانات");
+            setErrorMessage("كلمة المرور خطأ");
           }
         } else {
           setErrorMessage("حدث خطأ أثناء التسجيل، حاول مرة أخرى.");
