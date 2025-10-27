@@ -26,7 +26,7 @@ export default function BlogCard() {
           setErrorMessage("لم يتم العثور على إعلانات حالياً.");
         }
       } catch {
-        setError("حدث خطأ أثناء تحميل البيانات، حاول لاحقًا.");
+        setErrorMessage("حدث خطأ أثناء تحميل البيانات، حاول لاحقًا.");
       } finally {
         setIsLoading(false);
       }
