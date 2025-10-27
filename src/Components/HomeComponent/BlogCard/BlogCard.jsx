@@ -5,7 +5,6 @@ import { MdFavoriteBorder } from "react-icons/md";
 import "./blogCard.css";
 import AdCard from "../../AdCard/AdCard";
 
-
 export default function BlogCard() {
   const [adsCard, setAdsCard] = useState([]);
   const [loading, setLoading] = useState(true);
