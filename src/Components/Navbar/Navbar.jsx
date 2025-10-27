@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./header.css";
 import { Link, NavLink } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import { useCookies } from "react-cookie";
 import { contextData } from "../../Context/Context";
 
