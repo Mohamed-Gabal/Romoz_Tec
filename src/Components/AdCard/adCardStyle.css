@@ -36,6 +36,7 @@
     align-items: center;
     gap: 8px;
     padding: 5px 10px;
+    cursor: pointer;
 }
 
 .ad_card .card_user img {
@@ -51,7 +52,6 @@
 }
 
 .card_body h3 {
-    padding: 0 10px;
     font-size: 16px;
     font-weight: bold;
     color: #333;
@@ -63,9 +63,9 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 12px 12px;
     font-size: 14px;
     color: #777;
+    margin-top: 3px;
 }
 
 .card_body .mapPin_timer .mapPin,
@@ -82,22 +82,23 @@
     height: 15px;
 }
 
-.details_link {
-    display: block;
-    text-align: center;
-    background-color: var(--main-color);
-    color: white;
-    padding: 10px;
-    width: 90%;
-    margin: auto;
-    margin-bottom: 10px;
-    border-radius: var(--radius-sm);
-    text-decoration: none;
-    font-weight: 500;
+.card_footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: var(--main-color);
+    padding: 0px 15px;
+    margin-top: 5px;
 }
 
-.details_link:hover {
-    color: white;
+.card_footer .card_footer_price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card_footer .hart_icon {
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
@@ -111,13 +112,13 @@
     }
 
     .card_body {
-        padding: 0px 5px;
+        padding: 0px 10px;
     }
 
     .card_user span,
     .mapPin_timer span {
-        font-size: 11px;
-        font-weight: 500;
+        font-size: 12px;
+        font-weight: bold;
     }
 
     .details_link {
@@ -127,6 +128,15 @@
 
     .card_body h3 {
         font-size: 14px;
+    }
+
+    .card_body h3 {
+        font-size: 14px;
+    }
+
+    .card_footer .card_footer_price {
+        font-size: 14px;
+        font-weight: bold;
     }
 }
 
@@ -139,17 +149,24 @@
         padding: 5px;
         gap: 5px;
     }
-
+    .card_body .mapPin_timer {
+        padding: 0px;
+    }
     .card_body .mapPin_timer .mapPin,
     .card_body .mapPin_timer .timer {
-        gap: 0px;
+        gap: 1px;
     }
 
     .card_body .mapPin_timer .mapPin .mapPin_icon,
     .card_body .mapPin_timer .timer .timer_icon {
         display: flex;
-        width: 15px;
-        height: 15px;
+        width: 13px;
+        height: 13px;
         padding: 0px;
+    }
+
+    .card_footer {
+        font-size: 12px;
+        font-weight: bold;
     }
 }

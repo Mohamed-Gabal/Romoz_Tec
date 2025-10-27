@@ -151,8 +151,10 @@ export default function SpecificCategory() {
                             <div className=""></div>
                         </div>
                         <div className="categories_items">
-                            {filteredCategoriesDataByTitle.map((cat) => (
-                                <AdCard category={category} adID={cat.id_ads} img={cat.images[0]} title={cat?.information?.title} sellerName={cat.seller?.name} userID={cat?.user?.id_user} userImg={cat?.user?.profile_image} area={cat?.user?.area} created_at={cat?.created_at} />
+                            {filteredCategoriesDataByTitle.map((cat, index) => (
+                                <div key={index}>
+                                    <AdCard category={category} adID={cat?.id_ads} img={cat.images[0]} title={cat?.information?.title} sellerName={cat.seller?.name} userID={cat?.user?.id_user} userImg={cat?.user?.profile_image} area={cat?.user?.area} created_at={cat?.created_at} price={cat?.information?.price}/>
+                                </div>
                             ))}
                         </div>
                     </section>
