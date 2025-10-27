@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./ConfirmAd.css";
 import { categories } from '../Category/Category';
+import { useCookies } from 'react-cookie';
 
-export default function ConfirmAd({ formik }) {
-    const { values, handleSubmit } = formik;
-    const category = categories.find((cat) => values?.category === cat.key);
-    if (!category) return null;
+export default function ConfirmAd({ formik, isLoading }) {
+    const { values } = formik;
+    const category = categories.find((cat) => values?.category === cat.key) || "اسم الفئة";
+    const [cookies] = useCookies(["token"]);
+    const userID = cookies?.token?.data?.user?.id;
+    const token = cookies?.token?.data?.token;
+    const [userData, setUserData] = useState({});
+    console.log(userData?.area);
 
-    const [toggleModel, setToggleModel] = useState(false);
-    const handleModel = () => {
-        setToggleModel(!toggleModel);
-    }
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch(`https://api.mashy.sand.alrmoz.com/api/user/${userID}`, {
+                    method: "get",
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                setUserData(data?.data);
+            } catch (err) {
+                console.log(); (err.message);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     return (
         <div className="confirmAd_container">
             <header className='confirmAd_header'>
@@ -38,7 +59,7 @@ export default function ConfirmAd({ formik }) {
                     </li>
                     <li>
                         <h4>الموقع:</h4>
-                        <p>{values?.location?.detailedAddress}</p>
+                        <p>{userData?.area}</p>
                     </li>
                     <li>
                         <h4>البائع:</h4>
@@ -47,51 +68,60 @@ export default function ConfirmAd({ formik }) {
                 </ul>
             </div>
 
-            <div className="btn_confirmAd">
-                <button type='submit' onClick={() => { handleSubmit(); handleModel() }} className='btn'>
-                    <span>انشر إعلانك الأن</span>
-                    <img src="./advertisements/Plus.svg" alt="Plus" />
-                </button>
-                <p>بنشر إعلانك، أنت توافق على سياسة الاستخدام وشروط الخدمة</p>
+            {/* إتفاقية الرسوم*/}
+            <div className="fee_agreement">
+                <div className="terms_section">
+                    <label className="terms_label">
+                        <input
+                            type="checkbox"
+                            name="feeAgreement"
+                            id="feeAgreement"
+                            checked={values.feeAgreement || false}
+                            onChange={(e) => formik.setFieldValue("feeAgreement", e.target.checked)}
+                            className="terms_checkbox"
+                        />
+                    </label>
+                </div>
+
+                <div className="text">
+                    <p>اتعهد واقسم بالله أنا المعلن أن أدفع رسوم الموقع وهي 1% من قيمة البيع سواء تم البيع عن طريق الموقع أو بسببه.</p>
+                    <p>كما أتعهد بدفع الرسوم خلال 10 أيام من استلام كامل مبلغ المبايعة.</p>
+                </div>
+            </div>
+            
+            <div className="featured">
+                <div className="featured_section">
+                    <label className="featured_label">
+                        <input
+                            type="checkbox"
+                            name="featured"
+                            id="featured"
+                            checked={values.featured || false}
+                            onChange={(e) => formik.setFieldValue("featured", e.target.checked)}
+                            className="featured_checkbox"
+                        />
+                    </label>
+                </div>
+                <div className="text">
+                    <p>أريد تمييز الإعلان</p>
+                    <p>يمكنك تمييز إعلانك لزيادة فرص ظهوره للمستخدمين وتحقيق مبيعات أسرع.</p>
+                </div>
             </div>
 
-            {/* Modal */}
-            <div className="modal fade" style={{ display: toggleModel ? "none" : "flex" }}>
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <div className="img_avatar">
-                                <img src="./advertisements/CheckCircleGreen.svg" alt="CheckCircleGreen" />
-                            </div>
-                            <h1 className="modal-title">تم نشر إعلانك بنجاح!</h1>
-                            <p>إعلانك الآن مرئي لآلاف المشترين المهتمين</p>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-                        </div>
-                        <div className="modal-body">
-                            <button type="button" className="btn btn-secondary" onClick={handleModel}>
-                                <img src="./advertisements/eye.svg" alt="eye" />
-                                <span>شاهد إعلانك</span>
-                            </button>
-
-                            <div className="special-adver">
-                                <h4>
-                                    <img src="./advertisements/StarGold.svg" alt="StarGold" />
-                                    <span>ميز إعلانك ليظهر في النتائج الأولى</span>
-                                </h4>
-                                <p>زد من فرص مشاهدة إعلانك بـ 5 أضعاف مع خدمة التمي</p>
-                                <button type="button" className="btn btn-primary">
-                                    <img src="./advertisements/StarWhite.svg" alt="StarWhite" />
-                                    <span>شاهد إعلانك</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <p>سيتم مراجعة إعلانك خلال 24 ساعة للتأكد من مطابقته لشروط الخدمة</p>
-                        </div>
-                    </div>
+            {values.feeAgreement && (
+                <div className="btn_confirmAd">
+                    <button type='submit' className='btn'>
+                        <span>انشر إعلانك الأن</span>
+                        <img src="./advertisements/Plus.svg" alt="Plus" />
+                    </button>
+                    <p>بنشر إعلانك، أنت توافق على سياسة الاستخدام وشروط الخدمة</p>
                 </div>
+            )}
+
+            <div className="modal_fade" style={{ display: isLoading ? "flex" : "none" }}>
+                <div className="loader" />
             </div>
 
         </div>
     )
-}
+};

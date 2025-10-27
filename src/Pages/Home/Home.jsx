@@ -1,13 +1,11 @@
 import React from "react";
 import "./Home.css";
-import MainLayout from "../../Layouts/MainLayout";
-import SearchBar from "../../Components/SearchBar/SearchBar";
-import Slider from '../../Components/Slider/Slider';
-import AddList from '../../Components/AddList/AddList';
-import CategoriesSection from "../../Components/CategoriesSection/CategoriesSection";
-import BlogCard from "../../Components/BlogCard/BlogCard";
-import CarCard from "../../Components/CarCard/CarCard";
-import SellSeaction from "../../Components/SellSeaction/SellSeaction";
+import SearchBar from "../../Components/HomeComponent/SearchBar/SearchBar";
+import Slider from '../../Components/HomeComponent/Slider/Slider';
+import AddList from '../../Components/HomeComponent/AddList/AddList';
+import BlogCard from "../../Components/HomeComponent/BlogCard/BlogCard";
+import SellSeaction from "../../Components/HomeComponent/SellSeaction/SellSeaction";
+import CategoriesSection from "../../Components/HomeComponent/CategoriesSection/CategoriesSection";
 
 const Home = () => {
   return (
@@ -15,9 +13,8 @@ const Home = () => {
         <SearchBar />
         <Slider />
         <AddList />
-        <CategoriesSection />
+        <CategoriesSection/>
         <BlogCard />
-        <CarCard />
         <SellSeaction />
       </div>
   );

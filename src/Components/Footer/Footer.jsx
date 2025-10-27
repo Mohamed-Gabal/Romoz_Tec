@@ -106,7 +106,7 @@ const Footer = () => {
           <MdFavoriteBorder />
           <span>المفضله</span>
         </Link>
-        <Link>
+        <Link to="/advertisements">
           <IoMdAdd className="active-icon"/>
           <span>اضافه عرض</span>
         </Link>

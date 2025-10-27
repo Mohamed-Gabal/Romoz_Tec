@@ -11,7 +11,7 @@ export const validationSchemas = {
                 adDescription: Yup.string().required("الوصف مطلوب"),
                 adPrice: Yup.string()
                     .notRequired()
-                    .matches(/^(?:$|[1-9]\d*(\.\d+)?)$/, "السعر لازم يكون رقم"),
+                    .matches(/^(?:$|[٠-٩0-9]+(?:\.[٠-٩0-9]+)?)$/, "السعر لازم يكون رقم"),
                 isNegotiable: Yup.boolean(),
             }),
         });
@@ -23,6 +23,7 @@ export const validationSchemas = {
                     vehicle: Yup.object({
                         brand: Yup.string().required("يجب ادخال الماركة"),
                         model: Yup.string().required("يجب ادخال الموديل"),
+                        year: Yup.string().required("يجب ادخال سنة الصنع"),
                     }),
                 }),
             });
@@ -109,6 +110,17 @@ export const validationSchemas = {
             });
         }
 
+        if (category === "pets") {
+            return base.shape({
+                information: Yup.object({
+                    ...base.fields.information.fields,
+                    pets: Yup.object({
+                        animalType: Yup.string().required("نوع مطلوب"),
+                    }),
+                }),
+            });
+        }
+
         return base;
     },
 
@@ -119,21 +131,25 @@ export const validationSchemas = {
     }),
 
     4: Yup.object({
-        location: Yup.object({
-            detailedAddress: Yup.string().required("العنوان مطلوب"),
-            city: Yup.string().required("المدينة مطلوبة"),
-            area: Yup.string().required("المنطقة مطلوبة"),
-        }),
-    }),
-
-    5: Yup.object({
         seller: Yup.object({
             name: Yup.string().required("الاسم مطلوب"),
-            phone: Yup.string()
-            .matches(
-                /^(?:(?:\+966|966)5\d{8}|05\d{8})$/,"الصيغة الصحيحة : 05xxxxxxxxx او 9665xxxxxxxxx")
-                .required("رقم الجوال مطلوب"),
-            webMessage: Yup.boolean(),
+            phone: Yup.string().matches(/^(?:(?:\+966|966)5\d{8}|05\d{8})$/, "الصيغة الصحيحة : 05xxxxxxxxx او 9665xxxxxxxxx").required("رقم الجوال مطلوب"),
+            whatsAppMessage: Yup.boolean(),
+            phoneMessage: Yup.boolean(),
         }),
     }),
+    
+    5: Yup.object({
+        featured: Yup.boolean(),
+        feeAgreement: Yup.boolean()
+        .oneOf([true], "يجب الموافقة على اتفاقية الرسوم قبل نشر الإعلان"),
+    }),
+
+    // 6: Yup.object({
+    //     location: Yup.object({
+    //         detailedAddress: Yup.string().required("العنوان مطلوب"),
+    //         city: Yup.string().required("المدينة مطلوبة"),
+    //         area: Yup.string().required("المنطقة مطلوبة"),
+    //     }),
+    // }),
 };

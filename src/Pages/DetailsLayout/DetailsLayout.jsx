@@ -1,109 +1,262 @@
-
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./detailsLayout.css";
 
 // Icons
 import { IoIosArrowBack } from "react-icons/io";
 import { RiStarSLine } from "react-icons/ri";
 import { MdOutlineShield } from "react-icons/md";
-import { PiCarSimpleLight } from "react-icons/pi";
-import { CiLocationOn, CiFaceSmile, CiFlag1 } from "react-icons/ci";
-import { FaCheck, FaRegCommentDots } from "react-icons/fa6";
-import { MdOutlinePhoto } from "react-icons/md";
+import { FaRegCommentDots } from "react-icons/fa6";
 import { AiOutlineSend, AiOutlineLike } from "react-icons/ai";
 import { IoCallOutline } from "react-icons/io5";
 import { LuMessageCircleMore } from "react-icons/lu";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { categories } from "../Advertisements/Category/Category";
+import { timeSince } from "../SpecificCategory/SpecificCategory";
+import { CiFlag1 } from "react-icons/ci";
+import { attributeMapForDetails } from "../../data";
+import { useCookies } from "react-cookie";
+import { LoginForm } from "../Auth/Login/Login";
 
 const DetailsLayout = () => {
-  // الصور
-  const images = [
-    "/images/resultPage1.png",
-    "/images/resultPage2.png",
-    "/images/resultPage3.png",
-    "/images/resultPage4.png",
-    "/images/resultPage5.png",
-    "/images/resultPage6.png",
-    "/images/resultPage1.png",
-    "/images/resultPage2.png",
-    "/images/resultPage3.png",
-    "/images/resultPage4.png",
-  ];
+  const [cookies] = useCookies(["token"]);
+  const userToken = cookies?.token?.data?.token;
+  const [loginModel, setLoginModel] = useState(false);
 
-  // الصورة الرئيسية (بتبدأ بأول صورة)
-  const [mainImage, setMainImage] = useState(images[0]);
+  const { details, id } = useParams();
+  const category = categories.find((cat) => details === cat.key) || "اسم الفئة";
+  const [isLoading, setIsLoading] = useState(false);
+  const [ad_details, setAd_details] = useState([]);
+
+  const images = ad_details?.images || [];
+  const [mainImage, setMainImage] = useState(null);
+
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `https://api.mashy.sand.alrmoz.com/api/ealans/${details}/${id}`
+        );
+        if (response?.data?.success) {
+          const data = response?.data?.data;
+          setAd_details(response?.data?.data);
+          setIsLoading(false);
+
+          if (data?.images?.length > 0) {
+            setMainImage(`https://api.mashy.sand.alrmoz.com/storage/${data.images[0]}`);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching ad details:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDetails();
+    window.scrollTo(0, 0);
+  }, [details, id]);
+
+  useEffect(() => {
+    if (loginModel) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [loginModel]);
 
   return (
     <div className="details-layout">
-      {/* ------------------- الجزء اليمين ------------------- */}
-      <div className="details-right">
-        {/* روابط التنقل */}
-        <div className="details-close-close">
-          <span className="details-close">الرئيسيه <IoIosArrowBack /></span>
-          <span className="details-close">السيارات والمركبات <IoIosArrowBack /></span>
-          <span className="details-close">تويوتا لاندكروزر 2013</span>
+      <div className="details_header">
+        {/* links*/}
+        <div className="details_links">
+          <Link to="/" className="details-close">الرئيسيه <IoIosArrowBack /></Link>
+          <Link to={`/${category.key}`} className="details-close">{category.name}<IoIosArrowBack /></Link>
+          <span className="details-close">{ad_details?.information?.title}</span>
         </div>
 
-        {/* عنوان */}
-        <h2 className="details-title">تويوتا لاندكروزر 2013</h2>
+        <div className="details_header_content">
+          <div className="details_header_title">
+            <h2 className="details-title">{ad_details?.information?.title}</h2>
 
-        {/* معلومات مختصرة */}
-        <div className="details-close-titles">
-          <span className="details-close-title-yello"> <RiStarSLine className="details-close-title-yello-icon"/>مصر</span>
-          <span className="details-close-title-main"> <MdOutlineShield className="details-close-title-main-icon"/> بائع موثوق</span>
-          <span className="details-close-title-empty">نشر مند يومين</span>
-        </div>
-
-        {/* صور المنتج */}
-        <div className="details-lay-image">
-          {/* الصورة الرئيسية */}
-          <div className="details-lay-image-main">
-            <img src={mainImage} alt="Car" />
+            <div className="details_price">
+              {ad_details?.information?.price &&
+                <>
+                  <h1 className="details-left-price">{ad_details?.information?.price} ريال</h1>
+                  {ad_details?.information?.isNegotiable ?
+                    <span className="details-left-negotiable"> قابل للتفاوض</span>
+                    :
+                    <span className="details-left-negotiable">غير قابل للتفاوض</span>
+                  }
+                </>
+              }
+            </div>
           </div>
-
-          {/* الصور المصغرة */}
-          <div className="details-lay-image-thumbs">
-            {images.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`Car ${index}`}
-                onClick={() => setMainImage(img)}
-                className={mainImage === img ? "active-thumb" : ""}
-              />
-            ))}
+          {/* info */}
+          <div className="details-close-titles">
+            <span className="details-close-title-yello"> <RiStarSLine className="details-close-title-yello-icon" />مميز</span>
+            <span className="details-close-title-main"> <MdOutlineShield className="details-close-title-main-icon" /> بائع موثوق</span>
+            <span className="details-close-title-empty"><span>نشر منذ </span>{ad_details?.created_at ? timeSince(ad_details.created_at) : ""}</span>
           </div>
         </div>
+      </div>
 
-        {/* المواصفات */}
-        <div className="details-layout-info">
-          <h3 className="details-lay-info-title">المواصفات</h3>
-          <div className="details-lay-info-item">
-            <div><PiCarSimpleLight className="details-lay-info-icon"/><span>الماركه : تويوتا</span></div>
-            <div><PiCarSimpleLight className="details-lay-info-icon"/><span>الموديل : لاندكروزر</span></div>
-            <div><CiLocationOn className="details-lay-info-icon"/><span>المدينه : الرياض</span></div>
-            <div><CiLocationOn className="details-lay-info-icon"/><span>المنطقه : العليا</span></div>
+      <section className="details_grid_container">
+        {/* ------------------- right section  ------------------- */}
+        <div className="details-right">
+          {/* main photo */}
+          <div className="details_images">
+            <div className="details-lay-image-main">
+              {mainImage ? (
+                <img src={mainImage} alt="Main" />
+              ) : (
+                <p>جاري تحميل الصورة...</p>
+              )}
+            </div>
+
+            {/* small images */}
+            <div className="details-lay-image-thumbs">
+              {images.length > 0 &&
+                images.map((img, index) => {
+                  const fullImg = `https://api.mashy.sand.alrmoz.com/storage/${img}`;
+                  return (
+                    <img
+                      key={index}
+                      src={fullImg}
+                      alt={`thumb-${index}`}
+                      onClick={() => setMainImage(fullImg)}
+                      className={mainImage === fullImg ? "active-thumb" : ""}
+                    />
+                  );
+                })}
+            </div>
+          </div>
+
+
+
+          {/* المواصفات */}
+          <div className="details_specifications">
+            <h3 className="details-lay-info-title">المواصفات</h3>
+            <div className="details_specifications_box">
+              <div className="attributes">
+                {attributeMapForDetails(ad_details)[details].map((item, index) => (
+                  <div className="attribute_item" key={index}>
+                    <div className="attribute_item_icon">
+                      <img src={item.icon} alt={details} />
+                    </div>
+                    <div className="attribute_item_text">
+                      <span>{item.label}</span>
+                      <span>{item.value}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="deteils_location">
+                <div className="deteils_location_item">
+                  <div className="location_item_icon">
+                    <img src="/Icons/location.svg" alt="location" />
+                  </div>
+                  <div className="location_text">
+                    <span>المنطقة</span>
+                    <span>{ad_details?.user?.area}</span>
+                  </div>
+                </div>
+
+                <div className="deteils_location_item">
+                  <div className="location_item_icon">
+                    <img src="/Icons/location.svg" alt="location" />
+                  </div>
+                  <div className="location_text">
+                    <span>المدينة</span>
+                    <span>{ad_details?.user?.city}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* الوصف */}
+          <div className="details-layout-decs">
+            <h3 className="details-lay-decs-title">الوصف</h3>
+            <p className="details-lay-decs-info">{ad_details?.information?.description}</p>
+            {ad_details?.attributes?.moreInfo &&
+              <div className="attribute_item_text">
+                <span>معلومات اضافية</span>
+                <span>{ad_details?.attributes?.moreInfo}</span>
+              </div>
+            }
           </div>
         </div>
 
-        {/* الوصف */}
-        <div className="details-layout-decs">
-          <h3 className="details-lay-decs-title">الوصف</h3>
-          <p className="details-lay-decs-info">
-            تويوتا لاند كروزر 2013 بحالة ممتازة جداً. السيارة مستعملة استعمال
-            شخصي، محافظ عليها بالكامل وتم عمل صيانة دورية في الوكالة. لا توجد أي
-            أضرار أو حوادث.
-          </p>
-          <div className="details-lay-decs-info">
-            <span className="details-lay-decs-info-item"><FaCheck className="details-lay-decs-info-icon"/> تم تغيير الزيت حديثا</span>
-            <span className="details-lay-decs-info-item"><FaCheck className="details-lay-decs-info-icon"/> تكييف يعمل بكفاءه ممتازه</span>
-            <span className="details-lay-decs-info-item"><FaCheck className="details-lay-decs-info-icon"/> اطارات جديده</span>
-            <span className="details-lay-decs-info-item"><FaCheck className="details-lay-decs-info-icon"/> فحص شامل متوفر</span>
+        {/* ------------------- left section  ------------------- */}
+        <div className="details-left">
+          <div className="details_left_container">
+            {/* معلومات البائع */}
+            <div className="details-left-top">
+              <div className="details-left-top-user">
+                <Link to={`/user/${ad_details?.seller?.name}/${ad_details?.user?.id_user}`} className="card_user">
+                  <div className="card_user_image">
+                    {ad_details?.user?.profile_image ?
+                      <img
+                        src={ad_details?.user?.profile_image ? ad_details?.user?.profile_image : "/images/logo.svg"}
+                        alt={ad_details?.seller?.name?.split(" ").map(word => word[0]).join(" ").toUpperCase()}
+                      />
+                      :
+                      <div className="avatar_placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx={12} cy={10} r={4} /><circle cx={12} cy={12} r={10} /></svg>
+                      </div>
+                    }
+                  </div>
+
+                  <div className="user_info">
+                    <h5>{ad_details?.seller?.name}</h5>
+                    <p className="details-left-top-user-member"><span>عضو منذ </span><span>{ad_details?.user?.account_created_at ? timeSince(ad_details?.user?.account_created_at) : ""}</span></p>
+                  </div>
+                </Link>
+
+                {/* إحصائيات البائع */}
+                <div className="details-left-top-user-actions">
+                  <span><MdOutlineShield /> موثوق</span>
+                  <span><RiStarSLine className="details-left-top-user-actions-icon" />4.8</span>
+                  <span>{ad_details?.user?.user_ads_count} اعلان</span>
+                  <span>معدل الرد 95%</span>
+                </div>
+
+                {/* أزرار التواصل */}
+                <div className="details-left-top-user-buttons">
+                  {ad_details?.seller?.phoneMessage && (
+                    <button className="details-left-top-user-btn1" onClick={() => setLoginModel(true)}> <IoCallOutline />تواصل</button>
+                  )}
+                  <button className="details-left-top-user-btn2"> <LuMessageCircleMore />رساله</button>
+                </div>
+              </div>
+
+              {ad_details?.seller?.whatsAppMessage && (
+                <button type="button" onClick={() => handleWhatsApp(ad_details?.seller, ad_details?.information?.title)} className="details-left-top-send">واتساب</button>
+              )}
+
+            </div>
+
+            {/* نصائح الأمان */}
+            <div className="details-left-bottom">
+              <h2 className="details-left-bottom-title">نصائح الامان</h2>
+              <ul className="details-left-bottom-list">
+                <li>تأكد من فحص السياره قبل الشراء.</li>
+                <li>التق بالبائع في مكان عام.</li>
+                <li>لا تدفع اي مبلغ قبل المعاينه.</li>
+                <li>تحقق من الاوراق الرسميه.</li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        {/* التعليقات */}
-        <div className="details-lay-comments">
+        {/* footer التعليقات */}
+        <div className="details_footer_comments">
           <h3 className="details-lay-comments-title">التعليقات</h3>
           <p className="details-lay-comments-info">شارك رايك او اسفسارك حول هذا الاعلان</p>
 
@@ -114,15 +267,13 @@ const DetailsLayout = () => {
           </div>
 
           <div className="details-lay-comments-actions">
-            <span><CiFaceSmile /> اضافه رمز تعبيري</span>
-            <span><MdOutlinePhoto /> اضافه صوره</span>
             <button><AiOutlineSend /> اضافه تعليق</button>
           </div>
 
           {/* قائمة التعليقات */}
           <div className="details-lay-comments-list">
             <div className="details-lay-comments-list-item">
-              <img src="/images/logo.svg" alt="User" className="details-lay-comments-list-item-img"/>
+              <img src="/images/logo.svg" alt="User" className="details-lay-comments-list-item-img" />
               <div className="details-lay-comments-list-item-content">
                 <div className="details-lay-comments-list-item-header">
                   <span className="details-lay-comments-list-item-name">احمد محمد</span>
@@ -140,60 +291,60 @@ const DetailsLayout = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ------------------- الجزء الشمال ------------------- */}
-      <div className="details-left">
-        {/* السعر */}
-        <h1 className="details-left-price">175,000 ريال</h1>
-        <h6 className="details-left-negotiable">غير قابل للتفاوض</h6>
-
-        {/* معلومات البائع */}
-        <div className="details-left-top">
-          <div className="details-left-top-user">
-            <img src="/images/logo.svg" alt="User" />
-            <div>
-              <h3 className="details-left-top-user-name">
-                أحمد عمر ماهر
-                <span><MdOutlineShield /> موثوق</span>
-              </h3>
-              <p className="details-left-top-user-member">عضو منذ 2020</p>
+      {/* <!----------- Modal -----------> */}
+      {loginModel && (
+        <section className="login_modal_fade">
+          <div className="modal_dialog">
+            <div className="modal_header">
+              <button type="button" onClick={() => setLoginModel(false)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+              </button>
             </div>
-
-            {/* إحصائيات البائع */}
-            <div className="details-left-top-user-actions">
-              <span><RiStarSLine className="details-left-top-user-actions-icon"/>4.8</span>
-              <span>25 اعلان</span>
-              <span>معدل الرد 95%</span>
-            </div>
-
-            {/* أزرار التواصل */}
-            <div className="details-left-top-user-buttons">
-              <button className="details-left-top-user-btn1"> <IoCallOutline />تواصل</button>
-              <button className="details-left-top-user-btn2"> <LuMessageCircleMore />رساله</button>
-            </div>
+            {userToken ?
+              <div className="model_content">
+                <p>التواصل مع العارض</p>
+                <div className="seller_data">
+                  <div className="sellerPhone">
+                    <div className="sellerPhone_svg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg>
+                    </div>
+                    <span>{ad_details?.seller?.phone}</span>
+                  </div>
+                </div>
+              </div>
+              :
+              <div className="">
+                <h1>تسجيل الدخول</h1>
+                <LoginForm />
+              </div>
+            }
           </div>
-
-          <button className="details-left-top-send">واتساب</button>
-        </div>
-
-        {/* نصائح الأمان */}
-        <div className="details-left-bottom">
-          <h2 className="details-left-bottom-title">نصائح الامان</h2>
-          <ul className="details-left-bottom-list">
-            <li>تأكد من فحص السياره قبل الشراء.</li>
-            <li>التق بالبائع في مكان عام.</li>
-            <li>لا تدفع اي مبلغ قبل المعاينه.</li>
-            <li>تحقق من الاوراق الرسميه.</li>
-          </ul>
-        </div>
-      </div>
+        </section>
+      )}
     </div>
   );
 };
 export default DetailsLayout;
 
+// handleWhatsApp function to open whatsapp
+export function handleWhatsApp(seller, title) {
+  if (!seller || !seller.phone) {
+    console.error("Seller data not available");
+    return;
+  }
 
+  let phone = seller.phone.trim().replace(/\s+/g, "").replace(/^\+/, "");
+  phone = phone.startsWith("966") ? phone : phone.startsWith("0")
+    ? `966${phone.slice(1)}`
+    : `966${phone}`;
 
+  if (!/^9665\d{8}$/.test(phone)) {
+    return;
+  }
+  const message = `مرحبًا ${seller.name}! أريد التواصل معك بشأن إعلانك "${title}" على موقع ماشي.`;
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-
+  window.open(waUrl, "_blank", "noopener,noreferrer");
+}
