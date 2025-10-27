@@ -78,8 +78,9 @@ export default function ShowAnyUser() {
                     </div>
 
                     <div className="categories_items">
-                        {userData?.data?.map((cat) => (
+                        {userData?.data?.map((cat, index) => (
                             <AdCard
+                                key={index}
                                 category={cat?.category}
                                 adID={cat?.ad?.id_ads}
                                 img={cat?.ad?.images[0]}

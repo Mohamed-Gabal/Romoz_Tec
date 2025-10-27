@@ -2,31 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./detailsLayout.css";
 
 // Icons
-import { IoIosArrowBack } from "react-icons/io";
-import { RiStarSLine } from "react-icons/ri";
-import { MdOutlineShield } from "react-icons/md";
 import { FaRegCommentDots } from "react-icons/fa6";
 import { AiOutlineSend, AiOutlineLike } from "react-icons/ai";
-import { IoCallOutline } from "react-icons/io5";
-import { LuMessageCircleMore } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { categories } from "../Advertisements/Category/Category";
 import { timeSince } from "../SpecificCategory/SpecificCategory";
 import { CiFlag1 } from "react-icons/ci";
 import { attributeMapForDetails } from "../../data";
-import { useCookies } from "react-cookie";
-import { LoginForm } from "../Auth/Login/Login";
 
 const DetailsLayout = () => {
-  const [cookies] = useCookies(["token"]);
-  const userToken = cookies?.token?.data?.token;
   const [loginModel, setLoginModel] = useState(false);
 
   const { details, id } = useParams();
   const category = categories.find((cat) => details === cat.key) || "اسم الفئة";
   const [isLoading, setIsLoading] = useState(false);
   const [ad_details, setAd_details] = useState([]);
+  console.log(ad_details);
 
   const images = ad_details?.images || [];
   const [mainImage, setMainImage] = useState(null);
@@ -75,8 +67,10 @@ const DetailsLayout = () => {
       <div className="details_header">
         {/* links*/}
         <div className="details_links">
-          <Link to="/" className="details-close">الرئيسيه <IoIosArrowBack /></Link>
-          <Link to={`/${category.key}`} className="details-close">{category.name}<IoIosArrowBack /></Link>
+          <Link to="/" className="details-close">الرئيسيه</Link>
+          <img src="/Icons/chevron-left.svg" alt="chevron-left" />
+          <Link to={`/${category.key}`} className="details-close">{category.name}</Link>
+          <img src="/Icons/chevron-left.svg" alt="chevron-left" />
           <span className="details-close">{ad_details?.information?.title}</span>
         </div>
 
@@ -99,8 +93,20 @@ const DetailsLayout = () => {
           </div>
           {/* info */}
           <div className="details-close-titles">
-            <span className="details-close-title-yello"> <RiStarSLine className="details-close-title-yello-icon" />مميز</span>
-            <span className="details-close-title-main"> <MdOutlineShield className="details-close-title-main-icon" /> بائع موثوق</span>
+            <div className="special_star">
+              <div className="special_star_icon">
+                <img src="/Icons/star.svg" alt="Star" />
+              </div>
+              <span>مميز</span>
+            </div>
+
+            <div className="Shield">
+              <div className="Shield_icon">
+                <img src="/Icons/Shield.svg" alt="Shield" />
+              </div>
+              <span>بائع موثوق</span>
+            </div>
+
             <span className="details-close-title-empty"><span>نشر منذ </span>{ad_details?.created_at ? timeSince(ad_details.created_at) : ""}</span>
           </div>
         </div>
@@ -207,39 +213,52 @@ const DetailsLayout = () => {
                         alt={ad_details?.seller?.name?.split(" ").map(word => word[0]).join(" ").toUpperCase()}
                       />
                       :
-                      <div className="avatar_placeholder">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx={12} cy={10} r={4} /><circle cx={12} cy={12} r={10} /></svg>
-                      </div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-user-round-icon lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0" /><circle cx={12} cy={10} r={4} /><circle cx={12} cy={12} r={10} /></svg>
                     }
                   </div>
 
                   <div className="user_info">
-                    <h5>{ad_details?.seller?.name}</h5>
+                    <div className="user_info_header">
+                      <h5>{ad_details?.seller?.name}</h5>
+                      <div className="Shield">
+                        <div className="Shield_icon">
+                          <img src="/Icons/Shield.svg" alt="Shield" />
+                        </div>
+                        <span>موثوق</span>
+                      </div>
+                    </div>
                     <p className="details-left-top-user-member"><span>عضو منذ </span><span>{ad_details?.user?.account_created_at ? timeSince(ad_details?.user?.account_created_at) : ""}</span></p>
                   </div>
                 </Link>
 
                 {/* إحصائيات البائع */}
                 <div className="details-left-top-user-actions">
-                  <span><MdOutlineShield /> موثوق</span>
-                  <span><RiStarSLine className="details-left-top-user-actions-icon" />4.8</span>
+                  <div className="rating_star">
+                    <img src="/Icons/goldenStar.svg" alt="goldenStar" />
+                    <span>4.8</span>
+                  </div>
                   <span>{ad_details?.user?.user_ads_count} اعلان</span>
-                  <span>معدل الرد 95%</span>
+                  <span>معدل الرد: 95%</span>
                 </div>
 
                 {/* أزرار التواصل */}
                 <div className="details-left-top-user-buttons">
                   {ad_details?.seller?.phoneMessage && (
-                    <button className="details-left-top-user-btn1" onClick={() => setLoginModel(true)}> <IoCallOutline />تواصل</button>
+                    <button className="details-left-top-user-btn1" onClick={() => setLoginModel(true)}>
+                      <img src="/Icons/whitePhone.svg" alt="phone" />
+                      <span>تواصل</span>
+                    </button>
                   )}
-                  <button className="details-left-top-user-btn2"> <LuMessageCircleMore />رساله</button>
+                  <button className="details-left-top-user-btn2">
+                    <img src="/Icons/ChatTeardropDotsGreen.svg" alt="ChatTeardropDotsGreen" />
+                    <span>رساله</span>
+                  </button>
                 </div>
               </div>
 
               {ad_details?.seller?.whatsAppMessage && (
                 <button type="button" onClick={() => handleWhatsApp(ad_details?.seller, ad_details?.information?.title)} className="details-left-top-send">واتساب</button>
               )}
-
             </div>
 
             {/* نصائح الأمان */}
@@ -302,24 +321,19 @@ const DetailsLayout = () => {
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
               </button>
             </div>
-            {userToken ?
-              <div className="model_content">
-                <p>التواصل مع العارض</p>
-                <div className="seller_data">
-                  <div className="sellerPhone">
-                    <div className="sellerPhone_svg">
-                      <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg>
-                    </div>
-                    <span>{ad_details?.seller?.phone}</span>
+            <div className="model_content">
+              <p>التواصل مع العارض</p>
+              <div className="seller_data">
+                <a href={`tel:${ad_details?.seller?.phone}`} className="sellerPhone">
+                  <div className="sellerPhone_svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-phone-icon lucide-phone"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg>
                   </div>
-                </div>
+                  <span className="call_link">
+                    {ad_details?.seller?.phone}
+                  </span>
+                </a>
               </div>
-              :
-              <div className="">
-                <h1>تسجيل الدخول</h1>
-                <LoginForm />
-              </div>
-            }
+            </div>
           </div>
         </section>
       )}
