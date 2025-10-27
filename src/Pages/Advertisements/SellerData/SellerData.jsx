@@ -3,7 +3,7 @@ import "./SellerData.css"
 
 export default function SellerData({ formik }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
-    
+
     return (
         <div className="sellerData_container">
             <header className='sellerData_header'>
@@ -20,6 +20,8 @@ export default function SellerData({ formik }) {
                 <input
                     type="text"
                     name="seller.name"
+                    readOnly
+                    disabled
                     value={values.seller.name}
                     onChange={(e) => setFieldValue("seller.name", e.target.value)}
                     onBlur={handleBlur}
@@ -35,7 +37,7 @@ export default function SellerData({ formik }) {
                     )}
                 </label>
                 <input
-                    type="text"
+                    type="tel"
                     name="seller.phone"
                     value={values.seller.phone}
                     onChange={(e) => setFieldValue("seller.phone", e.target.value)}
@@ -45,22 +47,41 @@ export default function SellerData({ formik }) {
                     placeholder='05xxxxxxxxxx' />
             </div>
 
-            <div className="webMessage_item">
+            <div className="messages">
                 <div className="text">
-                    <h4>السماح بالرسائل عبر الموقع</h4>
-                    <p>يمكن للمشترين التواصل معك عبر نظام الرسائل الداخلي</p>
+                    <p>يمكن للمشترين التواصل معك عبر نظام الرسائل الواتساب او التواصل عن طريق رقم الجوال</p>
                 </div>
-                <label className="switch">
-                    <input
-                        type="checkbox"
-                        name="seller.webMessage"
-                        id='webMessage'
-                        checked={values.seller.webMessage}
-                        onChange={(e) => { setFieldValue("seller.webMessage", e.target.checked) }}
-                    />
-                    <span className="slider"></span>
-                </label>
+                <div className="message_item">
+                    <div className="web_message">
+                        <h4>السماح بالرسائل عبر الواتساب</h4>
+
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                name="seller.whatsAppMessage"
+                                id='whatsAppMessage'
+                                checked={values.seller.whatsAppMessage}
+                                onChange={(e) => { setFieldValue("seller.whatsAppMessage", e.target.checked) }}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+
+                    <div className="phone_message">
+                        <h4>السماح بالرسائل عبر الجوال</h4>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                name="seller.phoneMessage"
+                                id='phoneMessage'
+                                checked={values.seller.phoneMessage}
+                                onChange={(e) => { setFieldValue("seller.phoneMessage", e.target.checked) }}
+                            />
+                            <span className="slider"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     )
-}
+};

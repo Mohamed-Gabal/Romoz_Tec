@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import "./Location.css";
+import React, { useEffect, useRef, useState } from 'react';
+// import "./Location.css";
 
 export const saudiRegions = [
     {
         id: 1,
         region: "الرياض",
-        cities: ["الرياض", "الخرج", "الدرعية", "الدوادمي", "المجمعة", "القويعية", "وادي الدواسر", "الزلفي", "شقراء", "الأفلاج", "الغاط", "عفيف", "حوطة بني تميم", "الحريق", "السليل", "ضرماء", "المزاحمية", "ثادق", "رماح", "حريملاء", "مرات", "الدلم"]
+        cities: ["الخرج", "الدرعية", "الدوادمي", "المجمعة", "القويعية", "وادي الدواسر", "الزلفي", "شقراء", "الأفلاج", "الغاط", "عفيف", "حوطة بني تميم", "الحريق", "السليل", "ضرماء", "المزاحمية", "ثادق", "رماح", "حريملاء", "مرات", "الدلم"]
     },
     {
         id: 2,
         region: "مكة المكرمة",
-        cities: ["مكة المكرمة", "جدة", "الطائف", "القنفذة", "رابغ", "الليث", "الجموم", "خليص", "الكامل", "الخرمة", "رنية", "تربة", "المويه", "أضم", "ميسان", "بحرة"]
+        cities: ["جدة", "الطائف", "القنفذة", "رابغ", "الليث", "الجموم", "خليص", "الكامل", "الخرمة", "رنية", "تربة", "المويه", "أضم", "ميسان", "بحرة"]
     },
     {
         id: 3,
@@ -72,19 +72,49 @@ export const saudiRegions = [
 export default function Location({ formik }) {
     const { values, setFieldValue, errors, handleBlur, touched } = formik;
 
-    const [isOpen, setIsOpen] = useState(false);
-    const handleSelect = (option) => {
-        setFieldValue("location.area", option);
-        setIsOpen(false);
+    const [isOpenRegion, setIsOpenRegion] = useState(false);
+    const [isOpenCity, setIsOpenCity] = useState(false);
+
+    const RegionDropdownRef = useRef(null);
+    const cityDropdownRef = useRef(null);
+
+    const handleSelectRegion = () => {
+        setFieldValue("location.city", "");
+        setIsOpenRegion(false);
     };
 
-    let filteredRegions = saudiRegions.filter( region => 
-        region.region.includes(values.location.area)
-    );
+    const handleSelectCity = (city) => {
+        setFieldValue("location.city", city);
+        setIsOpenCity(false);
+    };
 
-    let filteredCitiesOfRegions = saudiRegions.find( (region) => region.region === values.location.area )
-    console.log(filteredCitiesOfRegions.cities);
+    const filteredRegions = saudiRegions.filter((region) => region.region.includes(values.location.area));
 
+    const selectedRegion = saudiRegions.find((region) => region.region === values.location.area);
+
+    const filteredCities = selectedRegion?.cities.filter(city => city.includes(values.location.city)) || [];
+
+    useEffect(() => {
+        const handleClickOutsideRegion = (event) => {
+            if (RegionDropdownRef.current && !RegionDropdownRef.current.contains(event.target)) {
+                setIsOpenRegion(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutsideRegion);
+
+        const handleClickOutsideCity = (event) => {
+            if (cityDropdownRef.current && !cityDropdownRef.current.contains(event.target)) {
+                setIsOpenCity(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutsideCity);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutsideRegion);
+            document.removeEventListener("mousedown", handleClickOutsideCity);
+        };
+    }, []);
+    
     return (
         <div className="location_container">
             <div className="location_header">
@@ -106,53 +136,68 @@ export default function Location({ formik }) {
                     onBlur={handleBlur}
                     id="detailedAddress"
                     className='detailedAddress_input input'
-                    placeholder='أدخل عنوان واضح'
+                    placeholder='الرياض - الخرج - اليمامة - حي النسيم'
                 />
             </div>
 
-            <div className="input_container">
+            <div className="input_container" ref={RegionDropdownRef}>
+                <label htmlFor="area">المنطقة*
+                    {errors?.location?.area && touched?.location?.area && (
+                        <div className="info_error">{errors?.location?.area}</div>
+                    )}
+                </label>
+                <div className="area_input">
+                    <input
+                        type="text"
+                        name="location.area"
+                        value={values.location.area}
+                        onClick={() => setIsOpenRegion(true)}
+                        onChange={(e) => setFieldValue("location.area", e.target.value)}
+                        // onBlur={handleBlur}
+                        id="area"
+                        className='input'
+                        placeholder='ادخل منطقتك'
+                    />
+                    <img src="./advertisements/CaretDown.svg" alt="CaretDown" />
+
+                    {isOpenRegion && filteredRegions.length > 0 && (
+                        <ul className='region_option'>
+                            {filteredRegions.map(region => (
+                                <li key={region.id} onClick={() => { handleSelectRegion(); setFieldValue("location.area", region.region); }}>{region.region}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            </div>
+
+            <div className="input_container" ref={cityDropdownRef}>
                 <label htmlFor="city">المدينة*
-                    {errors.location?.city && touched.location?.city && (
+                    {errors.location?.city && touched?.location?.city && (
                         <div className="info_error">{errors.location?.city}</div>
                     )}
                 </label>
-                <input
-                    type="text"
-                    name="location.city"
-                    value={values.location.city}
-                    onChange={(e) => setFieldValue("location.city", e.target.value)}
-                    onBlur={handleBlur}
-                    id="city"
-                    className='city_input input'
-                    placeholder='اختر االمدينة'
-                />
-            </div>
+                <div className="city_input">
+                    <input
+                        type="text"
+                        name="location.city"
+                        value={values.location.city}
+                        onClick={() => setIsOpenCity(true)}
+                        onChange={(e) => setFieldValue("location.city", e.target.value)}
+                        // onBlur={handleBlur}
+                        id="city"
+                        className='input'
+                        placeholder='ادخل االمدينة'
+                    />
+                    <img src="./advertisements/CaretDown.svg" alt="CaretDown" />
 
-            <div className="input_container">
-                <label htmlFor="area">المنطقة*
-                    {errors.location?.area && touched.location?.area && (
-                        <div className="info_error">{errors.location?.area}</div>
+                    {isOpenCity && filteredCities?.length > 0 && (
+                        <ul className='city_option'>
+                            {filteredCities.map((city, id) => (
+                                <li key={id} onClick={() => { handleSelectCity(city); setFieldValue("location.city", city) }}>{city}</li>
+                            ))}
+                        </ul>
                     )}
-                </label>
-                <input
-                    type="text"
-                    name="location.area"
-                    value={values.location.area}
-                    onChange={(e) => {setFieldValue("location.area", e.target.value); setIsOpen(true);}}
-                    onClick={() => setIsOpen(!isOpen)}
-                    onBlur={handleBlur}
-                    id="area"
-                    className='area_input input'
-                    placeholder='اختر منطقتك'
-                />
-
-                { isOpen && filteredRegions.length > 0 && (
-                    <ul className='region_option'>
-                        {filteredRegions.map((region) => (
-                            <li key={region.id} onClick={()=>handleSelect(region.region)}>{region.region}</li>
-                        ))}
-                    </ul>
-                )}
+                </div>
             </div>
         </div>
     )

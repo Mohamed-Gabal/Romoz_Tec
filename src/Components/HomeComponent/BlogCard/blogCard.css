@@ -1,0 +1,137 @@
+.car-card {
+  padding: 40px 0px;
+  background-color: #ECF0F1CC;
+  font-family: var(--main-font);
+  direction: rtl;
+}
+.car_card_container {
+  max-width: 1195px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  text-align: center;
+}
+.section-subtitle {
+  font-size: 16px;
+  color: var(--gray-color);
+  margin-bottom: 40px;
+  text-align: center;
+  line-height: 1.6;
+}
+.car-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* Responsiveness *
+
+/* الشاشات المتوسطة */
+@media (max-width: 992px) {
+  .car-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .car-card-card .card_img{ 
+    height: 150px;
+  }
+  .car-card-title {
+    font-size: 14px;
+    height: 36px;
+  }
+  .car-card-meta {
+    font-size: 12px;
+  }
+  .car-card-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .car-card-ico {
+    font-size: 20px;
+  }
+}
+
+/* الشاشات الصغيرة */
+@media (max-width: 768px) {
+  /* .section-title,
+  .section-subtitle {
+    display: none;
+  } */
+  .car-card {
+    margin-top: 30px;
+    padding: 15px 0px;
+  }
+  .car-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .car-card-card {
+    border-radius: 8px;
+  }
+  .car-card-card .card_img{ 
+    height: 100px;
+  }
+  .car-card-user-img {
+    width: 18px;
+    height: 18px;
+  }
+  .car-card-user span {
+    font-size: 9px;
+  }
+  .car-card-title {
+    font-size: 10px;
+    height: 20px;
+    margin-bottom: 0;
+  }
+  .car-card-meta {
+    font-size: 9px;
+    gap: 6px;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .car-card-icon {
+    font-size: 13px;
+  }
+  .car-card-price {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+  .car-card-btn {
+    font-size: 9px;
+    padding: 4px 6px;
+    border-radius: 5px;
+  }
+  .car-card-fav {
+    width: 28px;
+    height: 28px;
+  }
+  .car-card-ico {
+    font-size: 14px;
+  }
+}
+/* الشاشات الصغيرة جدًا */
+@media (max-width: 520px) {
+  .car-card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px;
+  }
+  .car-card-main-img {
+    height: 100px;
+  }
+  .car-card-title {
+    font-size: 9px;
+  }
+  .car-card-btn {
+    font-size: 8px;
+  }
+  .car-card-fav {
+    width: 26px;
+    height: 26px;
+  }
+}

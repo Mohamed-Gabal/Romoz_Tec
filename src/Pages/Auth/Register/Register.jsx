@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./registerStyle.css";
 import { Link, useNavigate } from "react-router-dom";
-// import { useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -18,7 +18,7 @@ export default function Register() {
     setShowModdel(false);
     navigate("/settingsUser");
   };
-  // const [setCookie] = useCookies(["token"]);
+  const [setCookie] = useCookies(["token"]);
 
   // Yup for validation
   const validationSchema = Yup.object({
@@ -68,11 +68,11 @@ export default function Register() {
         if (response.ok && data.success) {
           setIsLoading(false)
           setShowModdel(true);
-          // setCookie("token", data, {
-          //   maxAge: 60 * 60 * 24 * 30,
-          //   sameSite: "lax",
-          //   secure: process.env.NODE_ENV === "production",
-          // });
+          setCookie("token", data, {
+            maxAge: 60 * 60 * 24 * 30,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+          });
         } else if (data.errors) {
           const hasEmailError = data.errors.email;
           const hasPhoneError = data.errors.phone;
@@ -102,7 +102,7 @@ export default function Register() {
       <div className="register-box">
         {/* image */}
         <div className="register-image">
-          <img src="/images/login.png" alt="Register" />
+          <img src="/images/login.webp" alt="Register" />
         </div>
 
         {/* المحتوى */}
@@ -191,7 +191,7 @@ export default function Register() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  <div className="eye_icon" onClick={() => setShowPassword(!showPassword)}>
+                  <div className="eye_password_icon" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ?
                       <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx={12} cy={12} r={3} /></svg>
                       :
