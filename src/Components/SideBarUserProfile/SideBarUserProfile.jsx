@@ -46,7 +46,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                         <li onClick={() => setToggleSidebar(false)}>
                             <NavLink to="/userProfile" className="link">
                                 <div className="link_icon">
-                                    <img src="/Icons/offers.svg" alt="offers" />
+                                    <img src="/Icons/house.svg" alt="house" />
                                 </div>
                                 <span>الرئيسيه</span>
                             </NavLink>
@@ -54,7 +54,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                         <li onClick={() => setToggleSidebar(false)}>
                             <NavLink to="userOffers" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
-                                    <img src="/Icons/ChatTeardropGray.svg" alt="ChatTeardropGray" />
+                                    <img src="/Icons/offers.svg" alt="offers" />
                                 </div>
                                 <span>العروض</span>
                             </NavLink>
@@ -62,13 +62,14 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                         <li onClick={() => setToggleSidebar(false)}>
                             <NavLink to="/notifactionsUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
+                                    {/* <img src="/Icons/ChatTeardropGray.svg" alt="ChatTeardropGray" /> */}
                                     <img src="/Icons/Notification.svg" alt="Notification" />
                                 </div>
                                 <span>الإشعارات</span>
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/favoritesUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="favoritesUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/heart.svg" alt="heart" />
                                 </div>
@@ -79,7 +80,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
 
                     <ul className="userSidebar_links_group">
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/settingsUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="settingsUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/Setting.svg" alt="Setting" />
                                 </div>
@@ -87,7 +88,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/blogUser" className={({ isActive }) => (isActive ? "link active" : "link")} >
+                            <NavLink to="blogUser" className={({ isActive }) => (isActive ? "link active" : "link")} >
                                 <div className="link_icon">
                                     <img src="/Icons/Blogger.svg" alt="Blogger" />
                                 </div>
@@ -95,7 +96,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/helpUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="helpUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/HelpCircle.svg" alt="HelpCircle" />
                                 </div>
