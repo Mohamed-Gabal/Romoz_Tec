@@ -32,11 +32,11 @@ const router = createBrowserRouter([
       { path: "/:category", element: <SpecificCategory /> },
       { path: "/:details/:id", element: <DetailsLayout /> },
       { path: "/user/:name/:userID", element: <ShowAnyUser /> },
-      { path: "/userProfile", element: <UserProfile />, children: [
-
-      ] },
     ],
   },
+  { path: "/userProfile", element: <UserProfile />, children: [
+
+  ] },
 
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },

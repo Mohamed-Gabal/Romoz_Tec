@@ -1,0 +1,17 @@
+.userProfile {
+    background-color: #F5F5F5;
+    position: relative;
+}
+.userProfile .toggle_sidebar {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+@media (max-width: 768px) {
+    .userProfile .toggle_sidebar {
+        display: block;
+        cursor: pointer;
+    }
+}
