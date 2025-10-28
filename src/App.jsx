@@ -19,6 +19,7 @@ import ShowAnyUser from "./Pages/ShowAnyUser/ShowAnyUser";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import AccountUser from "./Pages/UserProfile/AccountUser/AccountUser";
 import UserOffers from "./Pages/UserProfile/UserOffers/UserOffers";
+import UserNotifactions from "./Pages/UserProfile/UserNotifactions/UserNotifactions";
 const Register = lazy(() => import("./Pages/Auth/Register/Register"));
 const ResetPassword = lazy(() => import("./Pages/Auth/ResetPassword/ResetPassword"));
 const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword/ForgotPassword"));
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
   { path: "/userProfile", element: <UserProfile />, children: [
     { index: true, element: <AccountUser /> },
     { path: "userOffers", element: <UserOffers /> },
+    { path: "userNotifactions", element: <UserNotifactions /> },
   ] },
 
   { path: "/login", element: <Login /> },

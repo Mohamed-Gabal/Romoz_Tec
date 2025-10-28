@@ -44,7 +44,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                 <div className="userSidebar_links">
                     <ul className="userSidebar_links_group">
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/userProfile" className="link">
+                            <NavLink to="/userProfile" end className="link">
                                 <div className="link_icon">
                                     <img src="/Icons/house.svg" alt="house" />
                                 </div>
@@ -60,7 +60,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/notifactionsUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="userNotifactions" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     {/* <img src="/Icons/ChatTeardropGray.svg" alt="ChatTeardropGray" /> */}
                                     <img src="/Icons/Notification.svg" alt="Notification" />
