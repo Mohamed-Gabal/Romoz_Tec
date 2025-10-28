@@ -69,7 +69,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="favoritesUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="userFavorites" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/heart.svg" alt="heart" />
                                 </div>
