@@ -52,7 +52,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             </NavLink>
                         </li>
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/offersUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="userOffers" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/ChatTeardropGray.svg" alt="ChatTeardropGray" />
                                 </div>
