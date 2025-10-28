@@ -38,7 +38,10 @@
     align-items: center;
     gap: 5px;
     flex: 1;
+    height: 40px;
+    padding-inline-start: 10px;
     color: var(--text-color);
+    border-radius: 6px;
     cursor: pointer;
 }
 
@@ -104,7 +107,7 @@
 }
 
 .userSideBar_container .userSidebar_content .userSidebar_links .userSidebar_links_group li .link.active {
-    background-color: #aaffee40;
+    background-color: #AAFFEE80;
 }
 
 @media (max-width: 768px) {
@@ -131,6 +134,12 @@
         align-items: center;
         padding: 0px;
         padding-bottom: 20px;
+    }
+
+    .userSideBar_container .userSidebar_content .userSidebar_links .userSidebar_links_group li,
+    .userSideBar_container .userSidebar_content .userSidebar_links .userSidebar_links_group li .link {
+        padding-inline-start: 0px;
+        padding-inline: 5px;
     }
 
     .userSideBar_container .userSidebar_content .userSidebar_links .userSidebar_links_group li .link span {

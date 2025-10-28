@@ -112,7 +112,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                             <span>الذهاب للموقع</span>
                         </div>
                         <div className="returntoWebSite_icon">
-                            <img src="images/logo.svg" alt="logo" />
+                            <img src="/images/logo.svg" alt="logo" />
                         </div>
                     </div>
 
