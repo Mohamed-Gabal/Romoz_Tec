@@ -1,0 +1,19 @@
+.accountUser_container {
+    flex: 1;
+    padding-top: 30px;
+}
+
+.accountUser_container header {
+    border-bottom: 2px solid var(--border-color);
+    padding-inline-start: 20px;
+    padding-bottom: 20px;
+}
+.accountUser_container header h2 {
+    font-size: 20px;
+}
+.accountUser_container header h2 span {
+    color: var(--main-color);
+}
+.accountUser_container header h2 p {
+    color: var(--text-color);
+}

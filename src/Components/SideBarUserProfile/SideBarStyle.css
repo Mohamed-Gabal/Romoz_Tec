@@ -1,7 +1,7 @@
 .userSideBar_container {
     background-color: var(--color);
     border-inline-end: 2px solid var(--border-color);
-    max-width: 200px;
+    width: 200px;
     min-height: 100dvh;
     position: relative;
     overflow: hidden;
@@ -9,10 +9,10 @@
 }
 
 .userSideBar_container .userSidebar_content {
-    max-width: 200px;
+    width: 200px;
     position: fixed;
     inset: 0;
-    top: 50px;
+    top: 40px;
     transition: all ease-in-out .3s;
 }
 
@@ -113,13 +113,14 @@
         padding: 0px;
         display: flex;
         flex-direction: column;
-        max-width: 60px;
+        width: 60px;
+        position: fixed;
         overflow: hidden;
     }
 
     .userSideBar_container.hidden,
     .userSideBar_container .userSidebar_content.hidden {
-        max-width: 0px;
+        width: 0px;
         padding: 0px;
         overflow: hidden;
         transition: all ease-in-out .3s;

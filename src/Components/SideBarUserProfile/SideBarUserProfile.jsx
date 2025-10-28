@@ -44,7 +44,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
                 <div className="userSidebar_links">
                     <ul className="userSidebar_links_group">
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="/accountUser" className="link">
+                            <NavLink to="/userProfile" className="link">
                                 <div className="link_icon">
                                     <img src="/Icons/offers.svg" alt="offers" />
                                 </div>

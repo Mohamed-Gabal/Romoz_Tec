@@ -1,5 +1,7 @@
 .userProfile {
     background-color: #F5F5F5;
+    display: flex;
+    flex-direction: row;
     position: relative;
 }
 .userProfile .toggle_sidebar {
