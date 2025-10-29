@@ -5,11 +5,30 @@
     position: relative;
     min-height: 100dvh;
 }
+
 .userProfile .toggle_sidebar {
     display: none;
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 20px;
+}
+
+.userProfile_header {
+    border-bottom: 2px solid var(--border-color);
+    padding-inline-start: 20px;
+    padding-bottom: 20px;
+}
+
+.userProfile_header h2 {
+    font-size: 20px;
+}
+
+.userProfile_header h2 span {
+    color: var(--main-color);
+}
+
+.userProfile_header h2 p {
+    color: var(--text-color);
 }
 
 @media (max-width: 768px) {

@@ -80,7 +80,7 @@ export default function SideBarUserProfile({ toggleSidebar, setToggleSidebar, si
 
                     <ul className="userSidebar_links_group">
                         <li onClick={() => setToggleSidebar(false)}>
-                            <NavLink to="settingsUser" className={({ isActive }) => (isActive ? "link active" : "link")}>
+                            <NavLink to="userSettings" className={({ isActive }) => (isActive ? "link active" : "link")}>
                                 <div className="link_icon">
                                     <img src="/Icons/Setting.svg" alt="Setting" />
                                 </div>

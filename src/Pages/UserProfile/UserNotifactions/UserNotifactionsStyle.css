@@ -2,18 +2,3 @@
     flex: 1;
     padding-top: 30px;
 }
-
-.UserNotifactions_container header {
-    border-bottom: 2px solid var(--border-color);
-    padding-inline-start: 20px;
-    padding-bottom: 20px;
-}
-.UserNotifactions_container header h2 {
-    font-size: 20px;
-}
-.UserNotifactions_container header h2 span {
-    color: var(--main-color);
-}
-.UserNotifactions_container header h2 p {
-    color: var(--text-color);
-}
