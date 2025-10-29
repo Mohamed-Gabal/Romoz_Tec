@@ -2,7 +2,55 @@
     background-color: #ececec;
     min-height: 80dvh;
 }
-.showAnyUserData .showAnyUserData_container {
+
+.loading_data .loading_image {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    animation: pulse 1.5s ease-in-out infinite;
+    overflow: hidden;
+}
+
+.loading_data .loading_image .skeleton_image{
+    border-radius: 12px;
+    position: relative;
+}
+
+.loading_data .loading_image .profile_user_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid white;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9;
+}
+
+.skeleton-user-icon {
+    color: #adb2ba;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.loading_data .loading_image .skeleton_user_info {
+    background-color: #d1d5db;
+    border-radius: 9999px;
+    width: 80px;
+    height: 10px;
+    margin: auto;
+    margin-top: 40px;
+}
+.showAnyUserData .showAnyUserData_container,
+.showAnyUserData .loading_data {
     max-width: 1190px;
     padding: 80px 20px;
     margin: auto;
