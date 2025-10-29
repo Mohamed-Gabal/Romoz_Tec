@@ -6,7 +6,7 @@ import SkeletonCard from '../../Components/SkeletonCard/SkeletonCard';
 import NotFound from '../../Components/NotFound/NotFound';
 import DatePicker from '../../Components/DatePicker/DatePicker';
 import AdCard from '../../Components/AdCard/AdCard';
-import "./SpecificCategory.css"
+import "./specificCategoryStyle.css"
 
 export default function SpecificCategory() {
     const { category } = useParams();

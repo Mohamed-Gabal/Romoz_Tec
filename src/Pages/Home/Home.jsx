@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./homeStyle.css";
 import Slider from '../../Components/HomeComponent/Slider/Slider';
 import BlogCard from "../../Components/HomeComponent/BlogCard/BlogCard";
 import SellSeaction from "../../Components/HomeComponent/SellSeaction/SellSeaction";
