@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./blogCard.css";
+import "./blogCardStyle.css";
 import AdCard from "../../AdCard/AdCard";
 import SkeletonCard from "../../SkeletonCard/SkeletonCard";
 
