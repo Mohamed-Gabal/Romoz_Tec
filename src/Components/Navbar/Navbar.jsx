@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./header.css";
 import { Link, NavLink } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import { useCookies } from "react-cookie";
 import { contextData } from "../../Context/Context";
 
@@ -11,18 +10,15 @@ export default function Navbar() {
   const isLoggedIn = Boolean(token && token !== "undefined");
   const [showToast, setShowToast] = useState(true);
 
-  // حالة لإظهار أو إخفاء كارت البروفايل لما نضغط على الصورة
   const [toggleProfileCard, setToggleProfileCard] = useState(false);
 
-  // حالة فتح أو غلق المينيو في الموبايل
   const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false); // دالة لغلق المينيو بسهولة
+  const closeMenu = () => setMenuOpen(false);
 
-  // مراجع (refs) لعناصر معينة في الـ DOM عشان نتحكم فيها
-  const menuRef = useRef(null);      // تمثل قائمة الروابط (ul)
-  const toggleRef = useRef(null);    // تمثل زر فتح المينيو
+  const menuRef = useRef(null);
+  const toggleRef = useRef(null);
   const mobileProfileRef = useRef(null);
-  const desktopProfileRef = useRef(null);   // تمثل صورة أو زر البروفاي
+  const desktopProfileRef = useRef(null); 
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -30,16 +26,25 @@ export default function Navbar() {
         (mobileProfileRef.current && mobileProfileRef.current.contains(e.target)) ||
         (desktopProfileRef.current && desktopProfileRef.current.contains(e.target))
       ) {
-        return; // لو الضغط داخل أحد الزرين → متقفلش
+        return;
       }
       setToggleProfileCard(false);
     };
+    const handleScroll = () => {
+      if (window.innerWidth <= 768) {
+        setToggleProfileCard(false);
+      }
+    };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
-  // useEffect الثاني: يقفل المينيو لما نضغط براها
   useEffect(() => {
     if (!menuOpen) return;
 
@@ -53,10 +58,18 @@ export default function Navbar() {
       }
       setMenuOpen(false);
     };
+    const handleScroll = () => {
+      if (window.innerWidth <= 768) {
+        setToggleProfileCard(false);
+        setMenuOpen(false);
+      }
+    };
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [menuOpen]);
 
@@ -74,7 +87,7 @@ export default function Navbar() {
             <img src="/images/logo.svg" alt="logo" />
           </NavLink>
         </div>
-        {/* قائمة الروابط الرئيسية */}
+        {/* list-links */}
         <ul id="primary-navigation" ref={menuRef} className={`nav ${menuOpen ? "open" : ""}`} >
           <li><NavLink to="/"><span>الرئيسية</span></NavLink></li>
           <li><NavLink to="/contactUs"><span>اتصل بنا</span></NavLink></li>
@@ -135,11 +148,11 @@ export default function Navbar() {
               <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-text-align-justify" ><path d="M3 5h18" /><path d="M3 12h18" /> <path d="M3 19h18" /></svg>
             </div>
           </div>
-          {/* كارت البروفايل */}
+          {/* profile */}
           {isLoggedIn && (<ProfileCard toggleProfileCard={toggleProfileCard} userData={userData} removeCookie={removeCookie} />)}
         </div>
       </div>
-      {isLoggedIn && userData?.area === null && (<ToastWarning message="الرجاء إضافة الموقع قبل المتابعة." onClose={() => setShowToast(false)} />)}
+      {isLoggedIn && showToast && userData?.area === null && (<ToastWarning message="الرجاء إضافة الموقع قبل المتابعة." onClose={() => setShowToast(false)} />)}
     </header>
   );
 };
@@ -162,7 +175,7 @@ export function ProfileCard({ toggleProfileCard, userData, removeCookie }) {
       </div>
       <Link to="/userProfile" className="show_accountUser"><span>عرض الملف الشخصي</span></Link>
 
-      <Link to="/settingsUser" className="settings">
+      <Link to="/userProfile/userSettings" className="settings">
         <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-settings-icon lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /><circle cx={12} cy={12} r={3} /></svg>
         <span>إعدادات الحساب</span>
       </Link>
