@@ -8,7 +8,7 @@ const categories = [
     title: "السيارات",
     desc: "سيارات مستعملة وجديدة، قطع غيار، دراجات",
     count: "12,500+",
-    img: "/Icons/categore3.svg",
+    img: "/advertisements/car.svg",
     link: "/vehicles",
   },
   {
@@ -16,7 +16,7 @@ const categories = [
     title: "العقارات",
     desc: "شقق، فيلات، أراضي، مكاتب تجارية",
     count: "12,500+",
-    img: "/Icons/categore4.svg",
+    img: "/advertisements/buildings.svg",
     link: "/realestate",
   },
   {
@@ -24,7 +24,7 @@ const categories = [
     title: "الإلكترونيات",
     desc: "هواتف، أجهزة كمبيوتر، أجهزة منزلية",
     count: "12,500+",
-    img: "/Icons/categore5.svg",
+    img: "/advertisements/electronics.svg",
     link: "/electronics",
   },
   {
@@ -32,7 +32,7 @@ const categories = [
     title: "الوظائف",
     desc: "وظائف بدوام كامل وجزئي، فرص عمل",
     count: "12,500+",
-    img: "/Icons/categore6.svg",
+    img: "/advertisements/jobs.svg",
     link: "/jobs",
   },
   {
@@ -40,7 +40,7 @@ const categories = [
     title: "أزياء",
     desc: "ملابس، أحذية، إكسسوارات",
     count: "12,500+",
-    img: "/Icons/categore9.svg",
+    img: "/advertisements/fashion.svg",
     link: "/fashion",
   },
   {
@@ -48,7 +48,7 @@ const categories = [
     title: "أثاث",
     desc: "أثاث منزلي ومكتبي",
     count: "12,500+",
-    img: "/Icons/categore7.svg",
+    img: "/advertisements/furniture.svg",
     link: "/furniture",
   },
   {
@@ -56,7 +56,7 @@ const categories = [
     title: "خدمات",
     desc: "خدمات متنوعة للأفراد والشركات",
     count: "12,500+",
-    img: "/Icons/categore8.svg",
+    img: "/advertisements/services.svg",
     link: "/services",
   },
   {
@@ -64,7 +64,7 @@ const categories = [
     title: "أطعمة",
     desc: "مأكولات، مشروبات، تموين",
     count: "12,500+",
-    img: "/Icons/food.svg",
+    img: "/advertisements/food.svg",
     link: "/food",
   },
   {
@@ -72,7 +72,7 @@ const categories = [
     title: "نوادر",
     desc: "مقتنيات وأشياء نادرة",
     count: "12,500+",
-    img: "/Icons/categore11.svg",
+    img: "/advertisements/anecdotes.svg",
     link: "/anecdotes",
   },
   {
@@ -80,7 +80,7 @@ const categories = [
     title: "حدائق",
     desc: "معدات وأدوات حدائق",
     count: "12,500+",
-    img: "/Icons/categore10.svg",
+    img: "/advertisements/gardens.svg",
     link: "/gardens",
   },
   {
@@ -88,7 +88,7 @@ const categories = [
     title: "رحلات",
     desc: "رحلات، سياحة، تخييم",
     count: "12,500+",
-    img: "/Icons/categore11.svg",
+    img: "/advertisements/trips.svg",
     link: "/trips",
   },
   {
@@ -96,7 +96,7 @@ const categories = [
     title: "حيوانات",
     desc: "حيوانات أليفة وإكسسواراتها",
     count: "12,500+",
-    img: "/Icons/categore12.svg",
+    img: "/advertisements/animals.svg",
     link: "/pets",
   },
 ];
