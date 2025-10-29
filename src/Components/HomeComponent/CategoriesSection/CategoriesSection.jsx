@@ -116,7 +116,9 @@ const CategoriesSection = () => {
       </div>
       <div className="categories-grid">
         {categories.map((cat) => (
+
           <Link to={`category${cat.link}`} key={cat.id} className="category-card">
+          <Link to={cat.link} key={cat.id} className="category-card">
             <div className="">
               <div className="icon-box">
                 <img src={cat.img} alt={cat.title} />

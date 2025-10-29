@@ -55,6 +55,36 @@ const router = createBrowserRouter([
 
 ]);
 
+
+// Auth pages
+import Login from "./Pages/Auth/Login/Login";
+import ShowAnyUser from "./Pages/ShowAnyUser/ShowAnyUser";
+const Register = lazy(() => import("./Pages/Auth/Register/Register"));
+const ResetPassword = lazy(() => import("./Pages/Auth/ResetPassword/ResetPassword"));
+const ForgotPassword = lazy(() => import("./Pages/Auth/ForgotPassword/ForgotPassword"));
+
+const router = createBrowserRouter([
+  {
+    path: "", element: <Layout />, children: [
+      { index: true, element: <Home /> },
+      { path: "/contactUs", element: <ContactUs /> },
+      { path: "/aboutUs", element: <AboutUS /> },
+      { path: "/blog", element: <Blog /> },
+      { path: "/advertisements", element: <Advertisements /> },
+      { path: "/:category", element: <SpecificCategory /> },
+      { path: "/:details/:id", element: <DetailsLayout /> },
+      { path: "/user/:name/:userID", element: <ShowAnyUser /> },
+    ],
+  },
+
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+  { path: "/forgotPassword", element: <ForgotPassword /> },
+  { path: "/resetPassword", element: <ResetPassword /> },
+
+]);
+
+
 const App = () => {
   return (
     <StoreContextProvider>

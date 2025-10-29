@@ -35,9 +35,13 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
     margin: 5px 10px;
     cursor: pointer;
     width: fit-content;
+
+    padding: 5px 10px;
+    cursor: pointer;
 }
 
 .ad_card .card_user img {
