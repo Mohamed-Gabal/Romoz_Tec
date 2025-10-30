@@ -4,6 +4,7 @@
     width: 200px;
     min-height: 100dvh;
     position: relative;
+    z-index: 99999;
     overflow: hidden;
     transition: all ease-in-out .3s;
 }
